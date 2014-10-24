@@ -27,7 +27,7 @@ public class Main extends JFrame {
 	private JButton btnSric;
 	private ReportSheet reportSheet;
 	private SRIC sric;
-	private ImageViewer imageViewer;
+	private ImageViewerGUI imageViewer;
 	private JDesktopPane desktopPane;
 
 	/**
@@ -136,7 +136,7 @@ public class Main extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if(imageViewer == null || imageViewer.isClosed())
 				{
-					imageViewer = new ImageViewer(); //only one instace of this
+					imageViewer = new ImageViewerGUI(); //only one instance of this
 					desktopPane.add(imageViewer);
 					imageViewer.show();
 				}
@@ -147,7 +147,7 @@ public class Main extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if(sric == null || sric.isClosed())
 				{
-					sric = new SRIC(); //only one instace of this
+					sric = new SRIC(); //only one instance of this
 					desktopPane.add(sric);
 					sric.show();
 				}

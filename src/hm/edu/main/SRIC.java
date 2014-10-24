@@ -17,6 +17,7 @@ public class SRIC extends JInternalFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	private JTextField textField_4;
 
 	/**
 	 * Launch the application.
@@ -68,7 +69,7 @@ public class SRIC extends JInternalFrame {
 		
 		JLabel lblSsid = new JLabel("SSID");
 		
-		JLabel label = new JLabel("SSID");
+		JLabel labelPW = new JLabel("Passwort");
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
@@ -86,6 +87,11 @@ public class SRIC extends JInternalFrame {
 		JLabel lblFtp = new JLabel("FTP");
 		
 		JButton btnSend = new JButton("Send");
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		
+		JLabel lblPicture = new JLabel("PicturePath");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -96,27 +102,28 @@ public class SRIC extends JInternalFrame {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(lblSsid, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(label, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
-									.addGap(18)
+								.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblName, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+											.addComponent(lblSsid, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+											.addComponent(labelPW, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)))
+									.addPreferredGap(ComponentPlacement.UNRELATED)
 									.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-										.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(lblName, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btnSend)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(lblPasswort, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
-					.addGap(250))
+										.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+										.addComponent(textField_3, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+										.addComponent(textField, GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)))
+								.addGroup(Alignment.LEADING, gl_panel.createParallelGroup(Alignment.TRAILING)
+									.addComponent(btnSend)
+									.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+											.addComponent(lblPicture, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+											.addComponent(lblPasswort, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+											.addComponent(textField_2)
+											.addComponent(textField_4, GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)))))))
+					.addGap(314))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -127,28 +134,33 @@ public class SRIC extends JInternalFrame {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(lblSsid)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(label)
+							.addComponent(labelPW)
 							.addGap(43)
 							.addComponent(lblFtp))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addGap(6)
+					.addGap(12)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblName)
+						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblName)))
-					.addGap(6)
+							.addGap(9)
+							.addComponent(lblPasswort))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(6)
+							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblPasswort)))
-					.addGap(18)
-					.addComponent(btnSend)
-					.addContainerGap(40, Short.MAX_VALUE))
+							.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(17)
+							.addComponent(btnSend))
+						.addComponent(lblPicture))
+					.addContainerGap(109, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 		getContentPane().setLayout(groupLayout);

@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package hm.edu.main;
 
 import java.awt.BorderLayout;
@@ -10,15 +5,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
@@ -26,32 +14,20 @@ import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JToolBar;
-import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-import java.awt.Graphics;
-import java.awt.GraphicsEnvironment;
-import java.awt.event.KeyListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
-
-/**
- *
- * @author anks
- */
-
-
-public class ImageViewer extends JInternalFrame {
+@SuppressWarnings("serial")
+public class ImageViewerGUI extends JInternalFrame {
     
-    private JLabel photographLabel = new JLabel();
+	private JLabel photographLabel = new JLabel();
     private JToolBar buttonBar = new JToolBar();
     
     private String imagedir = "../images/";
+    /* TODO Change this to an while(true)-thread-function which checks a specific folder for new images */
     
     private ImageViewerMissingIcon placeholderIcon = new ImageViewerMissingIcon();
     
@@ -60,12 +36,14 @@ public class ImageViewer extends JInternalFrame {
      */
     private String[] imageCaptions = { "Amazing Beauty 1", "Amazing Beauty 2",
     "Amazing Beauty 3", "Amazing Beauty 4"};
+    /* TODO Change this to an while(true)-thread-function which checks a specific folder for new images */
     
     /**
      * List of all the image files to load.
      */
     private String[] imageFileNames = { "1.jpg", "2.jpg",
     "3.jpg", "4.jpg"};
+    /* TODO Change this to an while(true)-thread-function which checks a specific folder for new images */
 
     /*
     KeyListener kl=new KeyAdapter()
@@ -81,37 +59,19 @@ public class ImageViewer extends JInternalFrame {
       }
      };
      */
-
-    /**
-     * Main of the program. Loads the Swing elements on the "Event
-     * Dispatch Thread".
-     *
-     * @param args
-     */
-
-    public static void main(String args[]) {
-
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                ImageViewer app = new ImageViewer();
-                app.setVisible(true);                
-            }
-        });
-
-    }
     
     /**
      * Default constructor
      */
-    public ImageViewer() {
-
-        //this.addKeyListener(kl);
+    public ImageViewerGUI() {
 
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Image Viewer");
 		setIconifiable(true);
 		setClosable(true);
 		setBounds(0, 0, 500, 400);
+        //setSize(900, 700);
+        //this.setResizable(false);
         
         // A label for displaying the pictures
         photographLabel.setVerticalTextPosition(JLabel.BOTTOM);
@@ -126,9 +86,6 @@ public class ImageViewer extends JInternalFrame {
         add(buttonBar, BorderLayout.NORTH);
         add(photographLabel, BorderLayout.CENTER);        
 
-        //setSize(900, 700);
-        //this.setResizable(false);
-
         // switching to fullscreen mode
         //GraphicsEnvironment.getLocalGraphicsEnvironment().
         //getDefaultScreenDevice().setFullScreenWindow(this);
@@ -139,16 +96,12 @@ public class ImageViewer extends JInternalFrame {
         // start the image loading SwingWorker in a background thread
         loadimages.execute();
     }
-     //Create a KeyListener that can listen when someone press Esc key on keyboard
-     //You can change for what key that you want, by change value at:
-     //VK_ESCAPE    
 
     
     /**
      * SwingWorker class that loads the images a background thread and calls publish
      * when a new one is ready to be displayed.
      */
-    
     private SwingWorker<Void, ThumbnailAction> loadimages = new SwingWorker<Void, ThumbnailAction>() {
         
         /**
@@ -160,12 +113,15 @@ public class ImageViewer extends JInternalFrame {
                 ImageIcon icon;
                 icon = createImageIcon(imagedir + imageFileNames[i], imageCaptions[i]);
                 
+                //downsize photo
+                ImageIcon downSizedIcon = new ImageIcon(getScaledImage(icon.getImage(), 400, 250));
+                
                 ThumbnailAction thumbAction;
                 if(icon != null){
                     
                     ImageIcon thumbnailIcon = new ImageIcon(getScaledImage(icon.getImage(), 64, 64));
                     
-                    thumbAction = new ThumbnailAction(icon, thumbnailIcon, imageCaptions[i]);
+                    thumbAction = new ThumbnailAction(downSizedIcon, thumbnailIcon, imageCaptions[i]);
                     
                 }else{
                     // the image failed to load for some reason
@@ -228,18 +184,20 @@ public class ImageViewer extends JInternalFrame {
      */
     private class ThumbnailAction extends AbstractAction{
         
-        /**
+		/**
          *The icon if the full image we want to display.
          */
         private Icon displayPhoto;
         
         /**
-         * @param Icon - The full size photo to show in the button.
+         * @param Icon - The bigger photo to show in the button.
          * @param Icon - The thumbnail to show in the button.
          * @param String - The descriptioon of the icon.
          */
         public ThumbnailAction(Icon photo, Icon thumb, String desc){
-            displayPhoto = photo;
+        	
+        	//photo
+        	displayPhoto = photo;
             
             // The short description becomes the tooltip of a button.
             putValue(SHORT_DESCRIPTION, desc);
