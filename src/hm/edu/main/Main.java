@@ -13,14 +13,27 @@ import javax.swing.ImageIcon;
 import javax.swing.JToolBar;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JDesktopPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.SystemColor;
 
-public class Main extends JFrame {
+/**
+* Main class.
+* 
+* This main class contains the outer gui window. 
+*  
+* @author Christoph Friegel
+* @version 0.1
+*/
 
+@SuppressWarnings("serial")
+public class Main extends JFrame {
+	
 	private JPanel contentPane;
 	private JButton btnReportSheet;
 	private JButton btnImageviewer;
@@ -55,7 +68,7 @@ public class Main extends JFrame {
 	}
 	
 	private void initComponents(){
-		setTitle("GroundStation");
+		setTitle("MissionControl");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		

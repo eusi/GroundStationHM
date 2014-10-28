@@ -19,6 +19,14 @@ import javax.swing.JLabel;
 import javax.swing.JToolBar;
 import javax.swing.SwingWorker;
 
+/**
+* ImageViewerGUI class.
+* 
+* This module displays images as original and thumbnailed. 
+*  
+* @author Christoph Friegel
+* @version 0.1
+*/
 
 @SuppressWarnings("serial")
 public class ImageViewerGUI extends JInternalFrame {
@@ -107,7 +115,8 @@ public class ImageViewerGUI extends JInternalFrame {
         /**
          * Creates full size and thumbnail versions of the target image files.
          */
-        @Override
+        @SuppressWarnings("unused")
+		@Override
         protected Void doInBackground() throws Exception {
             for (int i = 0; i < imageCaptions.length; i++) {
                 ImageIcon icon;

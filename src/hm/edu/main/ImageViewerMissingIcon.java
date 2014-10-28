@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package hm.edu.main;
 
 import java.awt.BasicStroke;
@@ -15,6 +10,7 @@ import javax.swing.Icon;
 /**
  *
  * @author anks
+ * @author Christoph Friegel
  */
 
 public class ImageViewerMissingIcon implements Icon{
