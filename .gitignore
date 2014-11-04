@@ -1,4 +1,12 @@
 *.class
+.classpath
+bin/
+tmp/
+*.tmp
+*.bak
+local.properties
+.settings/
+.loadpath
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
