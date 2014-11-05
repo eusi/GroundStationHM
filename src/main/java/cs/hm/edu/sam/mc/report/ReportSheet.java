@@ -1,4 +1,4 @@
-package cs.hm.edu.sam.mc.main;
+package cs.hm.edu.sam.mc.report;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;

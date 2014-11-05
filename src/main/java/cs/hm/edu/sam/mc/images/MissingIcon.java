@@ -1,4 +1,4 @@
-package cs.hm.edu.sam.mc.main;
+package cs.hm.edu.sam.mc.images;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -13,7 +13,7 @@ import javax.swing.Icon;
  * @author Christoph Friegel
  */
 
-public class ImageViewerMissingIcon implements Icon {
+public class MissingIcon implements Icon {
 
     private final int width = 32;
     private final int height = 32;

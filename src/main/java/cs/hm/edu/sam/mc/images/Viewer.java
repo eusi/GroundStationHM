@@ -1,4 +1,4 @@
-package cs.hm.edu.sam.mc.main;
+package cs.hm.edu.sam.mc.images;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics2D;
@@ -28,7 +28,7 @@ import javax.swing.SwingWorker;
  */
 
 @SuppressWarnings("serial")
-public class ImageViewerGUI extends JInternalFrame {
+public class Viewer extends JInternalFrame {
 
     private final JLabel photographLabel = new JLabel();
     private final JToolBar buttonBar = new JToolBar();
@@ -39,7 +39,7 @@ public class ImageViewerGUI extends JInternalFrame {
      * specific folder for new images
      */
 
-    private final ImageViewerMissingIcon placeholderIcon = new ImageViewerMissingIcon();
+    private final MissingIcon placeholderIcon = new MissingIcon();
 
     /**
      * List of all the descriptions of the image files with caption.
@@ -72,7 +72,7 @@ public class ImageViewerGUI extends JInternalFrame {
     /**
      * Default constructor
      */
-    public ImageViewerGUI() {
+    public Viewer() {
 
         // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Image Viewer");

@@ -1,4 +1,4 @@
-package cs.hm.edu.sam.mc.main;
+package cs.hm.edu.sam.mc.sric;
 
 import java.awt.EventQueue;
 

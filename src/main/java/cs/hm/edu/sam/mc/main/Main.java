@@ -17,6 +17,10 @@ import javax.swing.JToolBar;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
+import cs.hm.edu.sam.mc.images.Viewer;
+import cs.hm.edu.sam.mc.report.ReportSheet;
+import cs.hm.edu.sam.mc.sric.SRIC;
+
 /**
  * Main class. This main class contains the outer gui window.
  * 
@@ -33,7 +37,7 @@ public class Main extends JFrame {
     private JButton btnSric;
     private ReportSheet reportSheet;
     private SRIC sric;
-    private ImageViewerGUI imageViewer;
+    private Viewer imageViewer;
     private JDesktopPane desktopPane;
 
     /**
@@ -139,7 +143,7 @@ public class Main extends JFrame {
 
         btnImageviewer.addActionListener(arg0 -> {
             if (imageViewer == null || imageViewer.isClosed()) {
-                imageViewer = new ImageViewerGUI(); // only one instance of this
+                imageViewer = new Viewer(); // only one instance of this
                 desktopPane.add(imageViewer);
                 imageViewer.show();
             }
