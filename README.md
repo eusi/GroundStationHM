@@ -1,8 +1,8 @@
 MissionControlHM
 ===============
 
-TODO:
------
+TODO (Team 7):
+----------------
 
 - SRIC: Send data to target (and waiting for response) or prepare data for polling
 
