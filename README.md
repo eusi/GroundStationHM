@@ -1,6 +1,22 @@
 MissionControlHM
 ===============
 
+NEED TO BUILD:
+----------------
+
+- Eclipse ( https://www.eclipse.org/home/index.php )
+
+- Java 1.8 ( http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html )
+
+- Maven Plugin for Eclipse ( http://www.eclipse.org/m2e/ )
+
+- WindowBuilder / SWT Designer ( http://stackoverflow.com/questions/10867920/installing-windowbuilder-on-eclipse-4-2 )
+
+- Optional: Modify build path -> Project Properties -> Java Build Path -> renew 'JRE System Library' (1.8)
+
+
+
+
 TODO (Team 7):
 ----------------
 
