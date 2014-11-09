@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 import cs.hm.edu.sam.mc.images.Viewer;
 import cs.hm.edu.sam.mc.report.ReportSheet;
+import cs.hm.edu.sam.mc.routing.Routing;
 import cs.hm.edu.sam.mc.sric.SRIC;
 
 /**
@@ -37,8 +38,10 @@ public class Main extends JFrame {
     private JButton btnSric;
     private ReportSheet reportSheet;
     private SRIC sric;
+    private Routing routing;
     private Viewer imageViewer;
     private JDesktopPane desktopPane;
+    private JButton btnRouting;
 
     /**
      * Launch the application.
@@ -75,7 +78,7 @@ public class Main extends JFrame {
 
         final JMenuItem mntmExit = new JMenuItem("Exit");
         mntmExit.addActionListener(e -> System.exit(0));
-        //mntmExit.setIcon(new ImageIcon(Main.class.getResource("/icons/full/message_error.gif")));
+        mntmExit.setIcon(new ImageIcon(Main.class.getResource("/icons/exit_icon.png")));
         mnFile.add(mntmExit);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -114,21 +117,28 @@ public class Main extends JFrame {
         btnReportSheet
                 .setIcon(new ImageIcon(
                         Main.class
-                                .getResource("/com/sun/java/swing/plaf/windows/icons/JavaCup32.png")));
+                                .getResource("/icons/report_icon.png")));
         toolBar.add(btnReportSheet);
 
         btnImageviewer = new JButton("ImageViewer");
         btnImageviewer
                 .setIcon(new ImageIcon(
                         Main.class
-                                .getResource("/com/sun/java/swing/plaf/windows/icons/JavaCup32.png")));
+                                .getResource("/icons/image_icon.png")));
         toolBar.add(btnImageviewer);
 
         btnSric = new JButton("SRIC");
         btnSric.setIcon(new ImageIcon(
                 Main.class
-                        .getResource("/com/sun/java/swing/plaf/windows/icons/JavaCup32.png")));
+                        .getResource("/icons/sric_icon.png")));
         toolBar.add(btnSric);
+        
+        btnRouting = new JButton("Routing");
+        btnRouting.setIcon(new ImageIcon(
+                Main.class
+                        .getResource("/icons/routing_icon.png")));
+        toolBar.add(btnRouting);
+        
         contentPane.setLayout(gl_contentPane);
     }
 
@@ -154,6 +164,14 @@ public class Main extends JFrame {
                 sric = new SRIC(); // only one instance of this
                 desktopPane.add(sric);
                 sric.show();
+            }
+        });
+        
+        btnRouting.addActionListener(arg0 -> {
+            if (routing == null || routing.isClosed()) {
+            	routing = new Routing(); // only one instance of this
+                desktopPane.add(routing);
+                routing.show();
             }
         });
     }

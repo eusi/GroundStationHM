@@ -19,6 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JToolBar;
 import javax.swing.SwingWorker;
 
+import cs.hm.edu.sam.mc.report.ReportSheet;
+
 /**
  * ImageViewerGUI class. This module displays images as original and
  * thumbnailed.
@@ -79,8 +81,12 @@ public class Viewer extends JInternalFrame {
         setIconifiable(true);
         setClosable(true);
         setBounds(0, 0, 500, 400);
+        setResizable(true);
         // setSize(900, 700);
         // this.setResizable(false);
+        setFrameIcon(new ImageIcon(
+                ReportSheet.class
+                        .getResource("/icons/image_icon_mini.png")));
 
         // A label for displaying the pictures
         photographLabel.setVerticalTextPosition(JLabel.BOTTOM);

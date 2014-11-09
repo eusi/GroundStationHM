@@ -27,7 +27,7 @@ public class ReportSheet extends JInternalFrame {
     public ReportSheet() {
         setFrameIcon(new ImageIcon(
                 ReportSheet.class
-                        .getResource("/com/sun/javafx/webkit/prism/resources/missingImage.png")));
+                        .getResource("/icons/report_icon_mini.png")));
         setTitle("ReportSheet");
         setIconifiable(true);
         setClosable(true);

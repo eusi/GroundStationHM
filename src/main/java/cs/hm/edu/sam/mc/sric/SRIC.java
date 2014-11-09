@@ -1,7 +1,5 @@
 package cs.hm.edu.sam.mc.sric;
 
-import java.awt.EventQueue;
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -31,29 +29,16 @@ public class SRIC extends JInternalFrame {
     private final JTextField textFieldPP;
 
     /**
-     * Launch the application.
-     */
-    public static void main(final String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                final SRIC frame = new SRIC();
-                frame.setVisible(true);
-            } catch (final Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    /**
      * Create the frame.
      */
     public SRIC() {
         setFrameIcon(new ImageIcon(
                 SRIC.class
-                        .getResource("/com/sun/java/swing/plaf/windows/icons/Computer.gif")));
+                        .getResource("/icons/sric_icon_mini.png")));
         setTitle("SRIC");
         setClosable(true);
         setIconifiable(true);
+        setResizable(true);
         setBounds(0, 0, 500, 400);
 
         final JPanel panel = new JPanel();
