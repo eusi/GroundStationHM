@@ -13,7 +13,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 /**
  * SRIC class. This module's job is to collect WLAN/FTP data in mask and send
  * that data to a target.
- * 
+ *
  * @author Christoph Friegel
  * @version 0.1
  */
@@ -32,9 +32,7 @@ public class SRIC extends JInternalFrame {
      * Create the frame.
      */
     public SRIC() {
-        setFrameIcon(new ImageIcon(
-                SRIC.class
-                        .getResource("/icons/sric_icon_mini.png")));
+        setFrameIcon(new ImageIcon(SRIC.class.getResource("/icons/sric_icon_mini.png")));
         setTitle("SRIC");
         setClosable(true);
         setIconifiable(true);
@@ -43,31 +41,26 @@ public class SRIC extends JInternalFrame {
 
         final JPanel panel = new JPanel();
         final GroupLayout groupLayout = new GroupLayout(getContentPane());
-        groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(
-                Alignment.LEADING).addGroup(
+        groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
                 groupLayout
                         .createSequentialGroup()
                         .addContainerGap()
                         .addComponent(panel, GroupLayout.PREFERRED_SIZE, 465,
                                 GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE)));
-        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
-                Alignment.LEADING).addGroup(
-                groupLayout
-                        .createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panel, GroupLayout.PREFERRED_SIZE, 349,
-                                Short.MAX_VALUE).addContainerGap()));
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
+                groupLayout.createSequentialGroup().addContainerGap()
+                        .addComponent(panel, GroupLayout.PREFERRED_SIZE, 349, Short.MAX_VALUE)
+                        .addContainerGap()));
 
-        final JLabel lblWLAN = new JLabel("WLAN");
+        final JLabel lblWlan = new JLabel("WLAN");
 
         textFieldSSID = new JTextField();
         textFieldSSID.setColumns(10);
 
         final JLabel lblSsid = new JLabel("SSID");
 
-        final JLabel labelPW = new JLabel("Passwort");
+        final JLabel labelPw = new JLabel("Passwort");
 
         textFieldPW = new JTextField();
         textFieldPW.setColumns(10);
@@ -109,19 +102,16 @@ public class SRIC extends JInternalFrame {
                         gl_panel.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(
-                                        gl_panel.createParallelGroup(
-                                                Alignment.LEADING)
+                                        gl_panel.createParallelGroup(Alignment.LEADING)
                                                 .addGroup(
                                                         gl_panel.createSequentialGroup()
-                                                                .addComponent(
-                                                                        lblName,
+                                                                .addComponent(lblName,
                                                                         GroupLayout.PREFERRED_SIZE,
                                                                         60,
                                                                         GroupLayout.PREFERRED_SIZE)
                                                                 .addPreferredGap(
                                                                         ComponentPlacement.UNRELATED)
-                                                                .addComponent(
-                                                                        textFieldNAME,
+                                                                .addComponent(textFieldNAME,
                                                                         GroupLayout.PREFERRED_SIZE,
                                                                         176,
                                                                         GroupLayout.PREFERRED_SIZE))
@@ -157,56 +147,44 @@ public class SRIC extends JInternalFrame {
                                 .addGap(147))
                 .addGroup(
                         gl_panel.createSequentialGroup()
-                                .addComponent(lblFTP,
-                                        GroupLayout.PREFERRED_SIZE, 29,
+                                .addComponent(lblFTP, GroupLayout.PREFERRED_SIZE, 29,
                                         GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.RELATED,
-                                        502, Short.MAX_VALUE)
-                                .addComponent(lblFtp,
-                                        GroupLayout.PREFERRED_SIZE, 29,
-                                        GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
+                                .addPreferredGap(ComponentPlacement.RELATED, 502, Short.MAX_VALUE)
+                                .addComponent(lblFtp, GroupLayout.PREFERRED_SIZE, 29,
+                                        GroupLayout.PREFERRED_SIZE).addContainerGap())
                 .addGroup(
                         gl_panel.createSequentialGroup()
                                 .addGroup(
-                                        gl_panel.createParallelGroup(
-                                                Alignment.LEADING)
+                                        gl_panel.createParallelGroup(Alignment.LEADING)
                                                 .addGroup(
                                                         gl_panel.createSequentialGroup()
                                                                 .addContainerGap()
-                                                                .addComponent(
-                                                                        lblPort,
+                                                                .addComponent(lblPort,
                                                                         GroupLayout.PREFERRED_SIZE,
                                                                         60,
                                                                         GroupLayout.PREFERRED_SIZE)
                                                                 .addPreferredGap(
                                                                         ComponentPlacement.UNRELATED)
-                                                                .addComponent(
-                                                                        textFieldPORT,
+                                                                .addComponent(textFieldPORT,
                                                                         GroupLayout.DEFAULT_SIZE,
-                                                                        176,
-                                                                        Short.MAX_VALUE))
+                                                                        176, Short.MAX_VALUE))
                                                 .addGroup(
                                                         gl_panel.createSequentialGroup()
                                                                 .addContainerGap()
-                                                                .addComponent(
-                                                                        lblHost,
+                                                                .addComponent(lblHost,
                                                                         GroupLayout.PREFERRED_SIZE,
                                                                         60,
                                                                         GroupLayout.PREFERRED_SIZE)
                                                                 .addPreferredGap(
                                                                         ComponentPlacement.UNRELATED)
-                                                                .addComponent(
-                                                                        textFieldHOST,
+                                                                .addComponent(textFieldHOST,
                                                                         GroupLayout.DEFAULT_SIZE,
-                                                                        176,
-                                                                        Short.MAX_VALUE))
+                                                                        176, Short.MAX_VALUE))
                                                 .addGroup(
                                                         gl_panel.createSequentialGroup()
                                                                 .addContainerGap()
-                                                                .addComponent(
-                                                                        btnSend))
-                                                .addComponent(lblWLAN)
+                                                                .addComponent(btnSend))
+                                                .addComponent(lblWlan)
                                                 .addGroup(
                                                         gl_panel.createSequentialGroup()
                                                                 .addContainerGap()
@@ -220,7 +198,7 @@ public class SRIC extends JInternalFrame {
                                                                                         GroupLayout.DEFAULT_SIZE,
                                                                                         Short.MAX_VALUE)
                                                                                 .addComponent(
-                                                                                        labelPW,
+                                                                                        labelPw,
                                                                                         GroupLayout.DEFAULT_SIZE,
                                                                                         60,
                                                                                         Short.MAX_VALUE))
@@ -244,92 +222,74 @@ public class SRIC extends JInternalFrame {
                 .createParallelGroup(Alignment.LEADING)
                 .addGroup(
                         gl_panel.createSequentialGroup()
-                                .addComponent(lblWLAN)
+                                .addComponent(lblWlan)
                                 .addPreferredGap(ComponentPlacement.RELATED)
                                 .addGroup(
-                                        gl_panel.createParallelGroup(
-                                                Alignment.LEADING)
+                                        gl_panel.createParallelGroup(Alignment.LEADING)
                                                 .addGroup(
                                                         gl_panel.createSequentialGroup()
-                                                                .addComponent(
-                                                                        lblSsid)
+                                                                .addComponent(lblSsid)
                                                                 .addPreferredGap(
                                                                         ComponentPlacement.UNRELATED)
-                                                                .addComponent(
-                                                                        labelPW))
+                                                                .addComponent(labelPw))
                                                 .addGroup(
                                                         gl_panel.createSequentialGroup()
-                                                                .addComponent(
-                                                                        textFieldSSID,
+                                                                .addComponent(textFieldSSID,
                                                                         GroupLayout.PREFERRED_SIZE,
                                                                         GroupLayout.DEFAULT_SIZE,
                                                                         GroupLayout.PREFERRED_SIZE)
                                                                 .addPreferredGap(
                                                                         ComponentPlacement.RELATED)
-                                                                .addComponent(
-                                                                        textFieldPW,
+                                                                .addComponent(textFieldPW,
                                                                         GroupLayout.PREFERRED_SIZE,
                                                                         GroupLayout.DEFAULT_SIZE,
                                                                         GroupLayout.PREFERRED_SIZE)))
                                 .addGap(46)
                                 .addGroup(
-                                        gl_panel.createParallelGroup(
-                                                Alignment.BASELINE)
-                                                .addComponent(lblFtp)
-                                                .addComponent(lblFTP))
+                                        gl_panel.createParallelGroup(Alignment.BASELINE)
+                                                .addComponent(lblFtp).addComponent(lblFTP))
                                 .addGap(1)
                                 .addGroup(
-                                        gl_panel.createParallelGroup(
-                                                Alignment.BASELINE)
+                                        gl_panel.createParallelGroup(Alignment.BASELINE)
                                                 .addComponent(lblHost)
-                                                .addComponent(
-                                                        textFieldHOST,
+                                                .addComponent(textFieldHOST,
                                                         GroupLayout.PREFERRED_SIZE,
                                                         GroupLayout.DEFAULT_SIZE,
                                                         GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(ComponentPlacement.RELATED,
-                                        GroupLayout.DEFAULT_SIZE,
-                                        Short.MAX_VALUE)
+                                        GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(
-                                        gl_panel.createParallelGroup(
-                                                Alignment.BASELINE)
+                                        gl_panel.createParallelGroup(Alignment.BASELINE)
                                                 .addComponent(lblPort)
-                                                .addComponent(
-                                                        textFieldPORT,
+                                                .addComponent(textFieldPORT,
                                                         GroupLayout.PREFERRED_SIZE,
                                                         GroupLayout.DEFAULT_SIZE,
                                                         GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(ComponentPlacement.RELATED)
                                 .addGroup(
-                                        gl_panel.createParallelGroup(
-                                                Alignment.BASELINE)
+                                        gl_panel.createParallelGroup(Alignment.BASELINE)
                                                 .addComponent(lblName)
-                                                .addComponent(
-                                                        textFieldNAME,
+                                                .addComponent(textFieldNAME,
                                                         GroupLayout.PREFERRED_SIZE,
                                                         GroupLayout.DEFAULT_SIZE,
                                                         GroupLayout.PREFERRED_SIZE))
                                 .addGap(9)
                                 .addGroup(
-                                        gl_panel.createParallelGroup(
-                                                Alignment.BASELINE)
+                                        gl_panel.createParallelGroup(Alignment.BASELINE)
                                                 .addComponent(lblPasswort)
-                                                .addComponent(
-                                                        textFieldPW2,
+                                                .addComponent(textFieldPW2,
                                                         GroupLayout.PREFERRED_SIZE,
                                                         GroupLayout.DEFAULT_SIZE,
                                                         GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(ComponentPlacement.RELATED)
                                 .addGroup(
-                                        gl_panel.createParallelGroup(
-                                                Alignment.BASELINE)
+                                        gl_panel.createParallelGroup(Alignment.BASELINE)
                                                 .addComponent(lblPicture)
-                                                .addComponent(
-                                                        textFieldPP,
+                                                .addComponent(textFieldPP,
                                                         GroupLayout.PREFERRED_SIZE,
                                                         GroupLayout.DEFAULT_SIZE,
-                                                        GroupLayout.PREFERRED_SIZE))
-                                .addGap(29).addComponent(btnSend).addGap(54)));
+                                                        GroupLayout.PREFERRED_SIZE)).addGap(29)
+                                .addComponent(btnSend).addGap(54)));
         panel.setLayout(gl_panel);
         getContentPane().setLayout(groupLayout);
 
