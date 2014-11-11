@@ -24,7 +24,7 @@ import cs.hm.edu.sam.mc.report.ReportSheet;
 /**
  * ImageViewerGUI class. This module displays images as original and
  * thumbnailed.
- * 
+ *
  * @author Christoph Friegel
  * @version 0.1
  */
@@ -46,8 +46,7 @@ public class Viewer extends JInternalFrame {
     /**
      * List of all the descriptions of the image files with caption.
      */
-    private final String[] imageCaptions = { "Desc 1",
-            "Desc 2", "Desc 3", "Desc 4" };
+    private final String[] imageCaptions = { "Desc 1", "Desc 2", "Desc 3", "Desc 4" };
     /*
      * TODO Change this to an while(true)-thread-function which checks a
      * specific folder for new images
@@ -56,8 +55,7 @@ public class Viewer extends JInternalFrame {
     /**
      * List of all the image files to load.
      */
-    private final String[] imageFileNames = { "1.jpg", "2.jpg", "3.jpg",
-            "4.jpg" };
+    private final String[] imageFileNames = { "1.jpg", "2.jpg", "3.jpg", "4.jpg" };
 
     /*
      * TODO Change this to an while(true)-thread-function which checks a
@@ -84,9 +82,7 @@ public class Viewer extends JInternalFrame {
         setResizable(true);
         // setSize(900, 700);
         // this.setResizable(false);
-        setFrameIcon(new ImageIcon(
-                ReportSheet.class
-                        .getResource("/icons/image_icon_mini.png")));
+        setFrameIcon(new ImageIcon(ReportSheet.class.getResource("/icons/image_icon_mini.png")));
 
         // A label for displaying the pictures
         photographLabel.setVerticalTextPosition(JLabel.BOTTOM);
@@ -127,27 +123,26 @@ public class Viewer extends JInternalFrame {
         protected Void doInBackground() throws Exception {
             for (int i = 0; i < imageCaptions.length; i++) {
                 ImageIcon icon;
-                icon = createImageIcon(imagedir + imageFileNames[i],
-                        imageCaptions[i]);
+                icon = createImageIcon(imagedir + imageFileNames[i], imageCaptions[i]);
 
                 // downsize photo
-                final ImageIcon downSizedIcon = new ImageIcon(getScaledImage(
-                        icon.getImage(), 400, 250));
+                final ImageIcon downSizedIcon = new ImageIcon(getScaledImage(icon.getImage(), 400,
+                        250));
 
                 ThumbnailAction thumbAction;
                 if (icon != null) {
 
-                    final ImageIcon thumbnailIcon = new ImageIcon(
-                            getScaledImage(icon.getImage(), 64, 64));
+                    final ImageIcon thumbnailIcon = new ImageIcon(getScaledImage(icon.getImage(),
+                            64, 64));
 
-                    thumbAction = new ThumbnailAction(downSizedIcon,
-                            thumbnailIcon, imageCaptions[i]);
+                    thumbAction = new ThumbnailAction(downSizedIcon, thumbnailIcon,
+                            imageCaptions[i]);
 
                 } else {
                     // the image failed to load for some reason
                     // so load a placeholder instead
-                    thumbAction = new ThumbnailAction(placeholderIcon,
-                            placeholderIcon, imageCaptions[i]);
+                    thumbAction = new ThumbnailAction(placeholderIcon, placeholderIcon,
+                            imageCaptions[i]);
                 }
                 publish(thumbAction);
             }
@@ -170,14 +165,13 @@ public class Viewer extends JInternalFrame {
 
     /**
      * Creates an ImageIcon if the path is valid.
-     * 
+     *
      * @param String
      *            - resource path
      * @param String
      *            - description of the file
      */
-    protected ImageIcon createImageIcon(final String path,
-            final String description) {
+    protected ImageIcon createImageIcon(final String path, final String description) {
         final java.net.URL imgURL = getClass().getResource(path);
         if (imgURL != null) {
             return new ImageIcon(imgURL, description);
@@ -189,7 +183,7 @@ public class Viewer extends JInternalFrame {
 
     /**
      * Resizes an image using a Graphics2D object backed by a BufferedImage.
-     * 
+     *
      * @param srcImg
      *            - source image to scale
      * @param w
@@ -199,8 +193,7 @@ public class Viewer extends JInternalFrame {
      * @return - the new resized image
      */
     private Image getScaledImage(final Image srcImg, final int w, final int h) {
-        final BufferedImage resizedImg = new BufferedImage(w, h,
-                BufferedImage.TYPE_INT_RGB);
+        final BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
         final Graphics2D g2 = resizedImg.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
                 RenderingHints.VALUE_INTERPOLATION_BILINEAR);
@@ -227,8 +220,7 @@ public class Viewer extends JInternalFrame {
          * @param String
          *            - The descriptioon of the icon.
          */
-        public ThumbnailAction(final Icon photo, final Icon thumb,
-                final String desc) {
+        public ThumbnailAction(final Icon photo, final Icon thumb, final String desc) {
 
             // photo
             displayPhoto = photo;

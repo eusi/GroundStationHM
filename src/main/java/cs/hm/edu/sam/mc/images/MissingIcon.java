@@ -21,8 +21,7 @@ public class MissingIcon implements Icon {
     private final BasicStroke stroke = new BasicStroke(4);
 
     @Override
-    public void paintIcon(final Component c, final Graphics g, final int x,
-            final int y) {
+    public void paintIcon(final Component c, final Graphics g, final int x, final int y) {
         final Graphics2D g2d = (Graphics2D) g.create();
 
         g2d.setColor(Color.WHITE);

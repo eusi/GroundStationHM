@@ -12,7 +12,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 /**
  * ReportSheet class. This module creates a report sheet from specific files.
- * 
+ *
  * @author Christoph Friegel
  * @version 0.1
  */
@@ -25,9 +25,7 @@ public class ReportSheet extends JInternalFrame {
      * Create the frame.
      */
     public ReportSheet() {
-        setFrameIcon(new ImageIcon(
-                ReportSheet.class
-                        .getResource("/icons/report_icon_mini.png")));
+        setFrameIcon(new ImageIcon(ReportSheet.class.getResource("/icons/report_icon_mini.png")));
         setTitle("ReportSheet");
         setIconifiable(true);
         setClosable(true);
@@ -35,20 +33,14 @@ public class ReportSheet extends JInternalFrame {
 
         final JPanel panel = new JPanel();
         final GroupLayout groupLayout = new GroupLayout(getContentPane());
-        groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(
-                Alignment.LEADING).addGroup(
-                groupLayout
-                        .createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panel, GroupLayout.DEFAULT_SIZE, 414,
-                                Short.MAX_VALUE).addContainerGap()));
-        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(
-                Alignment.LEADING).addGroup(
-                groupLayout
-                        .createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panel, GroupLayout.DEFAULT_SIZE, 249,
-                                Short.MAX_VALUE).addContainerGap()));
+        groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
+                groupLayout.createSequentialGroup().addContainerGap()
+                        .addComponent(panel, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+                        .addContainerGap()));
+        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
+                groupLayout.createSequentialGroup().addContainerGap()
+                        .addComponent(panel, GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                        .addContainerGap()));
 
         final JButton btnCreate = new JButton("create");
 
@@ -60,31 +52,23 @@ public class ReportSheet extends JInternalFrame {
         textField.setEditable(false);
         textField.setColumns(10);
         final GroupLayout gl_panel = new GroupLayout(panel);
-        gl_panel.setHorizontalGroup(gl_panel
-                .createParallelGroup(Alignment.LEADING)
-                .addGroup(
-                        gl_panel.createSequentialGroup()
-                                .addGroup(
-                                        gl_panel.createParallelGroup(
-                                                Alignment.LEADING)
-                                                .addComponent(lblStatus)
-                                                .addComponent(lblReportsheet)
-                                                .addGroup(
-                                                        gl_panel.createSequentialGroup()
-                                                                .addContainerGap()
-                                                                .addComponent(
-                                                                        btnCreate))
-                                                .addGroup(
-                                                        gl_panel.createSequentialGroup()
-                                                                .addContainerGap()
-                                                                .addComponent(
-                                                                        textField,
-                                                                        GroupLayout.PREFERRED_SIZE,
-                                                                        427,
-                                                                        GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(27, Short.MAX_VALUE)));
-        gl_panel.setVerticalGroup(gl_panel.createParallelGroup(
-                Alignment.LEADING).addGroup(
+        gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(
+                gl_panel.createSequentialGroup()
+                        .addGroup(
+                                gl_panel.createParallelGroup(Alignment.LEADING)
+                                        .addComponent(lblStatus)
+                                        .addComponent(lblReportsheet)
+                                        .addGroup(
+                                                gl_panel.createSequentialGroup().addContainerGap()
+                                                        .addComponent(btnCreate))
+                                        .addGroup(
+                                                gl_panel.createSequentialGroup()
+                                                        .addContainerGap()
+                                                        .addComponent(textField,
+                                                                GroupLayout.PREFERRED_SIZE, 427,
+                                                                GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(27, Short.MAX_VALUE)));
+        gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(
                 gl_panel.createSequentialGroup()
                         .addGap(24)
                         .addComponent(lblReportsheet)
@@ -94,8 +78,7 @@ public class ReportSheet extends JInternalFrame {
                         .addComponent(lblStatus)
                         .addPreferredGap(ComponentPlacement.UNRELATED)
                         .addComponent(textField, GroupLayout.PREFERRED_SIZE,
-                                GroupLayout.DEFAULT_SIZE,
-                                GroupLayout.PREFERRED_SIZE)
+                                GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(194, Short.MAX_VALUE)));
         panel.setLayout(gl_panel);
         getContentPane().setLayout(groupLayout);

@@ -24,7 +24,7 @@ import cs.hm.edu.sam.mc.sric.SRIC;
 
 /**
  * Main class. This main class contains the outer gui window.
- * 
+ *
  * @author Christoph Friegel
  * @version 0.1
  */
@@ -92,53 +92,41 @@ public class Main extends JFrame {
         final GroupLayout gl_contentPane = new GroupLayout(contentPane);
         gl_contentPane.setHorizontalGroup(gl_contentPane
                 .createParallelGroup(Alignment.LEADING)
-                .addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 615,
-                        Short.MAX_VALUE)
-                .addComponent(desktopPane, Alignment.TRAILING,
-                        GroupLayout.DEFAULT_SIZE, 774, Short.MAX_VALUE));
-        gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(
-                Alignment.LEADING).addGroup(
-                gl_contentPane
-                        .createSequentialGroup()
-                        .addComponent(toolBar, GroupLayout.PREFERRED_SIZE,
-                                GroupLayout.DEFAULT_SIZE,
-                                GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(ComponentPlacement.UNRELATED)
-                        .addComponent(desktopPane, GroupLayout.DEFAULT_SIZE,
-                                479, Short.MAX_VALUE)));
+                .addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
+                .addComponent(desktopPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 774,
+                        Short.MAX_VALUE));
+        gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(
+                        gl_contentPane
+                                .createSequentialGroup()
+                                .addComponent(toolBar, GroupLayout.PREFERRED_SIZE,
+                                        GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.UNRELATED)
+                                .addComponent(desktopPane, GroupLayout.DEFAULT_SIZE, 479,
+                                        Short.MAX_VALUE)));
         final GroupLayout gl_desktopPane = new GroupLayout(desktopPane);
-        gl_desktopPane.setHorizontalGroup(gl_desktopPane.createParallelGroup(
-                Alignment.LEADING).addGap(0, 615, Short.MAX_VALUE));
-        gl_desktopPane.setVerticalGroup(gl_desktopPane.createParallelGroup(
-                Alignment.LEADING).addGap(0, 318, Short.MAX_VALUE));
+        gl_desktopPane.setHorizontalGroup(gl_desktopPane.createParallelGroup(Alignment.LEADING)
+                .addGap(0, 615, Short.MAX_VALUE));
+        gl_desktopPane.setVerticalGroup(gl_desktopPane.createParallelGroup(Alignment.LEADING)
+                .addGap(0, 318, Short.MAX_VALUE));
         desktopPane.setLayout(gl_desktopPane);
 
         btnReportSheet = new JButton("ReportSheet");
-        btnReportSheet
-                .setIcon(new ImageIcon(
-                        Main.class
-                                .getResource("/icons/report_icon.png")));
+        btnReportSheet.setIcon(new ImageIcon(Main.class.getResource("/icons/report_icon.png")));
         toolBar.add(btnReportSheet);
 
         btnImageviewer = new JButton("ImageViewer");
-        btnImageviewer
-                .setIcon(new ImageIcon(
-                        Main.class
-                                .getResource("/icons/image_icon.png")));
+        btnImageviewer.setIcon(new ImageIcon(Main.class.getResource("/icons/image_icon.png")));
         toolBar.add(btnImageviewer);
 
         btnSric = new JButton("SRIC");
-        btnSric.setIcon(new ImageIcon(
-                Main.class
-                        .getResource("/icons/sric_icon.png")));
+        btnSric.setIcon(new ImageIcon(Main.class.getResource("/icons/sric_icon.png")));
         toolBar.add(btnSric);
-        
+
         btnRouting = new JButton("Routing");
-        btnRouting.setIcon(new ImageIcon(
-                Main.class
-                        .getResource("/icons/routing_icon.png")));
+        btnRouting.setIcon(new ImageIcon(Main.class.getResource("/icons/routing_icon.png")));
         toolBar.add(btnRouting);
-        
+
         contentPane.setLayout(gl_contentPane);
     }
 
@@ -148,6 +136,8 @@ public class Main extends JFrame {
                 reportSheet = new ReportSheet(); // only one instace of this
                 desktopPane.add(reportSheet);
                 reportSheet.show();
+            } else {
+                reportSheet.moveToFront();
             }
         });
 
@@ -156,6 +146,8 @@ public class Main extends JFrame {
                 imageViewer = new Viewer(); // only one instance of this
                 desktopPane.add(imageViewer);
                 imageViewer.show();
+            } else {
+                imageViewer.moveToFront();
             }
         });
 
@@ -164,14 +156,18 @@ public class Main extends JFrame {
                 sric = new SRIC(); // only one instance of this
                 desktopPane.add(sric);
                 sric.show();
+            } else {
+                sric.moveToFront();
             }
         });
-        
+
         btnRouting.addActionListener(arg0 -> {
             if (routing == null || routing.isClosed()) {
-            	routing = new Routing(); // only one instance of this
+                routing = new Routing(); // only one instance of this
                 desktopPane.add(routing);
                 routing.show();
+            } else {
+                routing.moveToFront();
             }
         });
     }
