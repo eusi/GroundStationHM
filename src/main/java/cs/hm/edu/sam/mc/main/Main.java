@@ -18,6 +18,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
 import cs.hm.edu.sam.mc.images.Viewer;
+import cs.hm.edu.sam.mc.ir.Ir;
 import cs.hm.edu.sam.mc.report.ReportSheet;
 import cs.hm.edu.sam.mc.routing.Routing;
 import cs.hm.edu.sam.mc.sric.SRIC;
@@ -36,9 +37,11 @@ public class Main extends JFrame {
     private JButton btnReportSheet;
     private JButton btnImageviewer;
     private JButton btnSric;
+    private JButton btnIr;
     private ReportSheet reportSheet;
     private SRIC sric;
     private Routing routing;
+    private Ir ir;
     private Viewer imageViewer;
     private JDesktopPane desktopPane;
     private JButton btnRouting;
@@ -126,6 +129,10 @@ public class Main extends JFrame {
         btnRouting = new JButton("Routing");
         btnRouting.setIcon(new ImageIcon(Main.class.getResource("/icons/routing_icon.png")));
         toolBar.add(btnRouting);
+        
+        btnIr = new JButton("IR");
+        btnIr.setIcon(new ImageIcon(Main.class.getResource("/icons/ir_icon.png")));
+        toolBar.add(btnIr);
 
         contentPane.setLayout(gl_contentPane);
     }
@@ -170,5 +177,15 @@ public class Main extends JFrame {
                 routing.moveToFront();
             }
         });
+        
+        btnIr.addActionListener(arg0 -> {
+          if (ir == null || ir.isClosed()) {
+              ir = new Ir(); // only one instance of this
+              desktopPane.add(ir);
+              ir.show();
+          } else {
+              ir.moveToFront();
+          }
+      });
     }
 }

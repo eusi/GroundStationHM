@@ -11,6 +11,7 @@ public class Location {
 
 	private double x; //longitude
 	private double y; //latitude
+	private double z; //altitude
 	
 	public Location( double newX, double newY ) {
 		this.x = newX;
