@@ -24,7 +24,7 @@ public class RESTClient {
     		Client client = Client.create();
      
     		WebResource webResource = client
-    		   .resource(CONSTANTS.REST_MP + "/getCurrentPosition");
+    		   .resource(CONSTANTS.REST_MP + "/getUAVPosition");
      
     		//TODO: Handle Connection refused 
     		ClientResponse response = webResource.accept("application/json")
@@ -48,9 +48,9 @@ public class RESTClient {
     		if( output.charAt(0) != ']' && output != null )
     		{
 	    		JSONObject obj = new JSONObject(output);
-	    		double lng = obj.getDouble("lng");
-	    		double lat = obj.getDouble("lat");
-	    		double alt = obj.getDouble("alt");
+	    		double lng = obj.getDouble("Lng");
+	    		double lat = obj.getDouble("Lat");
+	    		double alt = obj.getDouble("Alt");
 	    		
 	    		Location newLocation = new Location(lng, lat, alt);
 	    		Data.setCurrentPosition( newLocation );
@@ -67,7 +67,7 @@ public class RESTClient {
 	public static void sendWaypoints()
 	{
 		try {
-			String waypointsJSON = "{\"waypoints\":[" + Data.getWaypoints().toString() + "], \"append\":1}}";
+			String waypointsJSON = "{\"waypoints\":[" + Data.getWaypoints().toString() + "], \"append\":1, \"name\":"+ Data.getWaypoints().getWaypointListName() +"}";
 			
 			ClientConfig clientConfig = new DefaultClientConfig();
 

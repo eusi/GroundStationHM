@@ -10,14 +10,17 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import cs.hm.edu.sam.mc.emergency.Emergency;
@@ -29,10 +32,6 @@ import cs.hm.edu.sam.mc.misc.RESTClient;
 import cs.hm.edu.sam.mc.report.ReportSheet;
 import cs.hm.edu.sam.mc.routing.Routing;
 import cs.hm.edu.sam.mc.sric.SRIC;
-
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.JCheckBoxMenuItem;
 
 /**
  * Main class. This main class contains the outer gui window.

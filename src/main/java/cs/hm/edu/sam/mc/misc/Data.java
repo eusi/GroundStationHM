@@ -16,12 +16,14 @@ package cs.hm.edu.sam.mc.misc;
  *
  * Waypoint-TEST (e.g. waypoint-list)
  *
- *		Location test1 = new Location( 1.2, 1.3, 50 );
+ *		Location test1 = new Location( 1.2, 1.3, 50 ); //HOME!
  *		Location test2 = new Location( 2.2, 2.3, 50 );
- *		Location[] waypoints = { test1, test2 };
+ *      Location test3 = new Location( 2.4, 2.6, 100 );
+ *		Location[] waypoints = { test1, test2, test3 };
  *		Data.setWaypointList( waypoints, "test" );
  *		System.out.println( Data.getWaypoints().getWaypointListName() );
  *		System.out.println( Data.getWaypoints().getWaypoints()[0].getLng() );
+ *      RESTClient.sendWaypoints();
 */
 
 public class Data {

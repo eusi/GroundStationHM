@@ -135,7 +135,7 @@ public enum MAV_CMD
 	ENUM_END (30003); 
 	
 	
-	private int value;
+	private final int value;
 	
 	
 	MAV_CMD ( int value )
@@ -144,8 +144,8 @@ public enum MAV_CMD
     }
 
 	
-    public void exit ( )
+    public int getValue ( )
     {
-    	System.exit ( value ) ;
+    	return value;
     }
 }

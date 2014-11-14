@@ -22,6 +22,8 @@ TODO (Team 7):
 
 - SRIC: Send data to android-phone (and waiting for response) or prepare data for polling
 
+- Zoning: Create new zone (multi-color). Multi-Parameter: lat, long.
+
 - Main: Better look & feel, more menu items?
 
 - Rest: Replace hardcoded paths with gui options (like MP IP address)

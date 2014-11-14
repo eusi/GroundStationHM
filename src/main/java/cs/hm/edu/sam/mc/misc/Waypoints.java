@@ -59,15 +59,15 @@ public class Waypoints {
 		
 		for(int i=0; i<list.length; i++)
 		{
-			jsonString.append("{alt:").append(list[i].getAlt()+",")
-					.append("id:").append(MAV_CMD.WAYPOINT + ",")
-					.append("lat:").append(list[i].getLat()+",")
-					.append("lng:").append(list[i].getLng()+",")
-					.append("options:").append("1,")
-					.append("p1:").append("0,")
-					.append("p2:").append("0,")
-					.append("p3:").append("0,")
-					.append("p4:").append("0}");
+			jsonString.append("{\"alt\":").append(list[i].getAlt()+",")
+					.append("\"id\":").append(MAV_CMD.WAYPOINT.getValue() + ",")
+					.append("\"lat\":").append(list[i].getLat()+",")
+					.append("\"lng\":").append(list[i].getLng()+",")
+					.append("\"options\":").append("1,")
+					.append("\"p1\":").append("0,")
+					.append("\"p2\":").append("0,")
+					.append("\"p3\":").append("0,")
+					.append("\"p4\":").append("0}");
 			
 			if(i+1 < list.length)
 				jsonString.append(",");
