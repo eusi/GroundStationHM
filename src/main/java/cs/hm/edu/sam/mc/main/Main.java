@@ -2,6 +2,8 @@ package cs.hm.edu.sam.mc.main;
 
 import java.awt.EventQueue;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
@@ -66,13 +68,15 @@ public class Main extends JFrame {
      * Launch the application.
      */
     public static void main(final String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                final Main frame = new Main();
-                frame.setVisible(true);
-            } catch (final Exception e) {
-                e.printStackTrace();
-            }
+    	EventQueue.invokeLater(new Runnable() {
+    		public void run() {
+	            try {
+	                final Main frame = new Main();
+	                frame.setVisible(true);
+	            } catch (final Exception e) {
+	                e.printStackTrace();
+	            }
+    		}
         });
     }
 
@@ -97,7 +101,11 @@ public class Main extends JFrame {
         menuBar.add(mnFile);
 
         final JMenuItem mntmExit = new JMenuItem("Exit");
-        mntmExit.addActionListener(e -> System.exit(0));
+        mntmExit.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		System.exit(0);
+        	}
+        });
         
         chckbxmntmGetLocation = new JCheckBoxMenuItem("Get Location");
         mnFile.add(chckbxmntmGetLocation);
@@ -177,64 +185,76 @@ public class Main extends JFrame {
     }
 
     private void createEvents() {
-        btnReportSheet.addActionListener(arg0 -> {
-            if (reportSheet == null || reportSheet.isClosed()) {
-                reportSheet = new ReportSheet(); // only one instace of this
-                desktopPane.add(reportSheet);
-                reportSheet.show();
-            } else {
-                reportSheet.moveToFront();
-            }
+    	btnReportSheet.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent arg0) {
+	            if (reportSheet == null || reportSheet.isClosed()) {
+	                reportSheet = new ReportSheet(); // only one instace of this
+	                desktopPane.add(reportSheet);
+	                reportSheet.show();
+	            } else {
+	                reportSheet.moveToFront();
+	            }
+    		}
         });
 
-        btnImageviewer.addActionListener(arg0 -> {
-            if (imageViewer == null || imageViewer.isClosed()) {
-                imageViewer = new ImageViewer(); // only one instance of this
-                desktopPane.add(imageViewer);
-                imageViewer.show();
-            } else {
-                imageViewer.moveToFront();
-            }
+        btnImageviewer.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent arg0) {
+	            if (imageViewer == null || imageViewer.isClosed()) {
+	                imageViewer = new ImageViewer(); // only one instance of this
+	                desktopPane.add(imageViewer);
+	                imageViewer.show();
+	            } else {
+	                imageViewer.moveToFront();
+	            }
+    		}
         });
 
-        btnSric.addActionListener(arg0 -> {
-            if (sric == null || sric.isClosed()) {
-                sric = new SRIC(); // only one instance of this
-                desktopPane.add(sric);
-                sric.show();
-            } else {
-                sric.moveToFront();
-            }
+        btnSric.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent arg0) {
+	            if (sric == null || sric.isClosed()) {
+	                sric = new SRIC(); // only one instance of this
+	                desktopPane.add(sric);
+	                sric.show();
+	            } else {
+	                sric.moveToFront();
+	            }
+    		}
         });
 
-        btnRouting.addActionListener(arg0 -> {
-            if (routing == null || routing.isClosed()) {
-                routing = new Routing(); // only one instance of this
-                desktopPane.add(routing);
-                routing.show();
-            } else {
-                routing.moveToFront();
-            }
+        btnRouting.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent arg0) {
+	            if (routing == null || routing.isClosed()) {
+	                routing = new Routing(); // only one instance of this
+	                desktopPane.add(routing);
+	                routing.show();
+	            } else {
+	                routing.moveToFront();
+	            }
+    		}
         });
         
-        btnIr.addActionListener(arg0 -> {
-          if (ir == null || ir.isClosed()) {
-              ir = new Ir(); // only one instance of this
-              desktopPane.add(ir);
-              ir.show();
-          } else {
-              ir.moveToFront();
-          }
+        btnIr.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent arg0) {
+	          if (ir == null || ir.isClosed()) {
+	              ir = new Ir(); // only one instance of this
+	              desktopPane.add(ir);
+	              ir.show();
+	          } else {
+	              ir.moveToFront();
+	          }
+    		}
       });
         
-        btnEmergency.addActionListener(arg0 -> {
-            if (emergency == null || emergency.isClosed()) {
-            	emergency = new Emergency(); // only one instance of this
-                desktopPane.add(emergency);
-                emergency.show();
-            } else {
-            	emergency.moveToFront();
-            }
+        btnEmergency.addActionListener(new ActionListener() {
+    		public void actionPerformed(ActionEvent arg0) {
+	            if (emergency == null || emergency.isClosed()) {
+	            	emergency = new Emergency(); // only one instance of this
+	                desktopPane.add(emergency);
+	                emergency.show();
+	            } else {
+	            	emergency.moveToFront();
+	            }
+    		}
         });
     }
     
