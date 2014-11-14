@@ -31,3 +31,5 @@ TODO (Team 7):
 - optional: add a config-file for modules if they use things like 'browser folder' (save path) or ftp data 
 
 - Logger?
+
+- Javadoc: Set to every public function an comment in javadoc.

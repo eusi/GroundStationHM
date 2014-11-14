@@ -11,9 +11,11 @@ public class CONSTANTS {
 
     public final static String IMAGE_DIR = "/images/";
     public final static String ICON_DIR = "/icons/";
-    public final static String IMAGE_DIR_FILE = "./target/classes" + IMAGE_DIR;
-    
+    public final static String IMAGE_DIR_FILE = "./src/main/resources" + IMAGE_DIR;
+
     public final static String REST_MP = "http://localhost:8000/MissionPlannerService";
+    
+    public final static int GET_CURRENT_POSITION_DELAY = 2000;
 	
 }
 
