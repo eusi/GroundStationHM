@@ -44,9 +44,9 @@ public abstract class GroundComponent implements GroundGuiInterface {
 	private boolean emergentReady = false;
 	
 	
-	private final List<Location> staticTarget = new ArrayList<>();
-	private final List<Location> dynamicTarget = new ArrayList<>();
-	private final List<Location> emergentTarget = new ArrayList<>();
+	private List<Location> staticTarget = new ArrayList<>();
+	private List<Location> dynamicTarget = new ArrayList<>();
+	private List<Location> emergentTarget = new ArrayList<>();
 	
 	
 
@@ -90,8 +90,9 @@ public abstract class GroundComponent implements GroundGuiInterface {
 	 * 
 	 */
 	private void calcStaticWaypoints(Location statTarget) {
-		// TODO Auto-generated method stub
 		
+		//TEST
+		this.staticTarget = TestMain.createTestWaypoints();
 	}
 	private void calcEmergentWaypoints(Location emerTarget) {
 		// TODO Auto-generated method stub
@@ -115,6 +116,7 @@ public abstract class GroundComponent implements GroundGuiInterface {
 		//Current von MissionControl Team...
 		Location currentLoc = Data.getCurrentPosition();
 		
+		//Alle Locations prüfen, escape wenn innerhalb des Radius.
 		for(int i = 0; i<currTaskWaypoints.size() || waypointInRad; i++) {
 			waypointInRad = inRadius(currTaskWaypoints.get(i), currentLoc);
 		}	
