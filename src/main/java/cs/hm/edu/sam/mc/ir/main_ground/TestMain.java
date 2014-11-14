@@ -16,7 +16,7 @@ public class TestMain {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		GroundComponent groundComponent = new StaticIRComponent();
+		StaticIRComponent test = new StaticIRComponent();
 		
 	}
 	
