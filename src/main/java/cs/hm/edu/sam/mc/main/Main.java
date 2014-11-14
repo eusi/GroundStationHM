@@ -262,7 +262,7 @@ public class Main extends JFrame {
         			}
         			
         			// sleep 2 sec
-    				sleep( 2000 );
+    				sleep( CONSTANTS.GET_CURRENT_POSITION_DELAY );
     			} 
     			catch (InterruptedException e) 
     			{

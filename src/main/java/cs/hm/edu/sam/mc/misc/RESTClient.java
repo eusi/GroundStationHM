@@ -67,9 +67,7 @@ public class RESTClient {
 	public static void sendWaypoints()
 	{
 		try {
-			String waypointsJSON = "[" + Data.getWaypoints().toString() + "]";
-			//String waypointsJSON = "[{\"alt\":0,\"id\":16,\"lat\":2,\"lng\":3,\"options\":1,\"p1\":0,\"p2\":0,\"p3\":0,\"p4\":0},{\"alt\":1,\"id\":16,\"lat\":2,\"lng\":3,\"options\":1,\"p1\":0,\"p2\":0,\"p3\":0,\"p4\":0},{\"alt\":2,\"id\":16,\"lat\":2,\"lng\":3,\"options\":1,\"p1\":0,\"p2\":0,\"p3\":0,\"p4\":0},{\"alt\":3,\"id\":16,\"lat\":2,\"lng\":3,\"options\":1,\"p1\":0,\"p2\":0,\"p3\":0,\"p4\":0},{\"alt\":4,\"id\":16,\"lat\":2,\"lng\":3,\"options\":1,\"p1\":0,\"p2\":0,\"p3\":0,\"p4\":0}}]";
-			//System.out.println(waypointsJSON);
+			String waypointsJSON = "{\"waypoints\":[" + Data.getWaypoints().toString() + "], \"append\":1}}";
 			
 			ClientConfig clientConfig = new DefaultClientConfig();
 
