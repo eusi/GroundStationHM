@@ -2,7 +2,10 @@ package cs.hm.edu.sam.mc.main;
 
 import java.awt.EventQueue;
 import java.awt.SystemColor;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
+import javax.swing.Box;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -17,11 +20,17 @@ import javax.swing.JToolBar;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
-import cs.hm.edu.sam.mc.images.Viewer;
+import cs.hm.edu.sam.mc.images.ImageViewer;
 import cs.hm.edu.sam.mc.ir.Ir;
+import cs.hm.edu.sam.mc.misc.Data;
+import cs.hm.edu.sam.mc.misc.RESTClient;
 import cs.hm.edu.sam.mc.report.ReportSheet;
 import cs.hm.edu.sam.mc.routing.Routing;
 import cs.hm.edu.sam.mc.sric.SRIC;
+
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.JCheckBoxMenuItem;
 
 /**
  * Main class. This main class contains the outer gui window.
@@ -42,9 +51,11 @@ public class Main extends JFrame {
     private SRIC sric;
     private Routing routing;
     private Ir ir;
-    private Viewer imageViewer;
+    private ImageViewer imageViewer;
     private JDesktopPane desktopPane;
     private JButton btnRouting;
+    private JLabel lblCoor;
+    private JCheckBoxMenuItem chckbxmntmGetLocation;
 
     /**
      * Launch the application.
@@ -66,6 +77,7 @@ public class Main extends JFrame {
     public Main() {
         initComponents();
         createEvents();
+        new Thready("currentLocation").start();
     }
 
     private void initComponents() {
@@ -81,8 +93,26 @@ public class Main extends JFrame {
 
         final JMenuItem mntmExit = new JMenuItem("Exit");
         mntmExit.addActionListener(e -> System.exit(0));
+        
+        chckbxmntmGetLocation = new JCheckBoxMenuItem("Get Location");
+        mnFile.add(chckbxmntmGetLocation);
         mntmExit.setIcon(new ImageIcon(Main.class.getResource("/icons/exit_icon.png")));
         mnFile.add(mntmExit);
+        
+        chckbxmntmGetLocation.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+            		Data.setCurrentLocationIsActive( chckbxmntmGetLocation.isSelected() );
+            }
+          });
+        
+        menuBar.add(Box.createHorizontalGlue());
+        
+        JLabel lblLocation = new JLabel("Location: ");
+        lblLocation.setHorizontalAlignment(SwingConstants.RIGHT);
+        menuBar.add(lblLocation);
+        
+        lblCoor = new JLabel("lng: 0, lat: 0, alt: 0");
+        menuBar.add(lblCoor);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -150,7 +180,7 @@ public class Main extends JFrame {
 
         btnImageviewer.addActionListener(arg0 -> {
             if (imageViewer == null || imageViewer.isClosed()) {
-                imageViewer = new Viewer(); // only one instance of this
+                imageViewer = new ImageViewer(); // only one instance of this
                 desktopPane.add(imageViewer);
                 imageViewer.show();
             } else {
@@ -187,5 +217,37 @@ public class Main extends JFrame {
               ir.moveToFront();
           }
       });
+    }
+    
+    
+	private class Thready extends Thread {
+    	public Thready(String str) {
+    		super(str);
+    	}
+     
+    	public void run() {
+    		while( true ) {
+    			try 
+    			{
+        			if ( Data.isCurrentLocationActive() )
+        			{
+        				RESTClient.getCurrentPosition();
+        				
+            			if ( Data.getCurrentPosition() != null )
+            			{
+	        				lblCoor.setText("lng: "+ Data.getCurrentPosition().getLng() 
+	        						+" , lat: "+  Data.getCurrentPosition().getLat()
+	        						+" , alt: "+ Data.getCurrentPosition().getAlt());
+            			}
+        			}
+        			
+        			// sleep 2 sec
+    				sleep( 2000 );
+    			} 
+    			catch (InterruptedException e) 
+    			{
+    			}
+    		}
+    	}
     }
 }

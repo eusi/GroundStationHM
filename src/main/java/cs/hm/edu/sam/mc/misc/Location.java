@@ -9,29 +9,36 @@ package cs.hm.edu.sam.mc.misc;
 
 public class Location {
 
-	private double x; //longitude
-	private double y; //latitude
-	private double z; //altitude
+	private double lng; //longitude
+	private double lat; //latitude
+	private double alt; //altitude, in real it's a float
 	
-	public Location( double newX, double newY ) {
-		this.x = newX;
-		this.y = newY;
+	public Location( double newLng, double newLat, double newAlt ) {
+		this.lng = newLng;
+		this.lat = newLat;
+		this.alt = newAlt;
 	}
 	
 	//Get longitude
-	public double getX() {
-		return x;
+	public double getLng() {
+		return lng;
 	}
 	
 	//Get latitude
-	public double getY() {
-		return y;
+	public double getLat() {
+		return lat;
+	}
+	
+	//Get altitude
+	public double getAlt() {
+		return alt;
 	}
 	
 	@Override
 	public String toString() {
-		return new StringBuffer(" x : ").append(this.x)
-				.append(" y : ").append(this.y).toString();
+		return new StringBuffer(" lng : ").append(this.lng)
+				.append(" lat : ").append(this.lat)
+				.append(" alt : ").append(this.alt).toString();
 	}
 	
 }

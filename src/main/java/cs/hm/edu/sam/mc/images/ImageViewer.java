@@ -1,6 +1,10 @@
 package cs.hm.edu.sam.mc.images;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
@@ -22,7 +26,7 @@ import javax.swing.SwingWorker;
 import cs.hm.edu.sam.mc.report.ReportSheet;
 
 /**
- * ImageViewerGUI class. This module displays images as original and
+ * ImageViewer class. This module displays images as original and
  * thumbnailed.
  *
  * @author Christoph Friegel
@@ -30,7 +34,7 @@ import cs.hm.edu.sam.mc.report.ReportSheet;
  */
 
 @SuppressWarnings("serial")
-public class Viewer extends JInternalFrame {
+public class ImageViewer extends JInternalFrame {
 
     private final JLabel photographLabel = new JLabel();
     private final JToolBar buttonBar = new JToolBar();
@@ -72,7 +76,7 @@ public class Viewer extends JInternalFrame {
     /**
      * Default constructor
      */
-    public Viewer() {
+    public ImageViewer() {
 
         // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Image Viewer");
@@ -242,4 +246,47 @@ public class Viewer extends JInternalFrame {
             setTitle("Image Viewer: " + getValue(SHORT_DESCRIPTION).toString());
         }
     }
+    
+    /**
+     * Icon class that creates an default icon when missing.
+     */
+    private class MissingIcon implements Icon {
+
+        private final int width = 32;
+        private final int height = 32;
+
+        private final BasicStroke stroke = new BasicStroke(4);
+
+        @Override
+        public void paintIcon(final Component c, final Graphics g, final int x, final int y) {
+            final Graphics2D g2d = (Graphics2D) g.create();
+
+            g2d.setColor(Color.WHITE);
+            g2d.fillRect(x + 1, y + 1, width - 2, height - 2);
+
+            g2d.setColor(Color.BLACK);
+            g2d.drawRect(x + 1, y + 1, width - 2, height - 2);
+
+            g2d.setColor(Color.RED);
+
+            g2d.setStroke(stroke);
+            g2d.drawLine(x + 10, y + 10, x + width - 10, y + height - 10);
+            g2d.drawLine(x + 10, y + height - 10, x + width - 10, y + 10);
+
+            g2d.dispose();
+        }
+
+        @Override
+        public int getIconWidth() {
+            return width;
+        }
+
+        @Override
+        public int getIconHeight() {
+            return height;
+        }
+
+    }
 }
+
+

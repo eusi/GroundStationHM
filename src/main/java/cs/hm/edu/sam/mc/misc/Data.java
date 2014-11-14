@@ -9,43 +9,53 @@ package cs.hm.edu.sam.mc.misc;
  *
  * Location-TEST (e.g. currentPosition)
  *
- *		Location test = new Location( 1.2, 1.3 );
+ *		Location test = new Location( 1.2, 1.3, 50 );
  *		Data.setCurrentPosition( test );
  *		System.out.println( Data.getCurrentPosition().getX() );
  *
  *
  * Waypoint-TEST (e.g. waypoint-list)
  *
- *		Location test1 = new Location( 1.2, 1.3 );
- *		Location test2 = new Location( 2.2, 2.3 );
+ *		Location test1 = new Location( 1.2, 1.3, 50 );
+ *		Location test2 = new Location( 2.2, 2.3, 50 );
  *		Location[] waypoints = { test1, test2 };
  *		Data.setWaypointList( waypoints, "test" );
  *		System.out.println( Data.getWaypoints().getWaypointListName() );
- *		System.out.println( Data.getWaypoints().getWaypoints()[0].getX() );
+ *		System.out.println( Data.getWaypoints().getWaypoints()[0].getLng() );
 */
 
 public class Data {
 	private static Location currentPosition; //contains x and y
 	private static Waypoints thisWaypoints; //contains some locations and a list name
+	
+	private static boolean currentLocationIsActive; //if we want to poll a current loc
 
-	//Get current position
+	//Get current position - for e.g. IR-task
 	public static Location getCurrentPosition() {
 		return currentPosition;
 	}
 	
-	//Set current position
+	//Set current position - for rest only, don't call this manually!
 	public static void setCurrentPosition( Location newPosition ) {
 		currentPosition = newPosition;
 	}
 	
-	//Get waypoint list
+	//Get waypoint list - for e.g. rest
 	public static Waypoints getWaypoints() {
 		return thisWaypoints;
 	}
 	
-	//Set waypoint list
+	//Set waypoint list - for e.g. routing
 	public static void setWaypointList( Location[] waypointList, String waypointListName ) {
 		thisWaypoints = new Waypoints( waypointList, waypointListName );
+	}
+
+	public static boolean isCurrentLocationActive() {
+		return currentLocationIsActive;
+	}
+
+	public static void setCurrentLocationIsActive(boolean currentLocationIsActive) {
+		Data.currentLocationIsActive = currentLocationIsActive;
 	}
 
 }
