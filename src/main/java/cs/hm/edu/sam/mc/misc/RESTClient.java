@@ -24,7 +24,7 @@ public class RESTClient {
     		Client client = Client.create();
      
     		WebResource webResource = client
-    		   .resource("http://localhost:8000/MissionPlannerService/getCurrentPosition");
+    		   .resource(CONSTANTS.REST_MP + "/getCurrentPosition");
      
     		//TODO: Handle Connection refused 
     		ClientResponse response = webResource.accept("application/json")
@@ -79,7 +79,7 @@ public class RESTClient {
 			Client client = Client.create(clientConfig);
 
 			WebResource webResource = client
-					.resource("http://localhost:8000/MissionPlannerService/setWaypoints");
+					.resource(CONSTANTS.REST_MP + "/setWaypoints");
 
 			ClientResponse response = webResource.accept("application/json")
 					.type("application/json").post(ClientResponse.class, waypointsJSON);

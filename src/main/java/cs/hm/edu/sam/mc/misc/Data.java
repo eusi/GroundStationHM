@@ -11,7 +11,7 @@ package cs.hm.edu.sam.mc.misc;
  *
  *		Location test = new Location( 1.2, 1.3, 50 );
  *		Data.setCurrentPosition( test );
- *		System.out.println( Data.getCurrentPosition().getX() );
+ *		System.out.println( Data.getCurrentPosition().getLng() );
  *
  *
  * Waypoint-TEST (e.g. waypoint-list)
@@ -25,8 +25,11 @@ package cs.hm.edu.sam.mc.misc;
 */
 
 public class Data {
-	private static Location currentPosition; //contains x and y
-	private static Waypoints thisWaypoints; //contains some locations and a list name
+	private static Location currentPosition; //this is acutally the current position
+	                                         //of the aircraft (by MP)
+	private static Waypoints thisWaypoints; //this should be the waypoints which
+	                                        //are created by routing-module and
+		                                    //will be send to MP
 	
 	private static boolean currentLocationIsActive; //if we want to poll a current loc
 

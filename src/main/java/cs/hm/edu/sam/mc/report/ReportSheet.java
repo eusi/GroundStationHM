@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import cs.hm.edu.sam.mc.misc.CONSTANTS;
+
 /**
  * ReportSheet class. This module creates a report sheet from specific files.
  *
@@ -25,7 +27,7 @@ public class ReportSheet extends JInternalFrame {
      * Create the frame.
      */
     public ReportSheet() {
-        setFrameIcon(new ImageIcon(ReportSheet.class.getResource("/icons/report_icon_mini.png")));
+        setFrameIcon(new ImageIcon(ReportSheet.class.getResource(CONSTANTS.ICON_DIR + "report_icon_mini.png")));
         setTitle("ReportSheet");
         setIconifiable(true);
         setClosable(true);

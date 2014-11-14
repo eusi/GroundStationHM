@@ -1,7 +1,6 @@
 package cs.hm.edu.sam.mc.images;
 
 import java.awt.BasicStroke;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -9,9 +8,15 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -20,9 +25,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingWorker;
 
+import net.miginfocom.swing.MigLayout;
+import cs.hm.edu.sam.mc.misc.CONSTANTS;
 import cs.hm.edu.sam.mc.report.ReportSheet;
 
 /**
@@ -34,37 +42,43 @@ import cs.hm.edu.sam.mc.report.ReportSheet;
  */
 
 @SuppressWarnings("serial")
-public class ImageViewer extends JInternalFrame {
+public class ImageViewer extends JInternalFrame implements ActionListener {
 
     private final JLabel photographLabel = new JLabel();
     private final JToolBar buttonBar = new JToolBar();
 
-    private final String imagedir = "/images/";
-    /*
-     * TODO Change this to an while(true)-thread-function which checks a
-     * specific folder for new images
-     */
+    private final String imagedir = CONSTANTS.IMAGE_DIR;
+    static final File dir = new File(CONSTANTS.IMAGE_DIR_FILE);
 
     private final MissingIcon placeholderIcon = new MissingIcon();
+    
+    static final String[] EXTENSIONS = new String[]{
+        "gif", "png", "bmp", "jpg"
+    };
+    
+    // filter to identify images based on their extensions
+    static final FilenameFilter IMAGE_FILTER = new FilenameFilter() {
 
-    /**
-     * List of all the descriptions of the image files with caption.
-     */
-    private final String[] imageCaptions = { "Desc 1", "Desc 2", "Desc 3", "Desc 4" };
-    /*
-     * TODO Change this to an while(true)-thread-function which checks a
-     * specific folder for new images
-     */
+        @Override
+        public boolean accept(final File dir, final String name) {
+            for (final String ext : EXTENSIONS) {
+                if (name.endsWith("." + ext)) {
+                    return (true);
+                }
+            }
+            return (false);
+        }
+    };
+
 
     /**
      * List of all the image files to load.
      */
-    private final String[] imageFileNames = { "1.jpg", "2.jpg", "3.jpg", "4.jpg" };
+    private ArrayList<String> imageFileNames = new ArrayList<String>();;
 
-    /*
-     * TODO Change this to an while(true)-thread-function which checks a
-     * specific folder for new images
-     */
+    
+    private JTextField txtTest;
+    private final JButton btnRefresh;
 
     /*
      * KeyListener kl=new KeyAdapter() {
@@ -77,30 +91,48 @@ public class ImageViewer extends JInternalFrame {
      * Default constructor
      */
     public ImageViewer() {
-
         // setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Image Viewer");
         setIconifiable(true);
         setClosable(true);
-        setBounds(0, 0, 500, 400);
+        setBounds(0, 0, 550, 450);
         setResizable(true);
         // setSize(900, 700);
         // this.setResizable(false);
-        setFrameIcon(new ImageIcon(ReportSheet.class.getResource("/icons/image_icon_mini.png")));
+        setFrameIcon(new ImageIcon(ReportSheet.class.getResource(CONSTANTS.ICON_DIR + "image_icon_mini.png")));
 
         // A label for displaying the pictures
         photographLabel.setVerticalTextPosition(JLabel.BOTTOM);
         photographLabel.setHorizontalTextPosition(JLabel.CENTER);
         photographLabel.setHorizontalAlignment(JLabel.CENTER);
         photographLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        getContentPane().setLayout(new MigLayout("", "[540px]", "[][][][2px][440px][20px]"));
+        
+	    // Two glue components to add thumbnail buttons to the toolbar inbetween
+	    // thease glue compoents.
+	    buttonBar.add(Box.createGlue());
+	    buttonBar.add(Box.createGlue());
+                
+        getContentPane().add(buttonBar, "cell 0 0,growx,aligny top");
+        getContentPane().add(photographLabel, "cell 0 4,grow");
+        
+        txtTest = new JTextField();
+        txtTest.setEditable(false);
+        txtTest.setText("...");
+        getContentPane().add(txtTest, "flowx,cell 0 5,growx,aligny top");
+        txtTest.setColumns(10);
+        
+        btnRefresh = new JButton("Refresh Images");
+        btnRefresh.addActionListener(new ActionListener() {
+       	 
+            public void actionPerformed(ActionEvent e)
+            {
+            	getImagesInDir();
+            }
+        });
 
-        // Two glue components to add thumbnail buttons to the toolbar inbetween
-        // thease glue compoents.
-        buttonBar.add(Box.createGlue());
-        buttonBar.add(Box.createGlue());
-
-        add(buttonBar, BorderLayout.NORTH);
-        add(photographLabel, BorderLayout.CENTER);
+        
+        getContentPane().add(btnRefresh, "cell 0 5");
 
         // switching to fullscreen mode
         // GraphicsEnvironment.getLocalGraphicsEnvironment().
@@ -112,6 +144,29 @@ public class ImageViewer extends JInternalFrame {
         // start the image loading SwingWorker in a background thread
         loadimages.execute();
     }
+    
+    
+    /**
+     * Function is looking for images in folder.
+     */
+    private void getImagesInDir() {
+    	if ( dir.isDirectory() ) {
+            for (final File f : dir.listFiles(IMAGE_FILTER)) {
+                @SuppressWarnings("unused")
+				BufferedImage img = null;
+
+                try 
+                {
+                    img = ImageIO.read(f);
+                    imageFileNames.add( f.getName() );
+                } 
+                catch (final IOException e) 
+                {}
+            }
+        }
+    }
+    
+    
 
     /**
      * SwingWorker class that loads the images a background thread and calls
@@ -125,10 +180,12 @@ public class ImageViewer extends JInternalFrame {
         @SuppressWarnings("unused")
         @Override
         protected Void doInBackground() throws Exception {
-            for (int i = 0; i < imageCaptions.length; i++) {
+        	getImagesInDir();
+        	
+            for (int i = 0; i < imageFileNames.size(); i++) {
                 ImageIcon icon;
-                icon = createImageIcon(imagedir + imageFileNames[i], imageCaptions[i]);
-
+                String fileName = imageFileNames.get(i);
+                icon = createImageIcon(imagedir + fileName, fileName);
                 // downsize photo
                 final ImageIcon downSizedIcon = new ImageIcon(getScaledImage(icon.getImage(), 400,
                         250));
@@ -140,13 +197,13 @@ public class ImageViewer extends JInternalFrame {
                             64, 64));
 
                     thumbAction = new ThumbnailAction(downSizedIcon, thumbnailIcon,
-                            imageCaptions[i]);
+                    		fileName, imagedir + fileName);
 
                 } else {
                     // the image failed to load for some reason
                     // so load a placeholder instead
                     thumbAction = new ThumbnailAction(placeholderIcon, placeholderIcon,
-                            imageCaptions[i]);
+                    		fileName, imagedir + fileName);
                 }
                 publish(thumbAction);
             }
@@ -166,6 +223,7 @@ public class ImageViewer extends JInternalFrame {
             }
         }
     };
+
 
     /**
      * Creates an ImageIcon if the path is valid.
@@ -215,8 +273,10 @@ public class ImageViewer extends JInternalFrame {
          * The icon if the full image we want to display.
          */
         private final Icon displayPhoto;
+        private final String filePath;
 
         /**
+         * @param filePath 
          * @param Icon
          *            - The bigger photo to show in the button.
          * @param Icon
@@ -224,10 +284,11 @@ public class ImageViewer extends JInternalFrame {
          * @param String
          *            - The descriptioon of the icon.
          */
-        public ThumbnailAction(final Icon photo, final Icon thumb, final String desc) {
+        public ThumbnailAction(final Icon photo, final Icon thumb, final String desc, String filePath) {
 
             // photo
             displayPhoto = photo;
+            this.filePath = filePath;
 
             // The short description becomes the tooltip of a button.
             putValue(SHORT_DESCRIPTION, desc);
@@ -244,6 +305,7 @@ public class ImageViewer extends JInternalFrame {
         public void actionPerformed(final ActionEvent e) {
             photographLabel.setIcon(displayPhoto);
             setTitle("Image Viewer: " + getValue(SHORT_DESCRIPTION).toString());
+            txtTest.setText( filePath );
         }
     }
     
@@ -287,6 +349,10 @@ public class ImageViewer extends JInternalFrame {
         }
 
     }
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+	}
 }
 
 

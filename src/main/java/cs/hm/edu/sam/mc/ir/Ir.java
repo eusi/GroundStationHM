@@ -7,6 +7,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import cs.hm.edu.sam.mc.misc.CONSTANTS;
+
 /**
  * ReportSheet class. This module creates a report sheet from specific files.
  *
@@ -21,7 +23,7 @@ public class Ir extends JInternalFrame {
      * Create the frame.
      */
     public Ir() {
-        setFrameIcon(new ImageIcon(Ir.class.getResource("/icons/ir_icon_mini.png")));
+        setFrameIcon(new ImageIcon(Ir.class.getResource(CONSTANTS.ICON_DIR + "ir_icon_mini.png")));
         setTitle("IR");
         setIconifiable(true);
         setClosable(true);
