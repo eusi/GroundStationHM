@@ -6,6 +6,10 @@ import cs.hm.edu.sam.mc.misc.Location;
 
 
 
+/**
+ * @author Maximilian Haag
+ *
+ */
 public interface EmergentGuiInterface extends GroundGuiInterface{
 	
 

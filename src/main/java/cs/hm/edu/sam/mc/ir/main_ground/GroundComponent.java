@@ -26,11 +26,11 @@ public abstract class GroundComponent implements GroundGuiInterface {
 	public final double STATICALT = 80;
 	public final double DYNAMICALT = 80;
 	public final double EMERGENTALT = 80;
-	
-	
+		
 	private TasksEnum currentTask = TasksEnum.NOTASSIGNED;
 
 
+	
 	/**
 	 * Prüft, ob Drohne Location (Wegpunkt) erreicht hat
 	 * @param currentTaskWPList
@@ -48,6 +48,7 @@ public abstract class GroundComponent implements GroundGuiInterface {
 		}	
 		return waypointInRad;
 	}
+	
 	
 	/**
 	 * Prüft, ob aktuelle Drohnenposition innerhalb eines Radius zum nächsten Wegpunkt liegt.

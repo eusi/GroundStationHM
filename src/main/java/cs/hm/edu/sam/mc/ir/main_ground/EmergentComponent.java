@@ -6,6 +6,10 @@ import java.util.List;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.EmergentGuiInterface;
 import cs.hm.edu.sam.mc.misc.Location;
 
+/**
+ * @author Maximilian Haag
+ *
+ */
 public class EmergentComponent extends GroundComponent implements EmergentGuiInterface  {
 
 	
@@ -49,6 +53,12 @@ public class EmergentComponent extends GroundComponent implements EmergentGuiInt
 	@Override
 	public void calcWaypoints(double longitude, double latitude) {
 		emerTarget = new Location(longitude, latitude, EMERGENTALT);
+		
+		//---
+		//Berechnung der Wegpunkte für Dynamic Target...
+		//---
+		
+		emergentReady = true;
 		
 	}
 
