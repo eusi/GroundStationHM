@@ -3,6 +3,8 @@
  */
 package cs.hm.edu.sam.mc.ir.main_ground;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 import cs.hm.edu.sam.mc.misc.Location;
@@ -13,6 +15,19 @@ import cs.hm.edu.sam.mc.misc.Location;
  */
 public class StaticIRComponent extends GroundComponent {
 
+	private List<Location> staticTarget = new ArrayList<>();
+	private boolean statReady = false;
+	private Location statTarget = null;
+
+	
+	
+	//Groundcomponent GUI Interface, Button entrypoint	
+	@Override
+	public void calcWaypoints(double longitude, double latitude) {
+		statTarget = new Location(longitude, latitude, STATICALT);
+		statReady = true;
+		
+	}
 	
 	
 	@Override
@@ -20,24 +35,18 @@ public class StaticIRComponent extends GroundComponent {
 		// TODO Auto-generated method stub
 		
 	}
+	
+
+
+
+
 
 	@Override
-	protected void controlDrone() {
-		// TODO Auto-generated method stub
-		
+	public boolean isTaskCalculated() {
+		return statReady;
 	}
 
-	@Override
-	public void addEmergentSearchAreaWP(double longitude, double latitude) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public List<Location> getEmergentSearchArea() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 }

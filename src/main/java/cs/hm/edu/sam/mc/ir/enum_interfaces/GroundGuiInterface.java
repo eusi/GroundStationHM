@@ -3,9 +3,6 @@
  */
 package cs.hm.edu.sam.mc.ir.enum_interfaces;
 
-import java.util.List;
-
-import cs.hm.edu.sam.mc.misc.Location;
 
 
 /**
@@ -15,12 +12,11 @@ import cs.hm.edu.sam.mc.misc.Location;
 public interface GroundGuiInterface {
 	
 	
-	public void calcWaypoints(TasksEnum task , double longitude, double latitude);
+	abstract public void calcWaypoints(double longitude, double latitude);
+	abstract public boolean isTaskCalculated();
+	abstract public void startMission();
 	
-	public boolean isTaskCalculated(TasksEnum task);
-	
-	public void addEmergentSearchAreaWP(double longitude, double latitude);
-	public List<Location> getEmergentSearchArea();
 	
 	public boolean isAirCompOnline();
+
 }
