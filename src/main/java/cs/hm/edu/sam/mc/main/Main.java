@@ -2,8 +2,8 @@ package cs.hm.edu.sam.mc.main;
 
 import java.awt.EventQueue;
 import java.awt.SystemColor;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
@@ -61,22 +61,23 @@ public class Main extends JFrame {
     private JButton btnRouting;
     private JLabel lblCoor;
     private JCheckBoxMenuItem chckbxmntmGetLocation;
-    
+
     private final String icondir = CONSTANTS.ICON_DIR;
 
     /**
      * Launch the application.
      */
     public static void main(final String[] args) {
-    	EventQueue.invokeLater(new Runnable() {
-    		public void run() {
-	            try {
-	                final Main frame = new Main();
-	                frame.setVisible(true);
-	            } catch (final Exception e) {
-	                e.printStackTrace();
-	            }
-    		}
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    final Main frame = new Main();
+                    frame.setVisible(true);
+                } catch (final Exception e) {
+                    e.printStackTrace();
+                }
+            }
         });
     }
 
@@ -102,28 +103,30 @@ public class Main extends JFrame {
 
         final JMenuItem mntmExit = new JMenuItem("Exit");
         mntmExit.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		System.exit(0);
-        	}
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
         });
-        
+
         chckbxmntmGetLocation = new JCheckBoxMenuItem("Get Location");
         mnFile.add(chckbxmntmGetLocation);
         mntmExit.setIcon(new ImageIcon(Main.class.getResource(icondir + "exit_icon.png")));
         mnFile.add(mntmExit);
-        
+
         chckbxmntmGetLocation.addItemListener(new ItemListener() {
+            @Override
             public void itemStateChanged(ItemEvent e) {
-            		Data.setCurrentLocationIsActive( chckbxmntmGetLocation.isSelected() );
+                Data.setCurrentLocationIsActive(chckbxmntmGetLocation.isSelected());
             }
-          });
-        
+        });
+
         menuBar.add(Box.createHorizontalGlue());
-        
-        JLabel lblLocation = new JLabel("Location: ");
+
+        final JLabel lblLocation = new JLabel("Location: ");
         lblLocation.setHorizontalAlignment(SwingConstants.RIGHT);
         menuBar.add(lblLocation);
-        
+
         lblCoor = new JLabel("lng: 0, lat: 0, alt: 0");
         menuBar.add(lblCoor);
         contentPane = new JPanel();
@@ -172,11 +175,11 @@ public class Main extends JFrame {
         btnRouting = new JButton("Routing");
         btnRouting.setIcon(new ImageIcon(Main.class.getResource(icondir + "routing_icon.png")));
         toolBar.add(btnRouting);
-        
+
         btnIr = new JButton("IR");
         btnIr.setIcon(new ImageIcon(Main.class.getResource(icondir + "ir_icon.png")));
         toolBar.add(btnIr);
-        
+
         btnEmergency = new JButton("Emergency");
         btnEmergency.setIcon(new ImageIcon(Main.class.getResource(icondir + "emergency_icon.png")));
         toolBar.add(btnEmergency);
@@ -185,108 +188,121 @@ public class Main extends JFrame {
     }
 
     private void createEvents() {
-    	btnReportSheet.addActionListener(new ActionListener() {
-    		public void actionPerformed(ActionEvent arg0) {
-	            if (reportSheet == null || reportSheet.isClosed()) {
-	                reportSheet = new ReportSheet(); // only one instace of this
-	                desktopPane.add(reportSheet);
-	                reportSheet.show();
-	            } else {
-	                reportSheet.moveToFront();
-	            }
-    		}
+        btnReportSheet.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                if (reportSheet == null) {
+                    reportSheet = new ReportSheet(); // only one instace of this
+                    desktopPane.add(reportSheet);
+                    reportSheet.show();
+                } else if (!reportSheet.isVisible()) {
+                    reportSheet.setVisible(true);
+                } else {
+                    reportSheet.moveToFront();
+                }
+            }
         });
 
         btnImageviewer.addActionListener(new ActionListener() {
-    		public void actionPerformed(ActionEvent arg0) {
-	            if (imageViewer == null || imageViewer.isClosed()) {
-	                imageViewer = new ImageViewer(); // only one instance of this
-	                desktopPane.add(imageViewer);
-	                imageViewer.show();
-	            } else {
-	                imageViewer.moveToFront();
-	            }
-    		}
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                if (imageViewer == null) {
+                    imageViewer = new ImageViewer(); // only one instace of this
+                    desktopPane.add(imageViewer);
+                    imageViewer.show();
+                } else if (!imageViewer.isVisible()) {
+                    imageViewer.setVisible(true);
+                } else {
+                    imageViewer.moveToFront();
+                }
+            }
         });
 
         btnSric.addActionListener(new ActionListener() {
-    		public void actionPerformed(ActionEvent arg0) {
-	            if (sric == null || sric.isClosed()) {
-	                sric = new SRIC(); // only one instance of this
-	                desktopPane.add(sric);
-	                sric.show();
-	            } else {
-	                sric.moveToFront();
-	            }
-    		}
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                if (sric == null) {
+                    sric = new SRIC(); // only one instance of this
+                    desktopPane.add(sric);
+                    sric.show();
+                } else if (!sric.isVisible()) {
+                    sric.setVisible(true);
+                } else {
+                    sric.moveToFront();
+                }
+            }
         });
 
         btnRouting.addActionListener(new ActionListener() {
-    		public void actionPerformed(ActionEvent arg0) {
-	            if (routing == null || routing.isClosed()) {
-	                routing = new Routing(); // only one instance of this
-	                desktopPane.add(routing);
-	                routing.show();
-	            } else {
-	                routing.moveToFront();
-	            }
-    		}
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                if (routing == null) {
+                    routing = new Routing(); // only one instance of this
+                    desktopPane.add(routing);
+                    routing.show();
+                } else if (!routing.isVisible()) {
+                    routing.setVisible(true);
+                } else {
+                    routing.moveToFront();
+                }
+            }
         });
-        
+
         btnIr.addActionListener(new ActionListener() {
-    		public void actionPerformed(ActionEvent arg0) {
-	          if (ir == null || ir.isClosed()) {
-	              ir = new Ir(); // only one instance of this
-	              desktopPane.add(ir);
-	              ir.show();
-	          } else {
-	              ir.moveToFront();
-	          }
-    		}
-      });
-        
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                if (ir == null) {
+                    ir = new Ir(); // only one instance of this
+                    desktopPane.add(ir);
+                    ir.show();
+                } else if (!ir.isVisible()) {
+                    ir.setVisible(true);
+                } else {
+                    ir.moveToFront();
+                }
+            }
+        });
+
         btnEmergency.addActionListener(new ActionListener() {
-    		public void actionPerformed(ActionEvent arg0) {
-	            if (emergency == null || emergency.isClosed()) {
-	            	emergency = new Emergency(); // only one instance of this
-	                desktopPane.add(emergency);
-	                emergency.show();
-	            } else {
-	            	emergency.moveToFront();
-	            }
-    		}
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                if (emergency == null) {
+                    emergency = new Emergency(); // only one instance of this
+                    desktopPane.add(emergency);
+                    emergency.show();
+                } else if (!emergency.isVisible()) {
+                    emergency.setVisible(true);
+                } else {
+                    emergency.moveToFront();
+                }
+            }
         });
     }
-    
-    
-	private class Thready extends Thread {
-    	public Thready(String str) {
-    		super(str);
-    	}
-     
-    	public void run() {
-    		while( true ) {
-    			try 
-    			{
-        			if ( Data.isCurrentLocationActive() )
-        			{
-        				RESTClient.getCurrentPosition();
-        				
-            			if ( Data.getCurrentPosition() != null )
-            			{
-	        				lblCoor.setText("lng: "+ Data.getCurrentPosition().getLng() 
-	        						+" , lat: "+  Data.getCurrentPosition().getLat()
-	        						+" , alt: "+ Data.getCurrentPosition().getAlt());
-            			}
-        			}
-        			
-        			// sleep 2 sec
-    				sleep( CONSTANTS.GET_CURRENT_POSITION_DELAY );
-    			} 
-    			catch (InterruptedException e) 
-    			{
-    			}
-    		}
-    	}
+
+    private class Thready extends Thread {
+        public Thready(String str) {
+            super(str);
+        }
+
+        @Override
+        public void run() {
+            while (true) {
+                try {
+                    if (Data.isCurrentLocationActive()) {
+                        RESTClient.getCurrentPosition();
+
+                        if (Data.getCurrentPosition() != null) {
+                            lblCoor.setText("lng: " + Data.getCurrentPosition().getLng()
+                                    + " , lat: " + Data.getCurrentPosition().getLat() + " , alt: "
+                                    + Data.getCurrentPosition().getAlt());
+                        }
+                    }
+
+                    // sleep 2 sec
+                    sleep(CONSTANTS.GET_CURRENT_POSITION_DELAY);
+                } catch (final InterruptedException e) {
+                }
+            }
+        }
     }
 }

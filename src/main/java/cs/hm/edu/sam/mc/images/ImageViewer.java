@@ -32,8 +32,7 @@ import cs.hm.edu.sam.mc.misc.CONSTANTS;
 import cs.hm.edu.sam.mc.report.ReportSheet;
 
 /**
- * ImageViewer class. This module displays images as original and
- * thumbnailed.
+ * ImageViewer class. This module displays images as original and thumbnailed.
  *
  * @author Christoph Friegel
  * @version 0.1
@@ -44,18 +43,16 @@ public class ImageViewer extends JInternalFrame implements ActionListener {
 
     private final JLabel photographLabel = new JLabel();
     private final JToolBar buttonBar = new JToolBar();
-    private JTextField txtPath;
+    private final JTextField txtPath;
     private final JButton btnRefresh;
 
     private final String imagedir = CONSTANTS.IMAGE_DIR;
     private final File dir = new File(CONSTANTS.IMAGE_DIR_FILE);
 
     private final MissingIcon placeholderIcon = new MissingIcon();
-    
-    static final String[] EXTENSIONS = new String[]{
-        "gif", "png", "bmp", "jpg"
-    };
-    
+
+    static final String[] EXTENSIONS = new String[] { "gif", "png", "bmp", "jpg" };
+
     // filter to identify images based on their extensions
     static final FilenameFilter IMAGE_FILTER = new FilenameFilter() {
 
@@ -77,9 +74,11 @@ public class ImageViewer extends JInternalFrame implements ActionListener {
         setTitle("Image Viewer");
         setIconifiable(true);
         setClosable(true);
+        setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
         setBounds(0, 0, 550, 450);
         setResizable(true);
-        setFrameIcon(new ImageIcon(ReportSheet.class.getResource(CONSTANTS.ICON_DIR + "image_icon_mini.png")));
+        setFrameIcon(new ImageIcon(ReportSheet.class.getResource(CONSTANTS.ICON_DIR
+                + "image_icon_mini.png")));
 
         // A label for displaying the pictures
         photographLabel.setVerticalTextPosition(JLabel.BOTTOM);
@@ -87,105 +86,99 @@ public class ImageViewer extends JInternalFrame implements ActionListener {
         photographLabel.setHorizontalAlignment(JLabel.CENTER);
         photographLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         getContentPane().setLayout(new MigLayout("", "[540px]", "[][][][2px][440px][20px]"));
-        
-	    // Two glue components to add thumbnail buttons to the toolbar inbetween
-	    // thease glue compoents.
-	    buttonBar.add(Box.createGlue());
-	    buttonBar.add(Box.createGlue());
-                
+
+        // Two glue components to add thumbnail buttons to the toolbar inbetween
+        // thease glue compoents.
+        buttonBar.add(Box.createGlue());
+        buttonBar.add(Box.createGlue());
+
         getContentPane().add(buttonBar, "cell 0 0,growx,aligny top");
         getContentPane().add(photographLabel, "cell 0 4,grow");
-        
+
         txtPath = new JTextField();
         txtPath.setEditable(false);
         txtPath.setText("...");
         getContentPane().add(txtPath, "flowx,cell 0 5,growx,aligny top");
         txtPath.setColumns(10);
-        
+
         btnRefresh = new JButton("Refresh Image List");
         btnRefresh.addActionListener(new ActionListener() {
-       	 
-        public void actionPerformed(ActionEvent e)
-        {
-    		try {
-    			createImageIconList();
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-        }
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    createImageIconList();
+                } catch (final Exception e1) {
+                    e1.printStackTrace();
+                }
+            }
         });
-        
+
         getContentPane().add(btnRefresh, "cell 0 5");
         try {
-			createImageIconList();
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
+            createImageIconList();
+        } catch (final Exception e1) {
+            e1.printStackTrace();
+        }
     }
-    
+
     /**
      * Function is looking for images in folder.
      */
     private ArrayList<String> getImagesInDir() {
-    	if ( dir.isDirectory() ) {
-    		ArrayList<String> imageFileNames = new ArrayList<String>();
-    		
-            for (final File f : dir.listFiles(IMAGE_FILTER)) {
-                @SuppressWarnings("unused")
-				BufferedImage img = null;
+        if (dir.isDirectory()) {
+            final ArrayList<String> imageFileNames = new ArrayList<String>();
 
-                try 
-                {
-                    img = ImageIO.read(f);
-                    imageFileNames.add( f.getName() );
-                } 
-                catch (final IOException e) 
-                {}
+            for (final File f : dir.listFiles(IMAGE_FILTER)) {
+                try {
+                    ImageIO.read(f);
+                    imageFileNames.add(f.getName());
+                } catch (final IOException e) {
+                }
             }
-            
+
             return imageFileNames;
         }
-    	
-    	return null;
+
+        return null;
     }
 
-	@SuppressWarnings("unused")
-	protected Void createImageIconList() throws Exception {
-		//reset bar first
-    	buttonBar.removeAll();
-		buttonBar.revalidate();
-		buttonBar.repaint();
-	
-    	ArrayList<String> imageFileNames = new ArrayList<String>();
-    	imageFileNames = getImagesInDir();
-    	
+    @SuppressWarnings("unused")
+    protected Void createImageIconList() throws Exception {
+        // reset bar first
+        buttonBar.removeAll();
+        buttonBar.revalidate();
+        buttonBar.repaint();
+
+        ArrayList<String> imageFileNames = new ArrayList<String>();
+        imageFileNames = getImagesInDir();
+
         for (int i = 0; i < imageFileNames.size(); i++) {
             ImageIcon icon;
-            String fileName = imageFileNames.get(i);
+            final String fileName = imageFileNames.get(i);
             icon = createImageIcon(imagedir + fileName, fileName);
             // downsize photo
-            final ImageIcon downSizedIcon = new ImageIcon(getScaledImage(icon.getImage(), 400,
-                    250));
+            final ImageIcon downSizedIcon = new ImageIcon(getScaledImage(icon.getImage(), 400, 250));
 
             ThumbnailAction thumbAction;
             if (icon != null) {
 
-                final ImageIcon thumbnailIcon = new ImageIcon(getScaledImage(icon.getImage(),
-                        64, 64));
+                final ImageIcon thumbnailIcon = new ImageIcon(getScaledImage(icon.getImage(), 64,
+                        64));
 
-                thumbAction = new ThumbnailAction(downSizedIcon, thumbnailIcon,
-                		fileName, imagedir + fileName);
+                thumbAction = new ThumbnailAction(downSizedIcon, thumbnailIcon, fileName, imagedir
+                        + fileName);
 
             } else {
                 // the image failed to load for some reason
                 // so load a placeholder instead
-                thumbAction = new ThumbnailAction(placeholderIcon, placeholderIcon,
-                		fileName, imagedir + fileName);
+                thumbAction = new ThumbnailAction(placeholderIcon, placeholderIcon, fileName,
+                        imagedir + fileName);
             }
-            JButton thumbButton = new JButton(thumbAction);
+            final JButton thumbButton = new JButton(thumbAction);
             buttonBar.add(thumbButton, buttonBar.getComponentCount() - 1);
         }
-		return null;
+        return null;
     }
 
     /**
@@ -205,7 +198,7 @@ public class ImageViewer extends JInternalFrame implements ActionListener {
             return null;
         }
     }
-    
+
     /**
      * Resizes an image using a Graphics2D object backed by a BufferedImage.
      *
@@ -239,7 +232,7 @@ public class ImageViewer extends JInternalFrame implements ActionListener {
         private final String filePath;
 
         /**
-         * @param filePath 
+         * @param filePath
          * @param Icon
          *            - The bigger photo to show in the button.
          * @param Icon
@@ -247,7 +240,8 @@ public class ImageViewer extends JInternalFrame implements ActionListener {
          * @param String
          *            - The descriptioon of the icon.
          */
-        public ThumbnailAction(final Icon photo, final Icon thumb, final String desc, String filePath) {
+        public ThumbnailAction(final Icon photo, final Icon thumb, final String desc,
+                String filePath) {
 
             // photo
             displayPhoto = photo;
@@ -268,10 +262,10 @@ public class ImageViewer extends JInternalFrame implements ActionListener {
         public void actionPerformed(final ActionEvent e) {
             photographLabel.setIcon(displayPhoto);
             setTitle("Image Viewer: " + getValue(SHORT_DESCRIPTION).toString());
-            txtPath.setText( filePath );
+            txtPath.setText(filePath);
         }
     }
-    
+
     /**
      * Icon class that creates an default icon when missing.
      */
@@ -295,8 +289,8 @@ public class ImageViewer extends JInternalFrame implements ActionListener {
             g2d.setColor(Color.RED);
 
             g2d.setStroke(stroke);
-            g2d.drawLine(x + 10, y + 10, x + width - 10, y + height - 10);
-            g2d.drawLine(x + 10, y + height - 10, x + width - 10, y + 10);
+            g2d.drawLine(x + 10, y + 10, (x + width) - 10, (y + height) - 10);
+            g2d.drawLine(x + 10, (y + height) - 10, (x + width) - 10, y + 10);
 
             g2d.dispose();
         }
@@ -312,7 +306,7 @@ public class ImageViewer extends JInternalFrame implements ActionListener {
         }
     }
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-	}
+    @Override
+    public void actionPerformed(ActionEvent arg0) {
+    }
 }

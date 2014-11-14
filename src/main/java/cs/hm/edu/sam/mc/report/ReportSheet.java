@@ -27,10 +27,12 @@ public class ReportSheet extends JInternalFrame {
      * Create the frame.
      */
     public ReportSheet() {
-        setFrameIcon(new ImageIcon(ReportSheet.class.getResource(CONSTANTS.ICON_DIR + "report_icon_mini.png")));
+        setFrameIcon(new ImageIcon(ReportSheet.class.getResource(CONSTANTS.ICON_DIR
+                + "report_icon_mini.png")));
         setTitle("ReportSheet");
         setIconifiable(true);
         setClosable(true);
+        setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
         setBounds(0, 0, 500, 400);
 
         final JPanel panel = new JPanel();
