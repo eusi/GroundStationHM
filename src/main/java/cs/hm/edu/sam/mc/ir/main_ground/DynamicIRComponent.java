@@ -11,7 +11,6 @@ public class DynamicIRComponent extends GroundComponent {
 	private List<Location> dynamicTarget = new ArrayList<>();
 	private boolean dynReady = false;
 	private Location dynTarget = null;
-
 	
 	
 
