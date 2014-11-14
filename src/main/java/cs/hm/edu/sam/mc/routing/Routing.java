@@ -7,6 +7,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import cs.hm.edu.sam.mc.misc.CONSTANTS;
+
 /**
  * ReportSheet class. This module creates a report sheet from specific files.
  *
@@ -21,7 +23,7 @@ public class Routing extends JInternalFrame {
      * Create the frame.
      */
     public Routing() {
-        setFrameIcon(new ImageIcon(Routing.class.getResource("/icons/routing_icon_mini.png")));
+        setFrameIcon(new ImageIcon(Routing.class.getResource(CONSTANTS.ICON_DIR + "routing_icon_mini.png")));
         setTitle("Routing");
         setIconifiable(true);
         setClosable(true);

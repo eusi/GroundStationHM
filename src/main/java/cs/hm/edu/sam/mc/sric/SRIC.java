@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import cs.hm.edu.sam.mc.misc.CONSTANTS;
+
 /**
  * SRIC class. This module's job is to collect WLAN/FTP data in mask and send
  * that data to a target.
@@ -32,7 +34,7 @@ public class SRIC extends JInternalFrame {
      * Create the frame.
      */
     public SRIC() {
-        setFrameIcon(new ImageIcon(SRIC.class.getResource("/icons/sric_icon_mini.png")));
+        setFrameIcon(new ImageIcon(SRIC.class.getResource(CONSTANTS.ICON_DIR + "sric_icon_mini.png")));
         setTitle("SRIC");
         setClosable(true);
         setIconifiable(true);
