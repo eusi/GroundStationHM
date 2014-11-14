@@ -89,7 +89,7 @@ public class Main extends JFrame {
     private void initComponents() {
         setTitle("MissionControl");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 800, 600);
+        setBounds(100, 100, 1024, 800);
 
         final JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
