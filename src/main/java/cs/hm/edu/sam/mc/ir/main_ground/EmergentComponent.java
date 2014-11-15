@@ -12,13 +12,12 @@ import cs.hm.edu.sam.mc.misc.Location;
  */
 public class EmergentComponent extends GroundComponent implements EmergentGuiInterface  {
 
-	
-	
-	private List<Location> emergentTarget = new ArrayList<>();
+
+	private List<Location> calculatedEmergWaypoints = new ArrayList<>();
 	private List<Location> emergentSearchArea = new ArrayList<>();
 	
-	private boolean emergentReady = false;
-	private Location emerTarget = null;
+	private boolean emergReadyToStart = false;
+	private Location emerTargetLastKnownPosition = null;
 	
 	
 	
@@ -26,7 +25,7 @@ public class EmergentComponent extends GroundComponent implements EmergentGuiInt
 	/* EmergentSearchArea Gebiet eintragen per GUI
 	 */
 	public void addEmergentSearchAreaWP(double longitude, double latitude) {
-		emergentSearchArea.add(new Location(longitude, latitude, EMERGENTALT));
+		emergentSearchArea.add(new Location(longitude, latitude, EMERGENT_ALT));
 	}
 	
 	
@@ -46,19 +45,19 @@ public class EmergentComponent extends GroundComponent implements EmergentGuiInt
 
 	@Override
 	public boolean isTaskCalculated() {
-		return emergentReady;
+		return emergReadyToStart;
 	}
 
 
 	@Override
 	public void calcWaypoints(double longitude, double latitude) {
-		emerTarget = new Location(longitude, latitude, EMERGENTALT);
+		emerTargetLastKnownPosition = new Location(longitude, latitude, EMERGENT_ALT);
 		
 		//---
 		//Berechnung der Wegpunkte für Dynamic Target...
 		//---
 		
-		emergentReady = true;
+		emergReadyToStart = true;
 		
 	}
 
