@@ -30,22 +30,24 @@ public abstract class GroundComponent implements GroundGuiInterface {
 	
 	
 	//1 Meter Toleranz Radius, um Wegpunkte als "erreicht" zu kennzeichnen
-	protected final double STATIC_TOLERANCE = 0.0001;
-	protected final double DYNAMIC_TOLERANCE = 0.0001;
-	protected final double EMERGENT_TOLERANCE = 0.0001;
+	protected final double STATIC_TOLERANCE = 0.00000000100;
+	protected final double DYNAMIC_TOLERANCE = 0.00000000100;
+	protected final double EMERGENT_TOLERANCE = 0.00000000100;
 	
 	//5 Meter Range Radius, um zu prüfen, ob Waypoint RANGE erreicht (Meter)
-	protected final double STATIC_RANGE = 0.0005;
-	protected final double DYNAMIC_RANGE = 0.0005;
-	protected final double EMERGENT_RANGE = 0.0005;
+	protected final double STATIC_RANGE = 0.00000000500;
+	protected final double DYNAMIC_RANGE = 0.00000000500;
+	protected final double EMERGENT_RANGE = 0.00000000500;
 	
 	//Höhen (Meter)
 	protected final double STATIC_ALT = 80;
 	protected final double DYNAMIC_ALT = 80;
 	protected final double EMERGENT_ALT = 80;
 	
+	
 	private TasksEnum currentTask = TasksEnum.NOTASSIGNED;
-
+	private Location wayPointBefore = new Location(0,0,0);
+	
 	
 	abstract public boolean isTaskCalculated();
 	abstract public void calcWaypoints(double longitude, double latitude);
@@ -81,15 +83,38 @@ public abstract class GroundComponent implements GroundGuiInterface {
 	 * @return
 	 */
 	protected boolean isDroneAtWaypoint(Location locToCheck, TasksEnum currentTask) {
+		
 		//Current von MissionControl Team...
-		Location currentLoc = Data.getCurrentPosition();
-		double range = getToleranceRadius();
-		return inRadius(locToCheck, currentLoc, currentTask, range);
+		//Location currentLoc = Data.getCurrentPosition();
+		
+		//----
+		//Für Simulation CurrentPosition aus TestMain
+		Location currentLoc = TestMain.getCurrentTESTPosition();
+		System.out.println("Drohne ist an Location: "+currentLoc.toString());
+		//----
+		
+		
+		boolean newWaypoint = locationHasChanged(currentLoc);
+		if(newWaypoint) {
+			wayPointBefore = currentLoc;
+			double range = getToleranceRadius();
+			return inRadius(locToCheck, currentLoc, currentTask, range);
+		} else {
+			//Waypoint Daten haben sich seit letzter Abfrage nicht geändert
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
+		}
 	}
 	
 	
 	
 	
+
 	/**
 	 * Prüft, ob Drohne Location RANGE erreicht hat.
 	 * @param currentTaskWPList
@@ -127,6 +152,21 @@ public abstract class GroundComponent implements GroundGuiInterface {
 		
 	}
 
+	/**
+	 * Prüft ob sich Waypoint Daten vom Flieger seit letzter Abfrage verändert haben
+	 * @param currentLoc
+	 * @return
+	 */
+	private boolean locationHasChanged(Location currentLoc) {
+		double cLat = currentLoc.getLat();
+		double cLng = currentLoc.getLng();
+		double oLat = wayPointBefore.getLat();
+		double oLng = wayPointBefore.getLng();
+		if(cLat == oLat && cLng == oLng)
+			return false;
+		else
+			return true;
+	}
 	
 	/**
 	 * Toleranz für Waypoint Überflug
@@ -177,7 +217,7 @@ public abstract class GroundComponent implements GroundGuiInterface {
 		double distance = Math.sqrt(latGap*latGap + longGap*longGap);
 		
 		//Innerhalb des Kreises
-		if(distance < radius)
+		if(distance <= radius)
 			return true;
 		else
 			return false;
