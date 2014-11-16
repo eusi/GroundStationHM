@@ -8,5 +8,5 @@ package cs.hm.edu.sam.mc.ir.enum_interfaces;
  *
  */
 public enum TasksEnum {
-	NOTASSIGNED,IRSTATIC,IRDYNAMIC,EMERGENT;
+    NOTASSIGNED, IRSTATIC, IRDYNAMIC, EMERGENT;
 }

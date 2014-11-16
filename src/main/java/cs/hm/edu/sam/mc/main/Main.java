@@ -31,6 +31,7 @@ import cs.hm.edu.sam.mc.ir.Ir;
 import cs.hm.edu.sam.mc.misc.CONSTANTS;
 import cs.hm.edu.sam.mc.misc.Data;
 import cs.hm.edu.sam.mc.misc.RESTClient;
+import cs.hm.edu.sam.mc.options.Options;
 import cs.hm.edu.sam.mc.report.ReportSheet;
 import cs.hm.edu.sam.mc.routing.Routing;
 import cs.hm.edu.sam.mc.sric.SRIC;
@@ -56,13 +57,14 @@ public class Main extends JFrame {
     private Routing routing;
     private Ir ir;
     private Emergency emergency;
+    private Options options;
     private ImageViewer imageViewer;
     private JDesktopPane desktopPane;
     private JButton btnRouting;
     private JLabel lblCoor;
     private JCheckBoxMenuItem chckbxmntmGetLocation;
-
-    private final String icondir = CONSTANTS.ICON_DIR;
+    private JMenuItem mntmOptions;
+    private JMenuItem mntmExit;
 
     /**
      * Launch the application.
@@ -101,17 +103,17 @@ public class Main extends JFrame {
         final JMenu mnFile = new JMenu("File");
         menuBar.add(mnFile);
 
-        final JMenuItem mntmExit = new JMenuItem("Exit");
-        mntmExit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-
         chckbxmntmGetLocation = new JCheckBoxMenuItem("Get Location");
         mnFile.add(chckbxmntmGetLocation);
-        mntmExit.setIcon(new ImageIcon(Main.class.getResource(icondir + "exit_icon.png")));
+
+        mntmOptions = new JMenuItem("Options");
+        mntmOptions.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR
+                + "options_icon_mini.png")));
+        mnFile.add(mntmOptions);
+
+        mntmExit = new JMenuItem("Exit");
+        mntmExit.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR
+                + "exit_icon_mini.png")));
         mnFile.add(mntmExit);
 
         chckbxmntmGetLocation.addItemListener(new ItemListener() {
@@ -147,9 +149,9 @@ public class Main extends JFrame {
         gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
                 .addGroup(
                         gl_contentPane
-                                .createSequentialGroup()
-                                .addComponent(toolBar, GroupLayout.PREFERRED_SIZE,
-                                        GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .createSequentialGroup()
+                        .addComponent(toolBar, GroupLayout.PREFERRED_SIZE,
+                                GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(ComponentPlacement.UNRELATED)
                                 .addComponent(desktopPane, GroupLayout.DEFAULT_SIZE, 479,
                                         Short.MAX_VALUE)));
@@ -161,27 +163,31 @@ public class Main extends JFrame {
         desktopPane.setLayout(gl_desktopPane);
 
         btnReportSheet = new JButton("ReportSheet");
-        btnReportSheet.setIcon(new ImageIcon(Main.class.getResource(icondir + "report_icon.png")));
+        btnReportSheet.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR
+                + "report_icon.png")));
         toolBar.add(btnReportSheet);
 
         btnImageviewer = new JButton("ImageViewer");
-        btnImageviewer.setIcon(new ImageIcon(Main.class.getResource(icondir + "image_icon.png")));
+        btnImageviewer.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR
+                + "image_icon.png")));
         toolBar.add(btnImageviewer);
 
         btnSric = new JButton("SRIC");
-        btnSric.setIcon(new ImageIcon(Main.class.getResource(icondir + "sric_icon.png")));
+        btnSric.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR + "sric_icon.png")));
         toolBar.add(btnSric);
 
         btnRouting = new JButton("Routing");
-        btnRouting.setIcon(new ImageIcon(Main.class.getResource(icondir + "routing_icon.png")));
+        btnRouting.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR
+                + "routing_icon.png")));
         toolBar.add(btnRouting);
 
         btnIr = new JButton("IR");
-        btnIr.setIcon(new ImageIcon(Main.class.getResource(icondir + "ir_icon.png")));
+        btnIr.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR + "ir_icon.png")));
         toolBar.add(btnIr);
 
         btnEmergency = new JButton("Emergency");
-        btnEmergency.setIcon(new ImageIcon(Main.class.getResource(icondir + "emergency_icon.png")));
+        btnEmergency.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR
+                + "emergency_icon.png")));
         toolBar.add(btnEmergency);
 
         contentPane.setLayout(gl_contentPane);
@@ -275,6 +281,23 @@ public class Main extends JFrame {
                 } else {
                     emergency.moveToFront();
                 }
+            }
+        });
+
+        mntmExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+        mntmOptions.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (options == null) {
+                    options = new Options();
+                }
+                options.setVisible(true);
             }
         });
     }

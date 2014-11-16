@@ -46,10 +46,10 @@ public class Emergency extends JInternalFrame {
         final GroupLayout gl_panel = new GroupLayout(panel);
         gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(
                 gl_panel.createSequentialGroup().addComponent(lblEmergency)
-                .addContainerGap(31, Short.MAX_VALUE)));
+                        .addContainerGap(31, Short.MAX_VALUE)));
         gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(
                 gl_panel.createSequentialGroup().addGap(24).addComponent(lblEmergency)
-                .addContainerGap(302, Short.MAX_VALUE)));
+                        .addContainerGap(302, Short.MAX_VALUE)));
         panel.setLayout(gl_panel);
         getContentPane().setLayout(groupLayout);
 

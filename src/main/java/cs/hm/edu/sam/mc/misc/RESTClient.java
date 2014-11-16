@@ -18,85 +18,77 @@ import com.sun.jersey.api.json.JSONConfiguration;
 
 public class RESTClient {
 
-	public static void getCurrentPosition()
-	{
-    	try {
-    		Client client = Client.create();
-     
-    		WebResource webResource = client
-    		   .resource(CONSTANTS.REST_MP + "/getUAVPosition");
-     
-    		//TODO: Handle Connection refused 
-    		ClientResponse response = webResource.accept("application/json")
-                       .get(ClientResponse.class);
-     
-    		if (response.getStatus() != 200) {
-    		   throw new RuntimeException("Failed : HTTP error code : "
-    			+ response.getStatus());
-    		}
-     
-    		String output = response.getEntity(String.class);
-     
-    		System.out.println("Output from Server ...");
-    		System.out.println(output + "\n");
-    		
-    		//cannot parse JSON when it starts with [
-    		if( output.charAt(0) == '[' )
-    			output = output.substring(1);
-    		
-    		//if there are waypoints and if there is a connection to MP...
-    		if( output.charAt(0) != ']' && output != null )
-    		{
-	    		JSONObject obj = new JSONObject(output);
-	    		double lng = obj.getDouble("Lng");
-	    		double lat = obj.getDouble("Lat");
-	    		double alt = obj.getDouble("Alt");
-	    		
-	    		Location newLocation = new Location(lng, lat, alt);
-	    		Data.setCurrentPosition( newLocation );
-    		}
-     
-    	  } catch (Exception e) 
-    	{
-    		e.printStackTrace();
-     
-    	  }
-	}
-	
-	
-	public static void sendWaypoints()
-	{
-		try {
-			String waypointsJSON = "{\"waypoints\":[" + Data.getWaypoints().toString() + "], \"append\":1, \"name\":"+ Data.getWaypoints().getWaypointListName() +"}";
-			
-			ClientConfig clientConfig = new DefaultClientConfig();
+    public static void getCurrentPosition() {
+        try {
+            Client client = Client.create();
 
-			clientConfig.getFeatures().put(
-					JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+            WebResource webResource = client.resource(CONSTANTS.REST_MP + "/getUAVPosition");
 
-			Client client = Client.create(clientConfig);
+            // TODO: Handle Connection refused
+            ClientResponse response = webResource.accept("application/json").get(
+                    ClientResponse.class);
 
-			WebResource webResource = client
-					.resource(CONSTANTS.REST_MP + "/setWaypoints");
+            if (response.getStatus() != 200) {
+                throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+            }
 
-			ClientResponse response = webResource.accept("application/json")
-					.type("application/json").post(ClientResponse.class, waypointsJSON);
+            String output = response.getEntity(String.class);
 
-			if (response.getStatus() != 200) {
-				throw new RuntimeException("Failed : HTTP error code : "
-						+ response.getStatus());
-			}
+            System.out.println("Output from Server ...");
+            System.out.println(output + "\n");
 
-			String output = response.getEntity(String.class);
+            // cannot parse JSON when it starts with [
+            if (output.charAt(0) == '[')
+                output = output.substring(1);
 
-			System.out.println("Server response ...");
-			System.out.println(output + "\n");
+            // if there are waypoints and if there is a connection to MP...
+            if (output.charAt(0) != ']' && output != null) {
+                JSONObject obj = new JSONObject(output);
+                double lng = obj.getDouble("Lng");
+                double lat = obj.getDouble("Lat");
+                double alt = obj.getDouble("Alt");
 
-		} catch (Exception e) {
+                Location newLocation = new Location(lng, lat, alt);
+                Data.setCurrentPosition(newLocation);
+            }
 
-			e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
 
-		}
-	}
+        }
+    }
+
+    public static void sendWaypoints() {
+        try {
+            String waypointsJSON = "{\"waypoints\":[" + Data.getWaypoints().toString()
+                    + "], \"append\":1, \"name\":" + Data.getWaypoints().getWaypointListName()
+                    + "}";
+
+            ClientConfig clientConfig = new DefaultClientConfig();
+
+            clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+
+            Client client = Client.create(clientConfig);
+
+            WebResource webResource = client.resource(CONSTANTS.REST_MP + "/setWaypoints");
+
+            ClientResponse response = webResource.accept("application/json")
+                    .type("application/json").post(ClientResponse.class, waypointsJSON);
+
+            if (response.getStatus() != 200) {
+                throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+            }
+
+            String output = response.getEntity(String.class);
+
+            System.out.println("Server response ...");
+            System.out.println(output + "\n");
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+    }
 
 }

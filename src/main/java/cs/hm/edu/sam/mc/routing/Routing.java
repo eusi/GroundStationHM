@@ -40,12 +40,12 @@ public class Routing extends JInternalFrame {
         final GroupLayout groupLayout = new GroupLayout(getContentPane());
         groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
                 groupLayout.createSequentialGroup().addContainerGap()
-                .addComponent(panel, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
-                .addContainerGap()));
+                        .addComponent(panel, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+                        .addContainerGap()));
         groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
                 groupLayout.createSequentialGroup().addContainerGap()
-                .addComponent(panel, GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-                .addContainerGap()));
+                        .addComponent(panel, GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                        .addContainerGap()));
 
         final JLabel lblRouting = new JLabel("Routing");
 

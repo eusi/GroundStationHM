@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
@@ -150,7 +151,7 @@ public class ImageViewer extends JInternalFrame implements ActionListener {
         buttonBar.revalidate();
         buttonBar.repaint();
 
-        ArrayList<String> imageFileNames = new ArrayList<String>();
+        List<String> imageFileNames = new ArrayList<>();
         imageFileNames = getImagesInDir();
 
         for (int i = 0; i < imageFileNames.size(); i++) {
