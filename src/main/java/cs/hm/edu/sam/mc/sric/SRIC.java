@@ -64,14 +64,14 @@ public class SRIC extends JInternalFrame {
 
         final JLabel lblSsid = new JLabel("SSID");
 
-        final JLabel labelPw = new JLabel("Passwort");
+        final JLabel labelPw = new JLabel("Password");
 
         textFieldPW = new JTextField();
         textFieldPW.setColumns(10);
 
         final JLabel lblName = new JLabel("Name");
 
-        final JLabel lblPasswort = new JLabel("Passwort");
+        final JLabel lblPasswort = new JLabel("Password");
 
         final JLabel lblFtp = new JLabel("FTP");
 

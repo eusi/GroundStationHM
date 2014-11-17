@@ -62,7 +62,7 @@ public class Main extends JFrame {
     private JDesktopPane desktopPane;
     private JButton btnRouting;
     private JLabel lblCoor;
-    private JCheckBoxMenuItem chckbxmntmGetLocation;
+    private JCheckBoxMenuItem mntmLocation;
     private JMenuItem mntmOptions;
     private JMenuItem mntmExit;
 
@@ -103,8 +103,10 @@ public class Main extends JFrame {
         final JMenu mnFile = new JMenu("File");
         menuBar.add(mnFile);
 
-        chckbxmntmGetLocation = new JCheckBoxMenuItem("Get Location");
-        mnFile.add(chckbxmntmGetLocation);
+        mntmLocation = new JCheckBoxMenuItem("Get Location");
+        mntmLocation.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR
+                + "location_icon_mini.png")));
+        mnFile.add(mntmLocation);
 
         mntmOptions = new JMenuItem("Options");
         mntmOptions.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR
@@ -116,10 +118,10 @@ public class Main extends JFrame {
                 + "exit_icon_mini.png")));
         mnFile.add(mntmExit);
 
-        chckbxmntmGetLocation.addItemListener(new ItemListener() {
+        mntmLocation.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                Data.setCurrentLocationIsActive(chckbxmntmGetLocation.isSelected());
+                Data.setCurrentLocationIsActive(mntmLocation.isSelected());
             }
         });
 
