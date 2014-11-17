@@ -26,7 +26,8 @@ public class EmergentComponent extends GroundComponent implements EmergentGuiInt
         emerTargetLastKnownPosition = new Location(longitude, latitude, EMERGENT_ALT);
 
         // ---
-        // Berechnung der Wegpunkte für Emergent Target...
+        // Berechnung der Wegpunkte für Emergent Target aus per GUI eingegebener emergentSearchArea...
+        // ->> calculatedEmergWaypoints
         // ---
 
         emergReadyToStart = true;

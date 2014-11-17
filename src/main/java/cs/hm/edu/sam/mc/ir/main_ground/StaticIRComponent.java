@@ -63,8 +63,8 @@ public class StaticIRComponent extends GroundComponent implements StaticGuiInter
      */
     private void flyRoute() {
 
-        // 500ms warten
-        // long sleepTime = (long) 500;
+        // 1/8 Sekunde = 125ms warten
+
         long sleepTime = (long) GroundComponent.STATIC_REFRESH_TIME * 1000;
 
         for (int i = 0; i < calculatedStatWaypoints.size(); i++) {
@@ -73,21 +73,17 @@ public class StaticIRComponent extends GroundComponent implements StaticGuiInter
             // bis erreicht, dann entfernen
             Location locToCompute = calculatedStatWaypoints.get(i);
 
-            System.out.println("DEBUG: " + locToCompute.toString());
-
             boolean isAtWaypoint = isDroneAtWaypoint(locToCompute, TasksEnum.IRSTATIC);
 
             while (!isAtWaypoint) {
 
                 isAtWaypoint = isDroneAtWaypoint(locToCompute, TasksEnum.IRSTATIC);
-                System.out
-                        .println("Drohne ist NICHT an static Waypoint ODER Foto bereits geschossen: "
-                                + locToCompute.toString());
+                System.out.println("Drohne ist NICHT an static Waypoint ODER Foto bereits geschossen: "+ locToCompute.toString());
             }
 
             // ----------------
             // HIER FOTOS MACHEN !!!!!!!!
-            System.out.println("Drohne ist an static Waypoint, FOTO");
+            System.out.println("Drohne ist an static Waypoint, FOTO: >>>>>>>>>> "+ locToCompute.toString());
             takeInfraredPhoto();
             super.takeNormalPhoto();
             // ---------------

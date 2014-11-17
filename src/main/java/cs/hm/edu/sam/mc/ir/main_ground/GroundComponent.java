@@ -10,6 +10,8 @@ import cs.hm.edu.sam.mc.ir.enum_interfaces.TasksEnum;
 import cs.hm.edu.sam.mc.misc.Data;
 import cs.hm.edu.sam.mc.misc.Location;
 
+import org.zeromq.ZMQ;
+
 /**
  * @author Maximilian Haag
  *
@@ -22,10 +24,10 @@ public abstract class GroundComponent implements GroundGuiInterface {
     protected static final String DYNAMIC_IR_T = "Dynamic_IR_Task";
     protected static final String EMERGENT_T = "Emergent_Task";
 
-    // "Waypoint erreicht" refresh check time (Sekunden)
-    protected static final double STATIC_REFRESH_TIME = 0.5;
-    protected static final double DYNAMIC_REFRESH_TIME = 0.5;
-    protected static final double EMERGENT_REFRESH_TIME = 0.5;
+    // "Waypoint erreicht" refresh check time (Sekunden), 8 x pro Sekunde abfragbar.
+    protected static final double STATIC_REFRESH_TIME = 0.125;
+    protected static final double DYNAMIC_REFRESH_TIME = 0.125;
+    protected static final double EMERGENT_REFRESH_TIME = 0.125;
 
     // 1 Meter Toleranz Radius, um Wegpunkte als "erreicht" zu kennzeichnen
     protected final double STATIC_TOLERANCE = 0.00000000100;
@@ -96,7 +98,7 @@ public abstract class GroundComponent implements GroundGuiInterface {
             double range = getToleranceRadius();
             return inRadius(locToCheck, currentLoc, currentTask, range);
         } else {
-            // Waypoint Daten haben sich seit letzter Abfrage nicht geändert
+            // Waypoint Daten haben sich seit letzter Abfrage nicht geändert, DELAY 50ms
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
@@ -200,8 +202,7 @@ public abstract class GroundComponent implements GroundGuiInterface {
      * @param currentLoc
      * @return
      */
-    private boolean inRadius(Location location, Location currentLoc, TasksEnum current,
-            double radius) {
+    private boolean inRadius(Location location, Location currentLoc, TasksEnum current, double radius) {
         double taskLat = location.getLat();
         double taskLong = location.getLng();
         double droneLat = currentLoc.getLat();
