@@ -27,6 +27,7 @@ import javax.swing.border.TitledBorder;
 import net.miginfocom.swing.MigLayout;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.DynamicGuiInterface;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.EmergentGuiInterface;
+import cs.hm.edu.sam.mc.ir.enum_interfaces.GUIInterface;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.StaticGuiInterface;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.TasksEnum;
 import cs.hm.edu.sam.mc.ir.main_ground.DynamicIRComponent;
@@ -34,7 +35,11 @@ import cs.hm.edu.sam.mc.ir.main_ground.EmergentComponent;
 import cs.hm.edu.sam.mc.ir.main_ground.StaticIRComponent;
 import cs.hm.edu.sam.mc.misc.Location;
 
-public class Ir extends JInternalFrame {
+import javax.swing.BoxLayout;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+public class Ir extends JInternalFrame implements GUIInterface {
 
 	private JTextField txtIRStaticLongitude;
 	private JTextField txtIRStaticLatitude;
@@ -45,11 +50,16 @@ public class Ir extends JInternalFrame {
 	private JTextField txtLongSA;
 	private JTextField txtLatSA;
 	private DefaultListModel<String> listModel = new DefaultListModel<>();
+	private DefaultListModel<String> listModelConsole = new DefaultListModel<>();
 	private JList lstSearchAreaWP = new JList(listModel);
+	private JList lstConsole = new JList(listModelConsole);
+	private JPanel pnlMiddleNorth;
+	private JScrollPane scrollPaneConsole;
 	
 	private  StaticGuiInterface staticIRTask =  new StaticIRComponent();
 	private  DynamicGuiInterface dynamicIRTask = new DynamicIRComponent();
 	private  EmergentGuiInterface emergentTask = new EmergentComponent();
+	private final JPanel panel = new JPanel();
 	
 
 //	/**
@@ -72,6 +82,11 @@ public class Ir extends JInternalFrame {
 //			}
 //		});
 //	}
+	
+	public void printConsole(String text){
+		listModelConsole.addElement(text);
+		lstConsole.ensureIndexIsVisible(listModelConsole.size() - 1);
+	}
 	
 	private void waypointOperation(TasksEnum task) {
 		double longitude = 0;
@@ -99,6 +114,7 @@ public class Ir extends JInternalFrame {
 		double latitude = Double.parseDouble(txtLatSA.getText().trim());
 		emergentTask.addEmergentSearchAreaWP(longitude, latitude);	
 		refreshEmergentSearchAreaList();
+	    printConsole("blaaaaaaaaaaaaaaaaa");
 	}
 	
 	private void startTask(TasksEnum tastToStart){
@@ -123,7 +139,7 @@ public class Ir extends JInternalFrame {
 			listModel.addElement(wp.toString());
 		}
 		lstSearchAreaWP = new JList<>(listModel);
-		
+		lstSearchAreaWP.ensureIndexIsVisible(listModel.getSize()-1);
 	}
 	
 
@@ -131,10 +147,24 @@ public class Ir extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public Ir() {
-		setBounds(100, 100, 819, 651);
+		
+		setTitle("IR AND EMERGENT TASKS");
+        setClosable(true);
+        setResizable(true);
+        
+ 
+        lstSearchAreaWP.setAutoscrolls(true);
+        
+		setBounds(100, 100, 830, 649);
 		
 		JPanel pnlSouth = new JPanel();
 		getContentPane().add(pnlSouth, BorderLayout.SOUTH);
+		
+		JPanel pnlEast = new JPanel();
+		getContentPane().add(pnlEast, BorderLayout.EAST);
+		pnlEast.setLayout(new BorderLayout(0, 0));
+		pnlEast.add(panel, BorderLayout.NORTH);
+		
 		pnlSouth.setLayout(new MigLayout("", "[][][][][][][][][][][][][][][][]", "[]"));
 		
 		//Static Missio start
@@ -174,6 +204,7 @@ public class Ir extends JInternalFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("Frame Static Click");
+				pnlMiddleNorth.setVisible(false);
 			}
 		});
 		panelTitleIRStatic.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "IR - Static", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -213,6 +244,7 @@ public class Ir extends JInternalFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("Frame Dynamic Click");
+				pnlMiddleNorth.setVisible(false);
 			}
 		});
 		panelTitleIRDynamic.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "IR - Dynamic", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -250,6 +282,7 @@ public class Ir extends JInternalFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println("Frame Emergent Click");
+				pnlMiddleNorth.setVisible(true);
 			}
 		});
 		panelTitleEmergent.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Emergent", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -292,35 +325,23 @@ public class Ir extends JInternalFrame {
 		JPanel pnlMiddle = new JPanel();
 		pnlMiddle.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		getContentPane().add(pnlMiddle, BorderLayout.CENTER);
-		GridBagLayout gbl_pnlMiddle = new GridBagLayout();
-		gbl_pnlMiddle.columnWidths = new int[]{0, 394, 0, 0, 0, 0, 0, 0};
-		gbl_pnlMiddle.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_pnlMiddle.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_pnlMiddle.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
-		pnlMiddle.setLayout(gbl_pnlMiddle);
+		pnlMiddle.setLayout(new BorderLayout(0, 0));
 		
-		JPanel pnlListButtonSearchArea = new JPanel();
-		GridBagConstraints gbc_pnlListButtonSearchArea = new GridBagConstraints();
-		gbc_pnlListButtonSearchArea.anchor = GridBagConstraints.WEST;
-		gbc_pnlListButtonSearchArea.insets = new Insets(0, 0, 0, 5);
-		gbc_pnlListButtonSearchArea.fill = GridBagConstraints.VERTICAL;
-		gbc_pnlListButtonSearchArea.gridx = 1;
-		gbc_pnlListButtonSearchArea.gridy = 8;
-		pnlMiddle.add(pnlListButtonSearchArea, gbc_pnlListButtonSearchArea);
-		pnlListButtonSearchArea.setLayout(new BorderLayout(0, 0));
+		pnlMiddleNorth = new JPanel();
+		pnlMiddle.add(pnlMiddleNorth, BorderLayout.NORTH);
+		pnlMiddleNorth.setLayout(new BorderLayout(0, 0));
 		
 		
 		
 		
-		pnlListButtonSearchArea.add(lstSearchAreaWP, BorderLayout.CENTER);
+		//pnlListButtonSearchArea.add(lstSearchAreaWP, BorderLayout.CENTER);
 		
-		JPanel panel_2 = new JPanel();
-		pnlListButtonSearchArea.add(panel_2, BorderLayout.NORTH);
-		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		JScrollPane scrollPane = new JScrollPane(lstSearchAreaWP);
+		pnlMiddleNorth.add(scrollPane, BorderLayout.NORTH);
 		
 		JPanel pnlLongLatSA = new JPanel();
+		scrollPane.setColumnHeaderView(pnlLongLatSA);
 		pnlLongLatSA.setBorder(new TitledBorder(null, "Edit SearchArea waypoints", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_2.add(pnlLongLatSA);
 		
 		JLabel lblLongSA = new JLabel("Long:");
 		pnlLongLatSA.add(lblLongSA);
@@ -345,6 +366,17 @@ public class Ir extends JInternalFrame {
 		});
 		pnlLongLatSA.add(btnAddSA);
 		
+		pnlMiddleNorth.add(scrollPane, BorderLayout.NORTH);
+		
+		JPanel pnlMiddleSouth = new JPanel();
+		pnlMiddle.add(pnlMiddleSouth, BorderLayout.SOUTH);
+		
+		
+		
+		scrollPaneConsole = new JScrollPane(lstConsole);
+		pnlMiddleSouth.add(scrollPaneConsole);
+//		pnlMiddleSouth.add(lstConsole);
+	
 		
 		
 	}
