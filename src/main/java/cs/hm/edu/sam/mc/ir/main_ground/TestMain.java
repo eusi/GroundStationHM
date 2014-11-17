@@ -19,19 +19,15 @@ public class TestMain extends Thread {
     // 0.000 000 0X0 00 = ca. METER
 
     // Test Waypoints
-    // private static double [] photoWaypointlat = {48.50000000100,
-    // 48.50000000200, 48.50000000300, 48.50000000400, 48.50000000500};
-    // private static double [] photoWaypointlng = {11.50000000000,
-    // 11.50000000000, 11.50000000000, 11.50000000000, 11.50000000000};
+    // private static double [] photoWaypointlat = {48.50000000100, 48.50000000200, 48.50000000300, 48.50000000400, 48.50000000500};
+    // private static double [] photoWaypointlng = {11.50000000000, 11.50000000000, 11.50000000000, 11.50000000000, 11.50000000000};
 
     private static double[] photoWaypointlat = { 48.50000000100, 48.50000000200 };
     private static double[] photoWaypointlng = { 11.50000000000, 11.50000000000 };
 
     // Waypoints, die FlugSimulation abfliegt...
-    private static double[] flylat = { 48.50000000900, 48.50000000800, 48.50000000700,
-            48.50000000600, 48.50000000500, 48.50000000100, 48.50000000200 };
-    private static double[] flylng = { 11.50000000000, 11.50000000000, 11.50000000000,
-            11.50000000000, 11.50000000000, 11.50000000000, 11.50000000000 };
+    private static double[] flylat = { 48.50000000900, 48.50000000800, 48.50000000700, 48.50000000600, 48.50000000500, 48.50000000100, 48.50000000200 };
+    private static double[] flylng = { 11.50000000000, 11.50000000000, 11.50000000000, 11.50000000000, 11.50000000000, 11.50000000000, 11.50000000000 };
 
     // Current Test Location
     private volatile static Location currentSimulatedPos = new Location(0, 0, 0);
@@ -43,6 +39,7 @@ public class TestMain extends Thread {
 
         StaticIRComponent test = new StaticIRComponent();
 
+       
         // Target Location
         double latTest = 48.50000000000;
         double lngTest = 11.50000000000;
@@ -73,7 +70,9 @@ public class TestMain extends Thread {
             }
 
             try {
-                Thread.sleep(800);
+            	//Sleep bis neuen Waypoint
+                Thread.sleep(100);
+                
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
