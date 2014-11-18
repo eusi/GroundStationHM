@@ -38,7 +38,9 @@ public class EmergentComponent extends GroundComponent implements EmergentGuiInt
      * EmergentSearchArea Gebiet eintragen per GUI
      */
     public void addEmergentSearchAreaWP(double longitude, double latitude) {
-        emergentSearchArea.add(new Location(longitude, latitude, EMERGENT_ALT));
+        Location toAdd = new Location(longitude, latitude, EMERGENT_ALT);
+        if(!emergentSearchArea.contains(toAdd))
+        	emergentSearchArea.add(toAdd);
     }
 
     /*
@@ -100,5 +102,13 @@ public class EmergentComponent extends GroundComponent implements EmergentGuiInt
 
         taskActive = false;
     }
+
+	@Override
+	public void deleteOneWaypoint(double longitude, double latitude) {
+        Location toDel = new Location(longitude, latitude, EMERGENT_ALT);
+        if(emergentSearchArea.contains(toDel))
+        	emergentSearchArea.remove(toDel);
+		
+	}
 
 }

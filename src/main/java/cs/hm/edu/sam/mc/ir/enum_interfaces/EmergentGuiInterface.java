@@ -11,7 +11,10 @@ import cs.hm.edu.sam.mc.misc.Location;
 public interface EmergentGuiInterface extends GroundGuiInterface {
 
     public void addEmergentSearchAreaWP(double longitude, double latitude);
-
+    public void deleteOneWaypoint(double longitude, double latitude);
+    
+    
     public List<Location> getEmergentSearchArea();
+
 
 }

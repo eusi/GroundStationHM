@@ -10,7 +10,6 @@ import cs.hm.edu.sam.mc.ir.enum_interfaces.TasksEnum;
 import cs.hm.edu.sam.mc.misc.Data;
 import cs.hm.edu.sam.mc.misc.Location;
 
-import org.zeromq.ZMQ;
 
 /**
  * @author Maximilian Haag
@@ -98,9 +97,9 @@ public abstract class GroundComponent implements GroundGuiInterface {
             double range = getToleranceRadius();
             return inRadius(locToCheck, currentLoc, currentTask, range);
         } else {
-            // Waypoint Daten haben sich seit letzter Abfrage nicht geändert, DELAY 50ms
+            // Waypoint Daten haben sich seit letzter Abfrage nicht geändert, DELAY 20ms
             try {
-                Thread.sleep(50);
+                Thread.sleep(20);
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

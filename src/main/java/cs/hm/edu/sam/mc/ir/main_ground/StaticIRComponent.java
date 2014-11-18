@@ -36,6 +36,7 @@ public class StaticIRComponent extends GroundComponent implements StaticGuiInter
         // --- TEST
 
         statReadyToStart = true;
+        
         System.out.println("Static IR waypoints calculated, static IR task ready...");
 
     }
