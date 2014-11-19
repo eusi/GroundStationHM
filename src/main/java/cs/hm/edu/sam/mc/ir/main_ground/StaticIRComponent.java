@@ -22,9 +22,10 @@ public class StaticIRComponent extends GroundComponent implements StaticGuiInter
     private Location statTargetLoc = null;
     private boolean taskActive = false;
 
+    private Ir irGui;
     
-    public StaticIRComponent(Ir gui) {
-		super(gui);
+    public StaticIRComponent(Ir irGui) {
+		this.irGui = irGui;
 	}
     
     // Groundcomponent GUI Interface, Button "Wegpunkte berechnen" etc.
@@ -54,6 +55,7 @@ public class StaticIRComponent extends GroundComponent implements StaticGuiInter
         if (statReadyToStart) {
             uploadTaskToMissionPlanner(calculatedStatWaypoints, GroundComponent.STATIC_IR_T);
             taskActive = true;
+            
             flyRoute();
         } else {
             System.out.println("NOT CALCULATED YET");
@@ -71,10 +73,7 @@ public class StaticIRComponent extends GroundComponent implements StaticGuiInter
     private void flyRoute() {
 
         // 1/8 Sekunde = 125ms warten
-    	
-
         long sleepTime = (long) GroundComponent.STATIC_REFRESH_TIME * 1000;
-
         
         
         for (int i = 0; i < calculatedStatWaypoints.size(); i++) {

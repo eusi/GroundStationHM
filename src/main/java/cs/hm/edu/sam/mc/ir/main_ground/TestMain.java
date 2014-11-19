@@ -45,10 +45,10 @@ public class TestMain extends Thread {
      */
     public static void main(String[] args) {
     	
-    	fillTestData();
-    	startTestFlight();
+    	//fillTestData();
+    	//startTestFlight();
 
-    	//testAirConnection();
+    	testAirConnection();
     	
     	//guiTest();
     	
@@ -58,18 +58,26 @@ public class TestMain extends Thread {
  
     
     private static void testAirConnection() {
-        new GroundAirSubscriber("A", 0, new String[] {"A"}).start();
-        new GroundAirSubscriber("B - Lagger",2000, new String[] {"B"}).start();
-        new GroundAirSubscriber("A&B", 0, new String[] {"A", "B"}).start();
+//        new GroundAirSubscriber("A", 0, new String[] {"A"}).start();
+//        new GroundAirSubscriber("B - Lagger",2000, new String[] {"B"}).start();
+//        new GroundAirSubscriber("A&B", 0, new String[] {"A", "B"}).start();
 
-        new GroundAirPublisher("0").start();
-
-//        //ZMQ.Socket request = MyActivity.context.socket(ZMQ.REQ);
-//        request.connect("tcp://localhost:12346");
-//
-//        for(int requestNumber = 0; requestNumber < 10; requestNumber++) {
-//            request.send("Hello");
-//            Log.d("JEROMQ", "Answer: " + request.recvStr());		
+      GroundAirPublisher g =   new GroundAirPublisher("0");
+      g.start();
+      
+      try {
+		Thread.sleep(5000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+      
+      GroundAirSubscriber s = new GroundAirSubscriber("A", 0, new String[] {"A"});
+      GroundAirSubscriber s2 = new GroundAirSubscriber("B", 0, new String[] {"B"});
+      s.start();
+      s2.start();
+      
+		
 	}
 
 

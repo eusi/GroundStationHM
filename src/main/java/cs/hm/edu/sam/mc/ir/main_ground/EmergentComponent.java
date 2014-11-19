@@ -3,7 +3,7 @@ package cs.hm.edu.sam.mc.ir.main_ground;
 import java.util.ArrayList;
 import java.util.List;
 
-import cs.hm.edu.sam.mc.ir.Ir;
+import cs.hm.edu.sam.mc.emergency.Emergency;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.EmergentGuiInterface;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.TasksEnum;
 import cs.hm.edu.sam.mc.misc.Location;
@@ -22,9 +22,10 @@ public class EmergentComponent extends GroundComponent implements EmergentGuiInt
     private Location emerTargetLastKnownPosition = null;
     private boolean taskActive = false;
 
+    private Emergency emergentGui;
     
-    public EmergentComponent(Ir gui) {
-		super(gui);
+    public EmergentComponent(Emergency emergentGui) {
+		this.emergentGui = emergentGui;
 	}
     
     @Override
