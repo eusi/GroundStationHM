@@ -3,9 +3,7 @@ package cs.hm.edu.sam.mc.ir;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -55,6 +53,7 @@ public class Ir extends JInternalFrame implements GUIInterface {
 	private JList lstConsole = new JList(listModelConsole);
 	private JPanel pnlMiddleNorth;
 	private JScrollPane scrollPaneConsole;
+	private JButton btnOnboardUnit = new JButton("Onboard Unit");
 	
 	private  StaticGuiInterface staticIRTask =  new StaticIRComponent();
 	private  DynamicGuiInterface dynamicIRTask = new DynamicIRComponent();
@@ -114,6 +113,8 @@ public class Ir extends JInternalFrame implements GUIInterface {
 		double latitude = Double.parseDouble(txtLatSA.getText().trim());
 		emergentTask.addEmergentSearchAreaWP(longitude, latitude);	
 		refreshEmergentSearchAreaList();
+		System.out.println(listModel.getSize()-1);
+		
 	    printConsole("blaaaaaaaaaaaaaaaaa");
 	}
 	
@@ -133,13 +134,12 @@ public class Ir extends JInternalFrame implements GUIInterface {
 	
 	private void refreshEmergentSearchAreaList(){
 		List<Location> saList = emergentTask.getEmergentSearchArea();
-		
 		listModel.clear();
 		for(Location wp : saList){
 			listModel.addElement(wp.toString());
 		}
 		lstSearchAreaWP = new JList<>(listModel);
-		lstSearchAreaWP.ensureIndexIsVisible(listModel.getSize()-1);
+
 	}
 	
 
@@ -149,12 +149,10 @@ public class Ir extends JInternalFrame implements GUIInterface {
 	public Ir() {
 		
 		setTitle("IR AND EMERGENT TASKS");
+		setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setResizable(true);
-        
- 
-        lstSearchAreaWP.setAutoscrolls(true);
-        
+       
 		setBounds(100, 100, 830, 649);
 		
 		JPanel pnlSouth = new JPanel();
@@ -315,10 +313,18 @@ public class Ir extends JInternalFrame implements GUIInterface {
 		JPanel pnlNorth = new JPanel();
 		getContentPane().add(pnlNorth, BorderLayout.NORTH);
 		pnlNorth.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		btnOnboardUnit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(btnOnboardUnit.getBackground()==Color.GREEN)
+					setDroneConnectionColor(TasksEnum.COLORRED);
+				else
+					setDroneConnectionColor(TasksEnum.COLORGREEN);
+			}
+		});
 		
-		JButton btnOnboardUnit = new JButton("Onboard Unit");
+		//Button Dronestatus
 		btnOnboardUnit.setHorizontalAlignment(SwingConstants.LEFT);
-		btnOnboardUnit.setForeground(Color.RED);
+		btnOnboardUnit.setForeground(Color.BLACK);
 		btnOnboardUnit.setBackground(Color.RED);
 		pnlNorth.add(btnOnboardUnit);
 		
@@ -370,6 +376,9 @@ public class Ir extends JInternalFrame implements GUIInterface {
 		
 		JPanel pnlMiddleSouth = new JPanel();
 		pnlMiddle.add(pnlMiddleSouth, BorderLayout.SOUTH);
+		pnlMiddleSouth.setLayout(new BoxLayout(pnlMiddleSouth, BoxLayout.X_AXIS));
+		lstConsole.setForeground(Color.GREEN);
+		lstConsole.setBackground(Color.BLACK);
 		
 		
 		
@@ -378,6 +387,16 @@ public class Ir extends JInternalFrame implements GUIInterface {
 //		pnlMiddleSouth.add(lstConsole);
 	
 		
+		
+	}
+
+	@Override
+	public void setDroneConnectionColor(TasksEnum setColor) {
+		if(setColor == TasksEnum.COLORGREEN)
+			btnOnboardUnit.setBackground(Color.GREEN);
+		else
+			btnOnboardUnit.setBackground(Color.RED);
+			
 		
 	}
 
