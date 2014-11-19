@@ -19,16 +19,24 @@ public class TestMain extends Thread {
     // 0.000 000 0X0 00 = ca. METER
 
     // Test Waypoints
-    // private static double [] photoWaypointlat = {48.50000000100, 48.50000000200, 48.50000000300, 48.50000000400, 48.50000000500};
-    // private static double [] photoWaypointlng = {11.50000000000, 11.50000000000, 11.50000000000, 11.50000000000, 11.50000000000};
 
-    private static double[] photoWaypointlat = { 48.50000000100, 48.50000000200 };
-    private static double[] photoWaypointlng = { 11.50000000000, 11.50000000000 };
 
-    // Waypoints, die FlugSimulation abfliegt...
-    private static double[] flylat = { 48.50000000900, 48.50000000800, 48.50000000700, 48.50000000600, 48.50000000500, 48.50000000100, 48.50000000200 };
-    private static double[] flylng = { 11.50000000000, 11.50000000000, 11.50000000000, 11.50000000000, 11.50000000000, 11.50000000000, 11.50000000000 };
+	
+	
+	private static ArrayList<Double> photoWaypointlat = new ArrayList<>();
+	private static ArrayList<Double> photoWaypointlng = new ArrayList<>();
+	
+	
+//    private static double[] photoWaypointlat = { 48.50000000100, 48.50000000200 };
+//    private static double[] photoWaypointlng = { 11.50000000000, 11.50000000000 };
+//
+//    // Waypoints, die FlugSimulation abfliegt...
+//    private static double[] flylat = { 48.50000000900, 48.50000000800, 48.50000000700, 48.50000000600, 48.50000000500, 48.50000000100, 48.50000000200 };
+//    private static double[] flylng = { 11.50000000000, 11.50000000000, 11.50000000000, 11.50000000000, 11.50000000000, 11.50000000000, 11.50000000000 };
 
+	private static ArrayList<Double> flylat = new ArrayList<>();
+	private static ArrayList<Double> flylng = new ArrayList<>();
+	
     // Current Test Location
     private volatile static Location currentSimulatedPos = new Location(0, 0, 0);
 
@@ -36,22 +44,18 @@ public class TestMain extends Thread {
      * @param args
      */
     public static void main(String[] args) {
-
-       
-        
-//      startTestFlight();
-
-    	testAirConnection();
     	
+    	fillTestData();
+    	startTestFlight();
 
+    //	testAirConnection();
     	
-
+    //	guiTest();
+    	
     }
 
     
-    
-    
-    
+ 
     
     private static void testAirConnection() {
         new GroundAirSubscriber("A", 0, new String[] {"A"}).start();
@@ -69,7 +73,40 @@ public class TestMain extends Thread {
 	}
 
 
+    private static void fillTestData() {
+    	
+    	//10 cm
+    	double flightStep = 0.00000000010;
 
+    	//Wegpunkte für Flieger
+    	for(int i = 0; i < 50; i++) {
+    		double toAdd = 48.50000000000 + flightStep;
+    		flylat.add(toAdd);
+    		flylng.add(11.50000000001);
+    		flightStep += 0.00000000010 ;
+    	}
+    	
+    	double photoStep = 0.00000000010;
+    	
+    	//Wegpunkte für Foto
+    	for(int i = 0; i < 5; i++) {
+    		photoWaypointlat.add(48.50000000000 + photoStep);
+    		photoWaypointlng.add(11.50000000001);
+    		photoStep += 0.00000000010;
+    	}
+    	
+    	for(int i = 0; i < flylat.size(); i++) {
+    		System.out.printf("%.11f\n", flylat.get(i));
+    		System.out.printf("%.11f\n", flylng.get(i));
+    	}
+		System.out.println("--------------");
+    	for(int i = 0; i< photoWaypointlat.size(); i++) {
+    		System.out.printf("%.11f\n", photoWaypointlat.get(i));
+    		System.out.printf("%.11f\n", photoWaypointlng.get(i));
+    	}
+
+
+    }
 
 
 
@@ -105,10 +142,10 @@ public class TestMain extends Thread {
     public void run() {
         System.out.println("Flieger gestartet");
 
-        for (int i = 0; i < flylat.length; i++) {
+        for (int i = 0; i < flylat.size(); i++) {
 
             synchronized (currentSimulatedPos) {
-                currentSimulatedPos = new Location(flylng[i], flylat[i], 80);
+                currentSimulatedPos = new Location(flylng.get(i), flylat.get(i), 80);
             }
 
             try {
@@ -130,8 +167,8 @@ public class TestMain extends Thread {
     public static List<Location> createTestWaypoints() {
         List<Location> testWaypoints = new ArrayList<>();
 
-        for (int i = 0; i < photoWaypointlat.length; i++) {
-            testWaypoints.add(new Location(photoWaypointlng[i], photoWaypointlat[i], 80));
+        for (int i = 0; i < photoWaypointlat.size(); i++) {
+            testWaypoints.add(new Location(photoWaypointlng.get(i), photoWaypointlat.get(i), 80));
         }
         System.out.println(testWaypoints.toString());
         return testWaypoints;
