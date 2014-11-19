@@ -21,19 +21,13 @@ import javax.swing.border.TitledBorder;
 import net.miginfocom.swing.MigLayout;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.ColorEnum;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.DynamicGuiInterface;
-import cs.hm.edu.sam.mc.ir.enum_interfaces.EmergentGuiInterface;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.GUIInterface;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.StaticGuiInterface;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.TasksEnum;
 import cs.hm.edu.sam.mc.ir.main_ground.DynamicIRComponent;
-import cs.hm.edu.sam.mc.ir.main_ground.EmergentComponent;
 import cs.hm.edu.sam.mc.ir.main_ground.StaticIRComponent;
-import cs.hm.edu.sam.mc.misc.Location;
-
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.ListModel;
 
 /**
  * @author Roland Widmann
@@ -65,19 +59,28 @@ public class Ir extends JInternalFrame implements GUIInterface {
 		lstConsole.ensureIndexIsVisible(listModelConsole.size() - 1);
 	}
 	
+	private boolean isEmpty(String txt){
+		return txt.equals("");
+	}
+	
+	
 	private void waypointOperation(TasksEnum task) {
 		double longitude = 0;
 		double latitude = 0;
 		switch (task){
 		case IRSTATIC:
-			longitude= Double.parseDouble(txtIRStaticLongitude.getText().trim());
-			latitude= Double.parseDouble(txtIRStaticLatitude.getText().trim());
-			staticIRTask.calcWaypoints(longitude , latitude);
+			if(!isEmpty(txtIRStaticLongitude.getText().trim()) && !isEmpty(txtIRStaticLatitude.getText().trim())){
+				longitude= Double.parseDouble(txtIRStaticLongitude.getText().trim());
+				latitude= Double.parseDouble(txtIRStaticLatitude.getText().trim());
+				staticIRTask.calcWaypoints(longitude , latitude);
+			}
 			break;
 		case IRDYNAMIC:
-			longitude= Double.parseDouble(txtIRDynamicLongitude.getText().trim());
-			latitude= Double.parseDouble(txtIRDynamicLatitude.getText().trim());
-			dynamicIRTask.calcWaypoints(longitude , latitude);
+			if(!isEmpty(txtIRDynamicLongitude.getText().trim()) && !isEmpty(txtIRDynamicLatitude.getText().trim())){
+				longitude= Double.parseDouble(txtIRDynamicLongitude.getText().trim());
+				latitude= Double.parseDouble(txtIRDynamicLatitude.getText().trim());
+				dynamicIRTask.calcWaypoints(longitude , latitude);
+			}
 		}
 	}
 	
@@ -88,9 +91,6 @@ public class Ir extends JInternalFrame implements GUIInterface {
 			break;
 		case IRDYNAMIC:
 			
-			break;
-		case EMERGENT:
-			
 		}
 	}
 
@@ -99,7 +99,7 @@ public class Ir extends JInternalFrame implements GUIInterface {
 	 */
 	public Ir() {
 		
-		setTitle("IR AND EMERGENT TASKS");
+		setTitle("TASK: INFRARED");
 		setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setResizable(true);
@@ -171,8 +171,6 @@ public class Ir extends JInternalFrame implements GUIInterface {
 			public void actionPerformed(ActionEvent arg0) {
 				waypointOperation(TasksEnum.IRSTATIC);
 			}
-
-
 		});
 		panelTitleIRStatic.add(btnRStaticCalculate,"cell 1 2");
 		
