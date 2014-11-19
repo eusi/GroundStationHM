@@ -79,12 +79,12 @@ public class StaticIRComponent extends GroundComponent implements StaticGuiInter
             while (!isAtWaypoint) {
 
                 isAtWaypoint = isDroneAtWaypoint(locToCompute, TasksEnum.IRSTATIC);
-                System.out.println("Drohne ist NICHT an static Waypoint ODER Foto bereits geschossen: "+ locToCompute.toString());
+                System.out.println("Drohne ist NICHT an static Waypoint ODER Foto bereits geschossen: "+ locToCompute.toString() );
             }
 
             // ----------------
             // HIER FOTOS MACHEN !!!!!!!!
-            System.out.println("Drohne ist an static Waypoint, FOTO: >>>>>>>>>> "+ locToCompute.toString());
+            System.out.println("Drohne ist an static Waypoint, FOTO: >>>>>>>>>> "+ locToCompute.toString()+ "  "+locToCompute.getLat());
             takeInfraredPhoto();
             super.takeNormalPhoto();
             // ---------------
