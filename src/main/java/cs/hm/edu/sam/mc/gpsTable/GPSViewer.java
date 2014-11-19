@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import cs.hm.edu.sam.mc.emergency.Emergency;
+import cs.hm.edu.sam.mc.emergent.Emergent;
 import cs.hm.edu.sam.mc.misc.CONSTANTS;
 
 /**
@@ -39,7 +39,7 @@ public class GPSViewer extends JInternalFrame
 
   public GPSViewer()
   {
-      setFrameIcon(new ImageIcon(Emergency.class.getResource(CONSTANTS.ICON_DIR
+      setFrameIcon(new ImageIcon(Emergent.class.getResource(CONSTANTS.ICON_DIR
               + "gps_icon_mini.png")));
       setTitle("GPS Table");
       setIconifiable(true);

@@ -25,7 +25,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import cs.hm.edu.sam.mc.emergency.Emergency;
+import cs.hm.edu.sam.mc.emergent.Emergent;
 import cs.hm.edu.sam.mc.gpsTable.GPSViewer;
 import cs.hm.edu.sam.mc.gpsTable.GpsTable;
 import cs.hm.edu.sam.mc.images.ImageViewer;
@@ -59,7 +59,7 @@ public class Main extends JFrame {
     private SRIC sric;
     private Routing routing;
     private Ir ir;
-    private Emergency emergency;
+    private Emergent emergency;
     private GPSViewer gpsviewer;
     private Options options;
     private ImageViewer imageViewer;
@@ -284,7 +284,7 @@ public class Main extends JFrame {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 if (emergency == null) {
-                    emergency = new Emergency(); // only one instance of this
+                    emergency = new Emergent(); // only one instance of this
                     desktopPane.add(emergency);
                     emergency.show();
                 } else if (!emergency.isVisible()) {
