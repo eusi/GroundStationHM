@@ -45,10 +45,10 @@ public class TestMain extends Thread {
      */
     public static void main(String[] args) {
     	
-    	//fillTestData();
-    	//startTestFlight();
+    	fillTestData();
+    	startTestFlight();
 
-    	testAirConnection();
+    	//testAirConnection();
     	
     	//guiTest();
     	
