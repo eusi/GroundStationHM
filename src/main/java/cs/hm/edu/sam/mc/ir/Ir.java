@@ -56,7 +56,7 @@ public class Ir extends JInternalFrame implements GUIInterface {
 	
 	private  StaticGuiInterface staticIRTask =  new StaticIRComponent(this);
 	private  DynamicGuiInterface dynamicIRTask = new DynamicIRComponent(this);
-	private  EmergentGuiInterface emergentTask = new EmergentComponent(this);
+	private  EmergentGuiInterface emergentTask = new EmergentComponent(null);
 	private final JPanel panel = new JPanel();
 	
 

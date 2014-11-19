@@ -44,8 +44,7 @@ public abstract class GroundComponent implements GroundGuiInterface {
     protected final double DYNAMIC_ALT = 80;
     protected final double EMERGENT_ALT = 80;
     
-    protected Ir gui;
-    
+       
     private TasksEnum currentTask = TasksEnum.NOTASSIGNED;
     private Location wayPointBefore = new Location(0, 0, 0);
     
@@ -53,10 +52,6 @@ public abstract class GroundComponent implements GroundGuiInterface {
     abstract public boolean isTaskCalculated();
     abstract public void calcWaypoints(double longitude, double latitude);
 
-    
-    public GroundComponent(Ir gui) {
-		this.gui = gui;
-	}
     
     @Override
     public boolean isAirCompOnline() {

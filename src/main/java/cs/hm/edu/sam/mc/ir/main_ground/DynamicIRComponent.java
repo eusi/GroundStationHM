@@ -19,9 +19,10 @@ public class DynamicIRComponent extends GroundComponent implements DynamicGuiInt
     private Location dynTargetLoc = null;
     private boolean taskActive = false;
 
+    private Ir irGui;
     
-    public DynamicIRComponent(Ir gui) {
-		super(gui);
+    public DynamicIRComponent(Ir irGui) {
+		this.irGui = irGui;
 	}
     
     @Override
