@@ -1,4 +1,4 @@
-package cs.hm.edu.sam.mc.misc;
+package cs.hm.edu.sam.mc.rest;
 
 import org.codehaus.jettison.json.JSONObject;
 
@@ -8,6 +8,10 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
+
+import cs.hm.edu.sam.mc.misc.CONSTANTS;
+import cs.hm.edu.sam.mc.misc.Data;
+import cs.hm.edu.sam.mc.misc.Location;
 
 /**
  * Send waypoints and get current location RESTful / JSON.
@@ -47,8 +51,9 @@ public class RESTClient {
                 double lng = obj.getDouble("Lng");
                 double lat = obj.getDouble("Lat");
                 double alt = obj.getDouble("Alt");
+                String ts = obj.getString("Ts");
 
-                Location newLocation = new Location(lng, lat, alt);
+                Location newLocation = new Location(lng, lat, alt, ts);
                 Data.setCurrentPosition(newLocation);
             }
 

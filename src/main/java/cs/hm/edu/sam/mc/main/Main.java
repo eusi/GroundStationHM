@@ -26,13 +26,15 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import cs.hm.edu.sam.mc.emergency.Emergency;
+import cs.hm.edu.sam.mc.gpsTable.GPSViewer;
+import cs.hm.edu.sam.mc.gpsTable.GpsTable;
 import cs.hm.edu.sam.mc.images.ImageViewer;
 import cs.hm.edu.sam.mc.ir.Ir;
 import cs.hm.edu.sam.mc.misc.CONSTANTS;
 import cs.hm.edu.sam.mc.misc.Data;
-import cs.hm.edu.sam.mc.misc.RESTClient;
 import cs.hm.edu.sam.mc.options.Options;
 import cs.hm.edu.sam.mc.report.ReportSheet;
+import cs.hm.edu.sam.mc.rest.RESTClient;
 import cs.hm.edu.sam.mc.routing.Routing;
 import cs.hm.edu.sam.mc.sric.SRIC;
 
@@ -52,11 +54,13 @@ public class Main extends JFrame {
     private JButton btnSric;
     private JButton btnIr;
     private JButton btnEmergency;
+    private JButton btnGPStable;
     private ReportSheet reportSheet;
     private SRIC sric;
     private Routing routing;
     private Ir ir;
     private Emergency emergency;
+    private GPSViewer gpsviewer;
     private Options options;
     private ImageViewer imageViewer;
     private JDesktopPane desktopPane;
@@ -191,6 +195,11 @@ public class Main extends JFrame {
         btnEmergency.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR
                 + "emergency_icon.png")));
         toolBar.add(btnEmergency);
+        
+        btnGPStable = new JButton("GPS Table");
+        btnGPStable.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR
+                + "gps_icon.png")));
+        toolBar.add(btnGPStable);
 
         contentPane.setLayout(gl_contentPane);
     }
@@ -285,6 +294,21 @@ public class Main extends JFrame {
                 }
             }
         });
+        
+        btnGPStable.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                if (gpsviewer == null) {
+                	gpsviewer = new GPSViewer(); // only one instance of this
+                    desktopPane.add(gpsviewer);
+                    gpsviewer.show();
+                } else if (!gpsviewer.isVisible()) {
+                	gpsviewer.setVisible(true);
+                } else {
+                	gpsviewer.moveToFront();
+                }
+            }
+        });
 
         mntmExit.addActionListener(new ActionListener() {
             @Override
@@ -320,6 +344,8 @@ public class Main extends JFrame {
                             lblCoor.setText("lng: " + Data.getCurrentPosition().getLng()
                                     + " , lat: " + Data.getCurrentPosition().getLat() + " , alt: "
                                     + Data.getCurrentPosition().getAlt());
+                            
+                            GpsTable.writeGpsTable( Data.getCurrentPosition().toGpsTable() );
                         }
                     }
 

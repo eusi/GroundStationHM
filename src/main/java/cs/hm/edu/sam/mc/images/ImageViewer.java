@@ -1,9 +1,5 @@
 package cs.hm.edu.sam.mc.images;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
@@ -11,8 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +29,7 @@ import javax.swing.JToolBar;
 
 import net.miginfocom.swing.MigLayout;
 import cs.hm.edu.sam.mc.misc.CONSTANTS;
+import cs.hm.edu.sam.mc.misc.MissingIcon;
 import cs.hm.edu.sam.mc.report.ReportSheet;
 
 /**
@@ -67,6 +67,7 @@ public class ImageViewer extends JInternalFrame implements ActionListener {
             return (false);
         }
     };
+    private final JButton btnCopyReport;
 
     /**
      * Default constructor
@@ -96,10 +97,52 @@ public class ImageViewer extends JInternalFrame implements ActionListener {
         getContentPane().add(buttonBar, "cell 0 0,growx,aligny top");
         getContentPane().add(photographLabel, "cell 0 4,grow");
 
+        btnCopyReport = new JButton("Copy to report");
+        btnCopyReport.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!txtPath.getText().equals("...")) {
+                    final String filename = txtPath.getText().replace(imagedir, "");
+                    final File inF = new File(CONSTANTS.IMAGE_DIR_FILE + filename);
+                    final File outF = new File(CONSTANTS.REPORT_DIR_FILE + filename);
+                    try {
+                        copyFile(inF, outF);
+                    } catch (final IOException e1) {
+                        e1.printStackTrace();
+                    }
+
+                }
+            }
+
+            private void copyFile(File in, File out) throws IOException {
+                FileChannel inChannel = null;
+                FileChannel outChannel = null;
+                try {
+                    inChannel = new FileInputStream(in).getChannel();
+                    outChannel = new FileOutputStream(out).getChannel();
+                    inChannel.transferTo(0, inChannel.size(), outChannel);
+                } catch (final IOException e) {
+                    throw e;
+                } finally {
+                    try {
+                        if (inChannel != null) {
+                            inChannel.close();
+                        }
+                        if (outChannel != null) {
+                            outChannel.close();
+                        }
+                    } catch (final IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        getContentPane().add(btnCopyReport, "flowx,cell 0 5");
+
         txtPath = new JTextField();
         txtPath.setEditable(false);
         txtPath.setText("...");
-        getContentPane().add(txtPath, "flowx,cell 0 5,growx,aligny top");
+        getContentPane().add(txtPath, "cell 0 5,growx,aligny top");
         txtPath.setColumns(10);
 
         btnRefresh = new JButton("Refresh Image List");
@@ -221,9 +264,6 @@ public class ImageViewer extends JInternalFrame implements ActionListener {
         return resizedImg;
     }
 
-    /**
-     * Action class that shows the image specified in it's constructor.
-     */
     private class ThumbnailAction extends AbstractAction {
 
         /**
@@ -261,49 +301,10 @@ public class ImageViewer extends JInternalFrame implements ActionListener {
          */
         @Override
         public void actionPerformed(final ActionEvent e) {
+
             photographLabel.setIcon(displayPhoto);
             setTitle("Image Viewer: " + getValue(SHORT_DESCRIPTION).toString());
             txtPath.setText(filePath);
-        }
-    }
-
-    /**
-     * Icon class that creates an default icon when missing.
-     */
-    private class MissingIcon implements Icon {
-
-        private final int width = 32;
-        private final int height = 32;
-
-        private final BasicStroke stroke = new BasicStroke(4);
-
-        @Override
-        public void paintIcon(final Component c, final Graphics g, final int x, final int y) {
-            final Graphics2D g2d = (Graphics2D) g.create();
-
-            g2d.setColor(Color.WHITE);
-            g2d.fillRect(x + 1, y + 1, width - 2, height - 2);
-
-            g2d.setColor(Color.BLACK);
-            g2d.drawRect(x + 1, y + 1, width - 2, height - 2);
-
-            g2d.setColor(Color.RED);
-
-            g2d.setStroke(stroke);
-            g2d.drawLine(x + 10, y + 10, (x + width) - 10, (y + height) - 10);
-            g2d.drawLine(x + 10, (y + height) - 10, (x + width) - 10, y + 10);
-
-            g2d.dispose();
-        }
-
-        @Override
-        public int getIconWidth() {
-            return width;
-        }
-
-        @Override
-        public int getIconHeight() {
-            return height;
         }
     }
 

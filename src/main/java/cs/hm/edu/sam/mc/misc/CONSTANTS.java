@@ -15,9 +15,8 @@ public class CONSTANTS {
     public final static String ICON_DIR = "/icons/";
     public final static String IMAGE_DIR_FILE = "./src/main/resources" + IMAGE_DIR;
     public final static String REPORT_DIR_FILE = "./src/main/resources" + REPORT_DIR;
-
+    public final static String GPS_TABLE_LOG = "./src/main/resources/gpsTable.log";
     public final static String REST_MP = "http://localhost:8000/MissionPlannerService";
-
     public final static int GET_CURRENT_POSITION_DELAY = 2000;
 
 }
