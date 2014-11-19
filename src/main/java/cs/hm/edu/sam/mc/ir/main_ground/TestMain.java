@@ -37,9 +37,45 @@ public class TestMain extends Thread {
      */
     public static void main(String[] args) {
 
-        StaticIRComponent test = new StaticIRComponent();
-
        
+        
+//      startTestFlight();
+
+    	testAirConnection();
+    	
+
+    	
+
+    }
+
+    
+    
+    
+    
+    
+    private static void testAirConnection() {
+        new GroundAirSubscriber("A", 0, new String[] {"A"}).start();
+        new GroundAirSubscriber("B - Lagger",2000, new String[] {"B"}).start();
+        new GroundAirSubscriber("A&B", 0, new String[] {"A", "B"}).start();
+
+        new GroundAirPublisher("0").start();
+
+//        //ZMQ.Socket request = MyActivity.context.socket(ZMQ.REQ);
+//        request.connect("tcp://localhost:12346");
+//
+//        for(int requestNumber = 0; requestNumber < 10; requestNumber++) {
+//            request.send("Hello");
+//            Log.d("JEROMQ", "Answer: " + request.recvStr());		
+	}
+
+
+
+
+
+
+	private static void startTestFlight() {
+    	 StaticIRComponent test = new StaticIRComponent();
+    	 
         // Target Location
         double latTest = 48.50000000000;
         double lngTest = 11.50000000000;
@@ -54,9 +90,15 @@ public class TestMain extends Thread {
         // Task starten
         test.startMission();
 
-    }
+		
+	}
 
-    /*
+
+
+
+
+
+	/*
      * (non-Javadoc) Flug Simulation
      */
     @Override
