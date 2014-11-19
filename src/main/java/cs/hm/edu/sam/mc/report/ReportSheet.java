@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
+import javax.swing.Box;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.Icon;
@@ -91,6 +92,9 @@ public class ReportSheet extends JInternalFrame {
 
         final JLabel lblLatitude = new JLabel("Latitude:");
 
+        buttonBar.add(Box.createGlue());
+        buttonBar.add(Box.createGlue());
+
         txtNumber = new JTextField();
         txtNumber.setColumns(10);
 
@@ -139,298 +143,305 @@ public class ReportSheet extends JInternalFrame {
         final JLabel lblFileName = new JLabel("File Name:");
 
         final JLabel lblAmplifyingText = new JLabel("Amplifying Text:");
+
+        final JButton btnSave = new JButton("save");
         final GroupLayout groupLayout = new GroupLayout(getContentPane());
         groupLayout
-        .setHorizontalGroup(groupLayout
-                .createParallelGroup(Alignment.LEADING)
-                .addGroup(
-                        groupLayout
-                        .createSequentialGroup()
-                        .addContainerGap()
+                .setHorizontalGroup(groupLayout
+                        .createParallelGroup(Alignment.LEADING)
                         .addGroup(
                                 groupLayout
-                                .createParallelGroup(Alignment.LEADING)
-                                .addComponent(buttonBar,
-                                        GroupLayout.DEFAULT_SIZE, 464,
-                                        Short.MAX_VALUE)
-                                        .addComponent(panel, Alignment.TRAILING,
-                                                GroupLayout.DEFAULT_SIZE, 464,
-                                                Short.MAX_VALUE)
-                                                .addGroup(
-                                                        groupLayout
-                                                        .createSequentialGroup()
+                                        .createSequentialGroup()
+                                        .addContainerGap()
+                                        .addGroup(
+                                                groupLayout
+                                                        .createParallelGroup(Alignment.LEADING)
+                                                        .addComponent(buttonBar,
+                                                                GroupLayout.DEFAULT_SIZE, 464,
+                                                                Short.MAX_VALUE)
+                                                        .addComponent(panel, Alignment.TRAILING,
+                                                                GroupLayout.DEFAULT_SIZE, 464,
+                                                                Short.MAX_VALUE)
                                                         .addGroup(
                                                                 groupLayout
-                                                                .createParallelGroup(
-                                                                        Alignment.LEADING)
-                                                                        .addComponent(
-                                                                                photographLabel,
-                                                                                GroupLayout.PREFERRED_SIZE,
-                                                                                232,
-                                                                                GroupLayout.PREFERRED_SIZE)
-                                                                                .addComponent(
-                                                                                        lblFileName))
-                                                                                        .addPreferredGap(
-                                                                                                ComponentPlacement.UNRELATED)
-                                                                                                .addGroup(
-                                                                                                        groupLayout
-                                                                                                        .createParallelGroup(
-                                                                                                                Alignment.LEADING)
-                                                                                                                .addGroup(
-                                                                                                                        Alignment.TRAILING,
-                                                                                                                        groupLayout
-                                                                                                                        .createSequentialGroup()
-                                                                                                                        .addGroup(
-                                                                                                                                groupLayout
-                                                                                                                                .createParallelGroup(
-                                                                                                                                        Alignment.LEADING)
-                                                                                                                                        .addComponent(
-                                                                                                                                                lblAlphanumericColor)
-                                                                                                                                                .addComponent(
-                                                                                                                                                        lblAlphanumeric)
-                                                                                                                                                        .addComponent(
-                                                                                                                                                                lblColor)
-                                                                                                                                                                .addComponent(
-                                                                                                                                                                        lblNewLabel)
-                                                                                                                                                                        .addComponent(
-                                                                                                                                                                                lblOrientation)
-                                                                                                                                                                                .addComponent(
-                                                                                                                                                                                        lblLongitude)
-                                                                                                                                                                                        .addComponent(
-                                                                                                                                                                                                lblLatitude)
-                                                                                                                                                                                                .addComponent(
-                                                                                                                                                                                                        lblType)
-                                                                                                                                                                                                        .addComponent(
-                                                                                                                                                                                                                lblNumber))
-                                                                                                                                                                                                                .addPreferredGap(
-                                                                                                                                                                                                                        ComponentPlacement.RELATED)
-                                                                                                                                                                                                                        .addGroup(
-                                                                                                                                                                                                                                groupLayout
-                                                                                                                                                                                                                                .createParallelGroup(
-                                                                                                                                                                                                                                        Alignment.LEADING)
-                                                                                                                                                                                                                                        .addComponent(
-                                                                                                                                                                                                                                                txtNumber,
-                                                                                                                                                                                                                                                GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                121,
-                                                                                                                                                                                                                                                Short.MAX_VALUE)
-                                                                                                                                                                                                                                                .addComponent(
-                                                                                                                                                                                                                                                        txtType,
-                                                                                                                                                                                                                                                        GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                        121,
-                                                                                                                                                                                                                                                        Short.MAX_VALUE)
-                                                                                                                                                                                                                                                        .addComponent(
-                                                                                                                                                                                                                                                                txtLatitude,
-                                                                                                                                                                                                                                                                GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                                121,
-                                                                                                                                                                                                                                                                Short.MAX_VALUE)
-                                                                                                                                                                                                                                                                .addComponent(
-                                                                                                                                                                                                                                                                        txtLongitude,
-                                                                                                                                                                                                                                                                        GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                                        121,
-                                                                                                                                                                                                                                                                        Short.MAX_VALUE)
-                                                                                                                                                                                                                                                                        .addComponent(
-                                                                                                                                                                                                                                                                                txtOrientation,
-                                                                                                                                                                                                                                                                                GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                                                121,
-                                                                                                                                                                                                                                                                                Short.MAX_VALUE)
-                                                                                                                                                                                                                                                                                .addComponent(
-                                                                                                                                                                                                                                                                                        txtShape,
-                                                                                                                                                                                                                                                                                        GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                                                        121,
-                                                                                                                                                                                                                                                                                        Short.MAX_VALUE)
-                                                                                                                                                                                                                                                                                        .addComponent(
-                                                                                                                                                                                                                                                                                                txtColor,
-                                                                                                                                                                                                                                                                                                GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                                                                121,
-                                                                                                                                                                                                                                                                                                Short.MAX_VALUE)
-                                                                                                                                                                                                                                                                                                .addComponent(
-                                                                                                                                                                                                                                                                                                        txtAlphanumeric,
-                                                                                                                                                                                                                                                                                                        GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                                                                        121,
-                                                                                                                                                                                                                                                                                                        Short.MAX_VALUE)
-                                                                                                                                                                                                                                                                                                        .addComponent(
-                                                                                                                                                                                                                                                                                                                txtAlphanumericColor,
-                                                                                                                                                                                                                                                                                                                GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                                                                                121,
-                                                                                                                                                                                                                                                                                                                Short.MAX_VALUE)))
-                                                                                                                                                                                                                                                                                                                .addComponent(
-                                                                                                                                                                                                                                                                                                                        txtFileName,
-                                                                                                                                                                                                                                                                                                                        Alignment.TRAILING,
-                                                                                                                                                                                                                                                                                                                        GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                                                                                        222,
-                                                                                                                                                                                                                                                                                                                        Short.MAX_VALUE)))
-                                                                                                                                                                                                                                                                                                                        .addGroup(
-                                                                                                                                                                                                                                                                                                                                groupLayout
-                                                                                                                                                                                                                                                                                                                                .createSequentialGroup()
-                                                                                                                                                                                                                                                                                                                                .addComponent(
-                                                                                                                                                                                                                                                                                                                                        lblAmplifyingText)
-                                                                                                                                                                                                                                                                                                                                        .addPreferredGap(
-                                                                                                                                                                                                                                                                                                                                                ComponentPlacement.UNRELATED)
-                                                                                                                                                                                                                                                                                                                                                .addComponent(
-                                                                                                                                                                                                                                                                                                                                                        txtAmplifyingText,
-                                                                                                                                                                                                                                                                                                                                                        GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                                                                                                                        376,
-                                                                                                                                                                                                                                                                                                                                                        Short.MAX_VALUE)))
-                                                                                                                                                                                                                                                                                                                                                        .addContainerGap()));
-        groupLayout
-        .setVerticalGroup(groupLayout
-                .createParallelGroup(Alignment.LEADING)
-                .addGroup(
-                        groupLayout
-                        .createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(buttonBar, GroupLayout.PREFERRED_SIZE, 28,
-                                GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addGroup(
-                                        groupLayout
-                                        .createParallelGroup(Alignment.LEADING,
-                                                false)
-                                                .addGroup(
-                                                        groupLayout
-                                                        .createSequentialGroup()
-                                                        .addGroup(
-                                                                groupLayout
-                                                                .createParallelGroup(
-                                                                        Alignment.BASELINE)
-                                                                        .addComponent(
-                                                                                lblNumber)
-                                                                                .addComponent(
-                                                                                        txtNumber,
-                                                                                        GroupLayout.PREFERRED_SIZE,
-                                                                                        GroupLayout.DEFAULT_SIZE,
-                                                                                        GroupLayout.PREFERRED_SIZE))
-                                                                                        .addPreferredGap(
-                                                                                                ComponentPlacement.RELATED)
-                                                                                                .addGroup(
-                                                                                                        groupLayout
-                                                                                                        .createParallelGroup(
-                                                                                                                Alignment.BASELINE)
-                                                                                                                .addComponent(
-                                                                                                                        txtType,
-                                                                                                                        GroupLayout.PREFERRED_SIZE,
-                                                                                                                        GroupLayout.DEFAULT_SIZE,
-                                                                                                                        GroupLayout.PREFERRED_SIZE)
+                                                                        .createSequentialGroup()
+                                                                        .addGroup(
+                                                                                groupLayout
+                                                                                        .createParallelGroup(
+                                                                                                Alignment.LEADING,
+                                                                                                false)
+                                                                                        .addGroup(
+                                                                                                groupLayout
+                                                                                                        .createSequentialGroup()
+                                                                                                        .addComponent(
+                                                                                                                lblAmplifyingText)
+                                                                                                        .addPreferredGap(
+                                                                                                                ComponentPlacement.UNRELATED)
+                                                                                                        .addComponent(
+                                                                                                                txtAmplifyingText))
+                                                                                        .addGroup(
+                                                                                                groupLayout
+                                                                                                        .createSequentialGroup()
+                                                                                                        .addComponent(
+                                                                                                                lblFileName)
+                                                                                                        .addPreferredGap(
+                                                                                                                ComponentPlacement.RELATED,
+                                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                                Short.MAX_VALUE)
+                                                                                                        .addComponent(
+                                                                                                                txtFileName,
+                                                                                                                GroupLayout.PREFERRED_SIZE,
+                                                                                                                251,
+                                                                                                                GroupLayout.PREFERRED_SIZE))
+                                                                                        .addGroup(
+                                                                                                groupLayout
+                                                                                                        .createSequentialGroup()
+                                                                                                        .addComponent(
+                                                                                                                photographLabel,
+                                                                                                                GroupLayout.PREFERRED_SIZE,
+                                                                                                                232,
+                                                                                                                GroupLayout.PREFERRED_SIZE)
+                                                                                                        .addPreferredGap(
+                                                                                                                ComponentPlacement.UNRELATED)
+                                                                                                        .addGroup(
+                                                                                                                groupLayout
+                                                                                                                        .createParallelGroup(
+                                                                                                                                Alignment.LEADING)
                                                                                                                         .addComponent(
-                                                                                                                                lblType))
-                                                                                                                                .addPreferredGap(
-                                                                                                                                        ComponentPlacement.RELATED)
-                                                                                                                                        .addGroup(
-                                                                                                                                                groupLayout
-                                                                                                                                                .createParallelGroup(
-                                                                                                                                                        Alignment.BASELINE)
-                                                                                                                                                        .addComponent(
-                                                                                                                                                                txtLatitude,
-                                                                                                                                                                GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                                GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                GroupLayout.PREFERRED_SIZE)
-                                                                                                                                                                .addComponent(
-                                                                                                                                                                        lblLatitude))
-                                                                                                                                                                        .addPreferredGap(
-                                                                                                                                                                                ComponentPlacement.RELATED)
-                                                                                                                                                                                .addGroup(
-                                                                                                                                                                                        groupLayout
-                                                                                                                                                                                        .createParallelGroup(
-                                                                                                                                                                                                Alignment.BASELINE)
-                                                                                                                                                                                                .addComponent(
-                                                                                                                                                                                                        lblLongitude)
-                                                                                                                                                                                                        .addComponent(
-                                                                                                                                                                                                                txtLongitude,
-                                                                                                                                                                                                                GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                                                                                GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                GroupLayout.PREFERRED_SIZE))
-                                                                                                                                                                                                                .addPreferredGap(
-                                                                                                                                                                                                                        ComponentPlacement.RELATED)
-                                                                                                                                                                                                                        .addGroup(
-                                                                                                                                                                                                                                groupLayout
-                                                                                                                                                                                                                                .createParallelGroup(
-                                                                                                                                                                                                                                        Alignment.BASELINE)
-                                                                                                                                                                                                                                        .addComponent(
-                                                                                                                                                                                                                                                txtOrientation,
-                                                                                                                                                                                                                                                GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                                                                                                                GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                GroupLayout.PREFERRED_SIZE)
-                                                                                                                                                                                                                                                .addComponent(
-                                                                                                                                                                                                                                                        lblOrientation))
-                                                                                                                                                                                                                                                        .addPreferredGap(
-                                                                                                                                                                                                                                                                ComponentPlacement.RELATED)
-                                                                                                                                                                                                                                                                .addGroup(
-                                                                                                                                                                                                                                                                        groupLayout
-                                                                                                                                                                                                                                                                        .createParallelGroup(
-                                                                                                                                                                                                                                                                                Alignment.BASELINE)
-                                                                                                                                                                                                                                                                                .addComponent(
-                                                                                                                                                                                                                                                                                        txtShape,
-                                                                                                                                                                                                                                                                                        GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                                                                                                                                                        GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                                                        GroupLayout.PREFERRED_SIZE)
-                                                                                                                                                                                                                                                                                        .addComponent(
-                                                                                                                                                                                                                                                                                                lblNewLabel))
-                                                                                                                                                                                                                                                                                                .addPreferredGap(
-                                                                                                                                                                                                                                                                                                        ComponentPlacement.RELATED)
-                                                                                                                                                                                                                                                                                                        .addGroup(
-                                                                                                                                                                                                                                                                                                                groupLayout
-                                                                                                                                                                                                                                                                                                                .createParallelGroup(
-                                                                                                                                                                                                                                                                                                                        Alignment.BASELINE)
-                                                                                                                                                                                                                                                                                                                        .addComponent(
-                                                                                                                                                                                                                                                                                                                                txtColor,
-                                                                                                                                                                                                                                                                                                                                GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                                                                                                                                                                                                GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                                                                                                GroupLayout.PREFERRED_SIZE)
-                                                                                                                                                                                                                                                                                                                                .addComponent(
-                                                                                                                                                                                                                                                                                                                                        lblColor))
-                                                                                                                                                                                                                                                                                                                                        .addPreferredGap(
-                                                                                                                                                                                                                                                                                                                                                ComponentPlacement.RELATED)
-                                                                                                                                                                                                                                                                                                                                                .addGroup(
-                                                                                                                                                                                                                                                                                                                                                        groupLayout
-                                                                                                                                                                                                                                                                                                                                                        .createParallelGroup(
-                                                                                                                                                                                                                                                                                                                                                                Alignment.BASELINE)
-                                                                                                                                                                                                                                                                                                                                                                .addComponent(
-                                                                                                                                                                                                                                                                                                                                                                        txtAlphanumeric,
-                                                                                                                                                                                                                                                                                                                                                                        GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                                                                                                                                                                                                                                        GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                                                                                                                                        GroupLayout.PREFERRED_SIZE)
-                                                                                                                                                                                                                                                                                                                                                                        .addComponent(
-                                                                                                                                                                                                                                                                                                                                                                                lblAlphanumeric))
-                                                                                                                                                                                                                                                                                                                                                                                .addPreferredGap(
-                                                                                                                                                                                                                                                                                                                                                                                        ComponentPlacement.RELATED)
-                                                                                                                                                                                                                                                                                                                                                                                        .addGroup(
-                                                                                                                                                                                                                                                                                                                                                                                                groupLayout
-                                                                                                                                                                                                                                                                                                                                                                                                .createParallelGroup(
-                                                                                                                                                                                                                                                                                                                                                                                                        Alignment.BASELINE)
-                                                                                                                                                                                                                                                                                                                                                                                                        .addComponent(
-                                                                                                                                                                                                                                                                                                                                                                                                                txtAlphanumericColor,
-                                                                                                                                                                                                                                                                                                                                                                                                                GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                                                                                                                                                                                                                                                                                GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                                                                                                                                                                                GroupLayout.PREFERRED_SIZE)
-                                                                                                                                                                                                                                                                                                                                                                                                                .addComponent(
-                                                                                                                                                                                                                                                                                                                                                                                                                        lblAlphanumericColor)))
-                                                                                                                                                                                                                                                                                                                                                                                                                        .addComponent(photographLabel,
-                                                                                                                                                                                                                                                                                                                                                                                                                                GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                                                                                                                                                                                                GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                                                                                                                                                                                                Short.MAX_VALUE))
-                                                                                                                                                                                                                                                                                                                                                                                                                                .addPreferredGap(ComponentPlacement.RELATED)
-                                                                                                                                                                                                                                                                                                                                                                                                                                .addGroup(
-                                                                                                                                                                                                                                                                                                                                                                                                                                        groupLayout
-                                                                                                                                                                                                                                                                                                                                                                                                                                        .createParallelGroup(Alignment.BASELINE)
-                                                                                                                                                                                                                                                                                                                                                                                                                                        .addComponent(txtFileName,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                GroupLayout.PREFERRED_SIZE)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                .addComponent(lblFileName))
-                                                                                                                                                                                                                                                                                                                                                                                                                                                .addPreferredGap(ComponentPlacement.RELATED)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                .addGroup(
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        groupLayout
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        .createParallelGroup(Alignment.BASELINE)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        .addComponent(txtAmplifyingText,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                GroupLayout.PREFERRED_SIZE)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                .addComponent(lblAmplifyingText))
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                .addPreferredGap(ComponentPlacement.RELATED)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                .addComponent(panel, GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                        GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                        GroupLayout.PREFERRED_SIZE)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                        .addContainerGap(46, Short.MAX_VALUE)));
+                                                                                                                                lblAlphanumericColor)
+                                                                                                                        .addComponent(
+                                                                                                                                lblAlphanumeric)
+                                                                                                                        .addComponent(
+                                                                                                                                lblColor)
+                                                                                                                        .addComponent(
+                                                                                                                                lblNewLabel)
+                                                                                                                        .addComponent(
+                                                                                                                                lblOrientation)
+                                                                                                                        .addComponent(
+                                                                                                                                lblLongitude)
+                                                                                                                        .addComponent(
+                                                                                                                                lblLatitude)
+                                                                                                                        .addComponent(
+                                                                                                                                lblType)
+                                                                                                                        .addComponent(
+                                                                                                                                lblNumber))))
+                                                                        .addPreferredGap(
+                                                                                ComponentPlacement.RELATED)
+                                                                        .addGroup(
+                                                                                groupLayout
+                                                                                        .createParallelGroup(
+                                                                                                Alignment.LEADING)
+                                                                                        .addComponent(
+                                                                                                btnSave,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                119,
+                                                                                                Short.MAX_VALUE)
+                                                                                        .addComponent(
+                                                                                                txtNumber,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                119,
+                                                                                                Short.MAX_VALUE)
+                                                                                        .addComponent(
+                                                                                                txtType,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                119,
+                                                                                                Short.MAX_VALUE)
+                                                                                        .addComponent(
+                                                                                                txtLatitude,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                119,
+                                                                                                Short.MAX_VALUE)
+                                                                                        .addComponent(
+                                                                                                txtLongitude,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                119,
+                                                                                                Short.MAX_VALUE)
+                                                                                        .addComponent(
+                                                                                                txtOrientation,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                119,
+                                                                                                Short.MAX_VALUE)
+                                                                                        .addComponent(
+                                                                                                txtShape,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                119,
+                                                                                                Short.MAX_VALUE)
+                                                                                        .addComponent(
+                                                                                                txtColor,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                119,
+                                                                                                Short.MAX_VALUE)
+                                                                                        .addComponent(
+                                                                                                txtAlphanumeric,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                119,
+                                                                                                Short.MAX_VALUE)
+                                                                                        .addComponent(
+                                                                                                txtAlphanumericColor,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                119,
+                                                                                                Short.MAX_VALUE))))
+                                        .addContainerGap()));
+        groupLayout
+                .setVerticalGroup(groupLayout
+                        .createParallelGroup(Alignment.LEADING)
+                        .addGroup(
+                                groupLayout
+                                        .createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(buttonBar, GroupLayout.PREFERRED_SIZE, 28,
+                                                GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(ComponentPlacement.RELATED)
+                                        .addGroup(
+                                                groupLayout
+                                                        .createParallelGroup(Alignment.LEADING,
+                                                                false)
+                                                        .addGroup(
+                                                                groupLayout
+                                                                        .createSequentialGroup()
+                                                                        .addGroup(
+                                                                                groupLayout
+                                                                                        .createParallelGroup(
+                                                                                                Alignment.BASELINE)
+                                                                                        .addComponent(
+                                                                                                lblNumber)
+                                                                                        .addComponent(
+                                                                                                txtNumber,
+                                                                                                GroupLayout.PREFERRED_SIZE,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                GroupLayout.PREFERRED_SIZE))
+                                                                        .addPreferredGap(
+                                                                                ComponentPlacement.RELATED)
+                                                                        .addGroup(
+                                                                                groupLayout
+                                                                                        .createParallelGroup(
+                                                                                                Alignment.BASELINE)
+                                                                                        .addComponent(
+                                                                                                txtType,
+                                                                                                GroupLayout.PREFERRED_SIZE,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                GroupLayout.PREFERRED_SIZE)
+                                                                                        .addComponent(
+                                                                                                lblType))
+                                                                        .addPreferredGap(
+                                                                                ComponentPlacement.RELATED)
+                                                                        .addGroup(
+                                                                                groupLayout
+                                                                                        .createParallelGroup(
+                                                                                                Alignment.BASELINE)
+                                                                                        .addComponent(
+                                                                                                txtLatitude,
+                                                                                                GroupLayout.PREFERRED_SIZE,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                GroupLayout.PREFERRED_SIZE)
+                                                                                        .addComponent(
+                                                                                                lblLatitude))
+                                                                        .addPreferredGap(
+                                                                                ComponentPlacement.RELATED)
+                                                                        .addGroup(
+                                                                                groupLayout
+                                                                                        .createParallelGroup(
+                                                                                                Alignment.BASELINE)
+                                                                                        .addComponent(
+                                                                                                lblLongitude)
+                                                                                        .addComponent(
+                                                                                                txtLongitude,
+                                                                                                GroupLayout.PREFERRED_SIZE,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                GroupLayout.PREFERRED_SIZE))
+                                                                        .addPreferredGap(
+                                                                                ComponentPlacement.RELATED)
+                                                                        .addGroup(
+                                                                                groupLayout
+                                                                                        .createParallelGroup(
+                                                                                                Alignment.BASELINE)
+                                                                                        .addComponent(
+                                                                                                txtOrientation,
+                                                                                                GroupLayout.PREFERRED_SIZE,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                GroupLayout.PREFERRED_SIZE)
+                                                                                        .addComponent(
+                                                                                                lblOrientation))
+                                                                        .addPreferredGap(
+                                                                                ComponentPlacement.RELATED)
+                                                                        .addGroup(
+                                                                                groupLayout
+                                                                                        .createParallelGroup(
+                                                                                                Alignment.BASELINE)
+                                                                                        .addComponent(
+                                                                                                txtShape,
+                                                                                                GroupLayout.PREFERRED_SIZE,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                GroupLayout.PREFERRED_SIZE)
+                                                                                        .addComponent(
+                                                                                                lblNewLabel))
+                                                                        .addPreferredGap(
+                                                                                ComponentPlacement.RELATED)
+                                                                        .addGroup(
+                                                                                groupLayout
+                                                                                        .createParallelGroup(
+                                                                                                Alignment.BASELINE)
+                                                                                        .addComponent(
+                                                                                                txtColor,
+                                                                                                GroupLayout.PREFERRED_SIZE,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                GroupLayout.PREFERRED_SIZE)
+                                                                                        .addComponent(
+                                                                                                lblColor))
+                                                                        .addPreferredGap(
+                                                                                ComponentPlacement.RELATED)
+                                                                        .addGroup(
+                                                                                groupLayout
+                                                                                        .createParallelGroup(
+                                                                                                Alignment.BASELINE)
+                                                                                        .addComponent(
+                                                                                                txtAlphanumeric,
+                                                                                                GroupLayout.PREFERRED_SIZE,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                GroupLayout.PREFERRED_SIZE)
+                                                                                        .addComponent(
+                                                                                                lblAlphanumeric))
+                                                                        .addPreferredGap(
+                                                                                ComponentPlacement.RELATED)
+                                                                        .addGroup(
+                                                                                groupLayout
+                                                                                        .createParallelGroup(
+                                                                                                Alignment.BASELINE)
+                                                                                        .addComponent(
+                                                                                                txtAlphanumericColor,
+                                                                                                GroupLayout.PREFERRED_SIZE,
+                                                                                                GroupLayout.DEFAULT_SIZE,
+                                                                                                GroupLayout.PREFERRED_SIZE)
+                                                                                        .addComponent(
+                                                                                                lblAlphanumericColor)))
+                                                        .addComponent(photographLabel,
+                                                                GroupLayout.DEFAULT_SIZE,
+                                                                GroupLayout.DEFAULT_SIZE,
+                                                                Short.MAX_VALUE))
+                                        .addPreferredGap(ComponentPlacement.RELATED)
+                                        .addGroup(
+                                                groupLayout
+                                                        .createParallelGroup(Alignment.BASELINE)
+                                                        .addComponent(lblFileName)
+                                                        .addComponent(txtFileName,
+                                                                GroupLayout.PREFERRED_SIZE,
+                                                                GroupLayout.DEFAULT_SIZE,
+                                                                GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(btnSave))
+                                        .addPreferredGap(ComponentPlacement.RELATED)
+                                        .addGroup(
+                                                groupLayout
+                                                        .createParallelGroup(Alignment.BASELINE)
+                                                        .addComponent(txtAmplifyingText,
+                                                                GroupLayout.PREFERRED_SIZE,
+                                                                GroupLayout.DEFAULT_SIZE,
+                                                                GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(lblAmplifyingText))
+                                        .addPreferredGap(ComponentPlacement.RELATED)
+                                        .addComponent(panel, GroupLayout.PREFERRED_SIZE,
+                                                GroupLayout.DEFAULT_SIZE,
+                                                GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap(46, Short.MAX_VALUE)));
 
         final JButton btnCreate = new JButton("create");
 
@@ -441,43 +452,49 @@ public class ReportSheet extends JInternalFrame {
         final JProgressBar progressBar = new JProgressBar(0, 100);
 
         final JButton btnOpen = new JButton("open");
+        btnOpen.setEnabled(false);
         final GroupLayout gl_panel = new GroupLayout(panel);
         gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(
                 gl_panel.createSequentialGroup()
-                .addGroup(
-                        gl_panel.createParallelGroup(Alignment.LEADING)
                         .addGroup(
-                                gl_panel.createSequentialGroup()
-                                .addComponent(lblReportsheet).addGap(78)
-                                .addComponent(btnCreate))
-                                .addComponent(lblStatus)
-                                .addGroup(
-                                        Alignment.TRAILING,
-                                        gl_panel.createSequentialGroup()
-                                        .addComponent(progressBar,
-                                                GroupLayout.DEFAULT_SIZE, 391,
-                                                Short.MAX_VALUE)
-                                                .addPreferredGap(
-                                                        ComponentPlacement.UNRELATED)
+                                gl_panel.createParallelGroup(Alignment.LEADING)
+                                        .addGroup(
+                                                gl_panel.createSequentialGroup()
+                                                        .addComponent(lblReportsheet).addGap(78)
+                                                        .addComponent(btnCreate))
+                                        .addComponent(lblStatus)
+                                        .addGroup(
+                                                Alignment.TRAILING,
+                                                gl_panel.createSequentialGroup()
+                                                        .addComponent(progressBar,
+                                                                GroupLayout.DEFAULT_SIZE, 391,
+                                                                Short.MAX_VALUE)
+                                                        .addPreferredGap(
+                                                                ComponentPlacement.UNRELATED)
                                                         .addComponent(btnOpen))).addContainerGap()));
         gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(
                 gl_panel.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(
-                        gl_panel.createParallelGroup(Alignment.BASELINE)
-                        .addComponent(lblReportsheet).addComponent(btnCreate))
+                        .addContainerGap()
+                        .addGroup(
+                                gl_panel.createParallelGroup(Alignment.BASELINE)
+                                        .addComponent(lblReportsheet).addComponent(btnCreate))
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addComponent(lblStatus)
                         .addPreferredGap(ComponentPlacement.RELATED)
                         .addGroup(
                                 gl_panel.createParallelGroup(Alignment.LEADING)
-                                .addComponent(btnOpen)
-                                .addComponent(progressBar, GroupLayout.DEFAULT_SIZE,
-                                        GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addContainerGap()));
+                                        .addComponent(btnOpen)
+                                        .addComponent(progressBar, GroupLayout.DEFAULT_SIZE,
+                                                GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()));
         panel.setLayout(gl_panel);
         getContentPane().setLayout(groupLayout);
-
+        try {
+            createImageIconList();
+        } catch (final Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @SuppressWarnings("unused")
@@ -612,10 +629,9 @@ public class ReportSheet extends JInternalFrame {
          */
         @Override
         public void actionPerformed(final ActionEvent e) {
-
             photographLabel.setIcon(displayPhoto);
-            setTitle("Image Viewer: " + getValue(SHORT_DESCRIPTION).toString());
-            // txtPath.setText(filePath);
+            setTitle("ReportSheet: " + getValue(SHORT_DESCRIPTION).toString());
+            txtFileName.setText(getValue(SHORT_DESCRIPTION).toString());
         }
     }
 }
