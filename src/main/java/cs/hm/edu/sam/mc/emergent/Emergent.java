@@ -62,19 +62,23 @@ public class Emergent extends JInternalFrame implements GUIInterface {
 		double latitude = 0;
 		switch (task){
 		case EMERGENT:
-			longitude= Double.parseDouble(txtEmergentLongitude.getText().trim());
-			latitude= Double.parseDouble(txtEmergentLatitude.getText().trim());
-			emergentTask.calcWaypoints(longitude , latitude);
+			if(!isEmpty(txtEmergentLongitude.getText().trim()) && !isEmpty(txtEmergentLatitude.getText().trim())){
+				longitude= Double.parseDouble(txtEmergentLongitude.getText().trim());
+				latitude= Double.parseDouble(txtEmergentLatitude.getText().trim());
+				emergentTask.calcWaypoints(longitude , latitude);
+			}
 		}
 	}
 	
 	private void addWPtoSearchArea() {
-		double longitude = Double.parseDouble(txtLongSA.getText().trim());
-		double latitude = Double.parseDouble(txtLatSA.getText().trim());
-		emergentTask.addEmergentSearchAreaWP(longitude, latitude);	
-		refreshEmergentSearchAreaList();
-		System.out.println(listModel.getSize()-1);
-		printConsole("BlaaaaBlubb");
+		if(!isEmpty(txtLongSA.getText().trim()) && !isEmpty(txtLatSA.getText().trim())){
+			double longitude = Double.parseDouble(txtLongSA.getText().trim());
+			double latitude = Double.parseDouble(txtLatSA.getText().trim());
+			emergentTask.addEmergentSearchAreaWP(longitude, latitude);	
+			refreshEmergentSearchAreaList();
+			System.out.println(listModel.getSize()-1);
+			printConsole("BlaaaaBlubb");
+		}
 	}
 	
 	private void startTask(TasksEnum tastToStart){
@@ -87,6 +91,10 @@ public class Emergent extends JInternalFrame implements GUIInterface {
 
 	}
 	
+	
+	private boolean isEmpty(String txt){
+		return txt.equals("");
+	}
 	
 	private void refreshEmergentSearchAreaList(){
 		List<Location> saList = emergentTask.getEmergentSearchArea();
@@ -104,7 +112,7 @@ public class Emergent extends JInternalFrame implements GUIInterface {
 	 */
 	public Emergent() {
 		
-		setTitle("IR AND EMERGENT TASKS");
+		setTitle("TASK: EMERGENT TARGET");
 		setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
         setClosable(true);
         setResizable(true);
