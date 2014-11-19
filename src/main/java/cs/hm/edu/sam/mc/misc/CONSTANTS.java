@@ -11,8 +11,10 @@ package cs.hm.edu.sam.mc.misc;
 public class CONSTANTS {
 
     public final static String IMAGE_DIR = "/images/";
+    public final static String REPORT_DIR = "/images/report/";
     public final static String ICON_DIR = "/icons/";
     public final static String IMAGE_DIR_FILE = "./src/main/resources" + IMAGE_DIR;
+    public final static String REPORT_DIR_FILE = "./src/main/resources" + REPORT_DIR;
 
     public final static String REST_MP = "http://localhost:8000/MissionPlannerService";
 
