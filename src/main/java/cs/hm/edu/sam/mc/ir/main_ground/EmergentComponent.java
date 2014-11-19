@@ -3,6 +3,7 @@ package cs.hm.edu.sam.mc.ir.main_ground;
 import java.util.ArrayList;
 import java.util.List;
 
+import cs.hm.edu.sam.mc.ir.Ir;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.EmergentGuiInterface;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.TasksEnum;
 import cs.hm.edu.sam.mc.misc.Location;
@@ -21,6 +22,11 @@ public class EmergentComponent extends GroundComponent implements EmergentGuiInt
     private Location emerTargetLastKnownPosition = null;
     private boolean taskActive = false;
 
+    
+    public EmergentComponent(Ir gui) {
+		super(gui);
+	}
+    
     @Override
     public void calcWaypoints(double longitude, double latitude) {
         emerTargetLastKnownPosition = new Location(longitude, latitude, EMERGENT_ALT);

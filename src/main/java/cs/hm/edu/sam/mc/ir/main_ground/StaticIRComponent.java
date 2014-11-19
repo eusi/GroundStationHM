@@ -6,6 +6,7 @@ package cs.hm.edu.sam.mc.ir.main_ground;
 import java.util.ArrayList;
 import java.util.List;
 
+import cs.hm.edu.sam.mc.ir.Ir;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.StaticGuiInterface;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.TasksEnum;
 import cs.hm.edu.sam.mc.misc.Location;
@@ -21,6 +22,11 @@ public class StaticIRComponent extends GroundComponent implements StaticGuiInter
     private Location statTargetLoc = null;
     private boolean taskActive = false;
 
+    
+    public StaticIRComponent(Ir gui) {
+		super(gui);
+	}
+    
     // Groundcomponent GUI Interface, Button "Wegpunkte berechnen" etc.
     // Entrypoint
     @Override
@@ -65,35 +71,47 @@ public class StaticIRComponent extends GroundComponent implements StaticGuiInter
     private void flyRoute() {
 
         // 1/8 Sekunde = 125ms warten
+    	
 
         long sleepTime = (long) GroundComponent.STATIC_REFRESH_TIME * 1000;
 
+        
+        
         for (int i = 0; i < calculatedStatWaypoints.size(); i++) {
 
-            // Ersten abzufliegenden Waypoint aus Liste holen, solange prüfen,
-            // bis erreicht, dann entfernen
-            Location locToCompute = calculatedStatWaypoints.get(i);
+            // Ersten abzufliegenden Waypoint aus Liste holen, solange Fotos im Radius machen bis verlassen, dann entfernen
+            
+        	Location locToCompute = calculatedStatWaypoints.get(i);
+            boolean isInWPRadius = isDroneAtWaypoint(locToCompute, TasksEnum.IRSTATIC);
 
-            boolean isAtWaypoint = isDroneAtWaypoint(locToCompute, TasksEnum.IRSTATIC);
-
-            while (!isAtWaypoint) {
-
-                isAtWaypoint = isDroneAtWaypoint(locToCompute, TasksEnum.IRSTATIC);
-                System.out.println("Drohne ist NICHT an static Waypoint ODER Foto bereits geschossen: "+ locToCompute.toString() );
+            while(!isInWPRadius) {
+            	
+            	try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            	isInWPRadius = isDroneAtWaypoint(locToCompute, TasksEnum.IRSTATIC);
             }
-
-            // ----------------
-            // HIER FOTOS MACHEN !!!!!!!!
-            System.out.println("Drohne ist an static Waypoint, FOTO: >>>>>>>>>> "+ locToCompute.toString()+ "  "+locToCompute.getLat());
-            takeInfraredPhoto();
-            super.takeNormalPhoto();
-            // ---------------
-
-            // Delay für Waypoint Check
-            try {
-                Thread.sleep(sleepTime);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            
+          //Fotos 8,7 Hz -> 8 Fotos /Sek
+            while (isInWPRadius) {
+            	
+                takeInfraredPhoto();
+                super.takeNormalPhoto();
+            	
+            	try {
+					Thread.sleep(1000/8);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                
+                
+                System.out.println("Drohne ist innerhalb von Waypoint: "+ locToCompute.toString()+" ----> FOTO");
+                isInWPRadius = isDroneAtWaypoint(locToCompute, TasksEnum.IRSTATIC);
+ 
             }
 
         }

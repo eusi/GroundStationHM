@@ -3,7 +3,6 @@ package cs.hm.edu.sam.mc.ir;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -55,9 +54,9 @@ public class Ir extends JInternalFrame implements GUIInterface {
 	private JScrollPane scrollPaneConsole;
 	private JButton btnOnboardUnit = new JButton("Onboard Unit");
 	
-	private  StaticGuiInterface staticIRTask =  new StaticIRComponent();
-	private  DynamicGuiInterface dynamicIRTask = new DynamicIRComponent();
-	private  EmergentGuiInterface emergentTask = new EmergentComponent();
+	private  StaticGuiInterface staticIRTask =  new StaticIRComponent(this);
+	private  DynamicGuiInterface dynamicIRTask = new DynamicIRComponent(this);
+	private  EmergentGuiInterface emergentTask = new EmergentComponent(this);
 	private final JPanel panel = new JPanel();
 	
 
