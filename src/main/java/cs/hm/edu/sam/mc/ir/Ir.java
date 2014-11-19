@@ -53,8 +53,8 @@ public class Ir extends JInternalFrame implements GUIInterface {
 	private JButton btnOnboardUnit = new JButton("Onboard Unit");
 	private JList<String> lstConsole = new JList<String>(listModelConsole);
 	
-	private  StaticGuiInterface staticIRTask =  new StaticIRComponent();
-	private  DynamicGuiInterface dynamicIRTask = new DynamicIRComponent();
+	private  StaticGuiInterface staticIRTask =  new StaticIRComponent(this);
+	private  DynamicGuiInterface dynamicIRTask = new DynamicIRComponent(this);
 	private final JPanel panel = new JPanel();
 	
 	

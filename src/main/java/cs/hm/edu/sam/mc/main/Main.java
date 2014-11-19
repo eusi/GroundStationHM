@@ -21,15 +21,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-<<<<<<< HEAD
 import cs.hm.edu.sam.mc.emergent.Emergent;
-=======
-import cs.hm.edu.sam.mc.airdrop.Airdrop;
-import cs.hm.edu.sam.mc.emergency.Emergency;
->>>>>>> 28e68bc0f03b229e9c656b8e28a4d2a78213a2af
 import cs.hm.edu.sam.mc.gpsTable.GPSViewer;
 import cs.hm.edu.sam.mc.gpsTable.GpsTable;
 import cs.hm.edu.sam.mc.images.ImageViewer;
@@ -40,7 +36,6 @@ import cs.hm.edu.sam.mc.options.Options;
 import cs.hm.edu.sam.mc.report.ReportSheet;
 import cs.hm.edu.sam.mc.rest.RESTClient;
 import cs.hm.edu.sam.mc.routing.Routing;
-import cs.hm.edu.sam.mc.searchArea.SearchArea;
 import cs.hm.edu.sam.mc.sric.SRIC;
 
 /**
@@ -66,8 +61,6 @@ public class Main extends JFrame {
     private Ir ir;
     private Emergent emergency;
     private GPSViewer gpsviewer;
-    private SearchArea searchArea;
-    private Airdrop airdrop;
     private Options options;
     private ImageViewer imageViewer;
     private JDesktopPane desktopPane;
@@ -76,8 +69,6 @@ public class Main extends JFrame {
     private JCheckBoxMenuItem mntmLocation;
     private JMenuItem mntmOptions;
     private JMenuItem mntmExit;
-    private JButton btnSearchArea;
-    private JButton btnAirdrop;
 
     /**
      * Launch the application.
@@ -156,21 +147,20 @@ public class Main extends JFrame {
         desktopPane = new JDesktopPane();
         desktopPane.setBackground(SystemColor.activeCaption);
         final GroupLayout gl_contentPane = new GroupLayout(contentPane);
-        gl_contentPane.setHorizontalGroup(
-          gl_contentPane.createParallelGroup(Alignment.LEADING)
-            .addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 1014, Short.MAX_VALUE)
-            .addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-              .addGap(53)
-              .addComponent(desktopPane, GroupLayout.DEFAULT_SIZE, 1014, Short.MAX_VALUE)
-              .addContainerGap())
-        );
-        gl_contentPane.setVerticalGroup(
-          gl_contentPane.createParallelGroup(Alignment.LEADING)
-            .addGroup(gl_contentPane.createSequentialGroup()
-              .addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-              .addGap(12)
-              .addComponent(desktopPane, GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE))
-        );
+        gl_contentPane.setHorizontalGroup(gl_contentPane
+                .createParallelGroup(Alignment.LEADING)
+                .addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
+                .addComponent(desktopPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 774,
+                        Short.MAX_VALUE));
+        gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(
+                        gl_contentPane
+                        .createSequentialGroup()
+                        .addComponent(toolBar, GroupLayout.PREFERRED_SIZE,
+                                GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(ComponentPlacement.UNRELATED)
+                                .addComponent(desktopPane, GroupLayout.DEFAULT_SIZE, 479,
+                                        Short.MAX_VALUE)));
         final GroupLayout gl_desktopPane = new GroupLayout(desktopPane);
         gl_desktopPane.setHorizontalGroup(gl_desktopPane.createParallelGroup(Alignment.LEADING)
                 .addGap(0, 615, Short.MAX_VALUE));
@@ -210,16 +200,6 @@ public class Main extends JFrame {
         btnGPStable.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR
                 + "gps_icon.png")));
         toolBar.add(btnGPStable);
-        
-        btnSearchArea = new JButton("SearchArea");
-        btnSearchArea.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR
-            + "gps_icon.png")));
-        toolBar.add(btnSearchArea);
-        
-        btnAirdrop = new JButton("AirDrop");
-        btnAirdrop.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR
-            + "gps_icon.png")));
-        toolBar.add(btnAirdrop);
 
         contentPane.setLayout(gl_contentPane);
     }
@@ -329,36 +309,6 @@ public class Main extends JFrame {
                 }
             }
         });
-        
-        btnAirdrop.addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent arg0) {
-              if (airdrop == null) {
-                airdrop = new Airdrop(); // only one instance of this
-                  desktopPane.add(airdrop);
-                  airdrop.show();
-              } else if (!airdrop.isVisible()) {
-                airdrop.setVisible(true);
-              } else {
-                airdrop.moveToFront();
-              }
-          }
-      });
-        
-        btnSearchArea.addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent arg0) {
-              if (searchArea == null) {
-                searchArea = new SearchArea(); // only one instance of this
-                  desktopPane.add(searchArea);
-                  searchArea.show();
-              } else if (!gpsviewer.isVisible()) {
-                searchArea.setVisible(true);
-              } else {
-                searchArea.moveToFront();
-              }
-          }
-      });
 
         mntmExit.addActionListener(new ActionListener() {
             @Override

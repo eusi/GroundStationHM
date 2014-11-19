@@ -5,6 +5,7 @@ package cs.hm.edu.sam.mc.ir.main_ground;
 
 import java.util.List;
 
+import cs.hm.edu.sam.mc.ir.Ir;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.GroundGuiInterface;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.TasksEnum;
 import cs.hm.edu.sam.mc.misc.Data;
@@ -29,7 +30,7 @@ public abstract class GroundComponent implements GroundGuiInterface {
     protected static final double EMERGENT_REFRESH_TIME = 0.125;
 
     // 1 Meter Toleranz Radius, um Wegpunkte als "erreicht" zu kennzeichnen
-    protected final double STATIC_TOLERANCE = 0.00000000100;
+    protected final double STATIC_TOLERANCE = 0.00000000200;
     protected final double DYNAMIC_TOLERANCE = 0.00000000100;
     protected final double EMERGENT_TOLERANCE = 0.00000000100;
 
@@ -42,14 +43,21 @@ public abstract class GroundComponent implements GroundGuiInterface {
     protected final double STATIC_ALT = 80;
     protected final double DYNAMIC_ALT = 80;
     protected final double EMERGENT_ALT = 80;
-
+    
+    protected Ir gui;
+    
     private TasksEnum currentTask = TasksEnum.NOTASSIGNED;
     private Location wayPointBefore = new Location(0, 0, 0);
-
+    
+    
     abstract public boolean isTaskCalculated();
-
     abstract public void calcWaypoints(double longitude, double latitude);
 
+    
+    public GroundComponent(Ir gui) {
+		this.gui = gui;
+	}
+    
     @Override
     public boolean isAirCompOnline() {
         // TODO
@@ -88,24 +96,13 @@ public abstract class GroundComponent implements GroundGuiInterface {
         // ----
         // Für Simulation CurrentPosition aus TestMain
         Location currentLoc = TestMain.getCurrentTESTPosition();
-        System.out.println("Drohne ist an Location: " + currentLoc.toString());
+      //  System.out.println("Drohne ist an Location: " + currentLoc.toString());
         // ----
 
         boolean newWaypoint = locationHasChanged(currentLoc);
-        if (newWaypoint) {
-            wayPointBefore = currentLoc;
-            double range = getToleranceRadius();
-            return inRadius(locToCheck, currentLoc, currentTask, range);
-        } else {
-            // Waypoint Daten haben sich seit letzter Abfrage nicht geändert, DELAY 20ms
-            try {
-                Thread.sleep(20);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            return false;
-        }
+        double range = getToleranceRadius();
+        return inRadius(locToCheck, currentLoc, currentTask, range);
+        
     }
 
     /**

@@ -48,7 +48,7 @@ public class Emergent extends JInternalFrame implements GUIInterface {
 	private JPanel pnlMiddleNorth;
 	private JScrollPane scrollPaneConsole;
 	private JButton btnOnboardUnit = new JButton("Onboard Unit");
-	private  EmergentGuiInterface emergentTask = new EmergentComponent();
+	private  EmergentGuiInterface emergentTask = new EmergentComponent(this);
 	private final JPanel panel = new JPanel();
 	
 	

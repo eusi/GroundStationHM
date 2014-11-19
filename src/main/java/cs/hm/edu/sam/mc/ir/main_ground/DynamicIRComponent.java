@@ -3,6 +3,7 @@ package cs.hm.edu.sam.mc.ir.main_ground;
 import java.util.ArrayList;
 import java.util.List;
 
+import cs.hm.edu.sam.mc.ir.Ir;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.DynamicGuiInterface;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.TasksEnum;
 import cs.hm.edu.sam.mc.misc.Location;
@@ -18,6 +19,11 @@ public class DynamicIRComponent extends GroundComponent implements DynamicGuiInt
     private Location dynTargetLoc = null;
     private boolean taskActive = false;
 
+    
+    public DynamicIRComponent(Ir gui) {
+		super(gui);
+	}
+    
     @Override
     public void calcWaypoints(double longitude, double latitude) {
         dynTargetLoc = new Location(longitude, latitude, DYNAMIC_ALT);

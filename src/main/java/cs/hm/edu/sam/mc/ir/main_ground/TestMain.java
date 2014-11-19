@@ -48,9 +48,9 @@ public class TestMain extends Thread {
     	fillTestData();
     	startTestFlight();
 
-    //	testAirConnection();
+    	//testAirConnection();
     	
-    //	guiTest();
+    	//guiTest();
     	
     }
 
@@ -78,32 +78,29 @@ public class TestMain extends Thread {
     	//10 cm
     	double flightStep = 0.00000000010;
 
-    	//Wegpunkte für Flieger
-    	for(int i = 0; i < 50; i++) {
-    		double toAdd = 48.50000000000 + flightStep;
-    		flylat.add(toAdd);
+    	//Wegpunkte für Flieger (ca. 5000cm = 50m )
+    	for(int i = 0; i < 500; i++) {
+    		flylat.add(48.50000000000 + flightStep);
     		flylng.add(11.50000000001);
     		flightStep += 0.00000000010 ;
     	}
     	
-    	double photoStep = 0.00000000010;
-    	
     	//Wegpunkte für Foto
-    	for(int i = 0; i < 5; i++) {
-    		photoWaypointlat.add(48.50000000000 + photoStep);
+    	for(int i = 0; i < 500; i+=50) {
+    		photoWaypointlat.add(flylat.get(i));
     		photoWaypointlng.add(11.50000000001);
-    		photoStep += 0.00000000010;
+    		
     	}
     	
-    	for(int i = 0; i < flylat.size(); i++) {
-    		System.out.printf("%.11f\n", flylat.get(i));
-    		System.out.printf("%.11f\n", flylng.get(i));
-    	}
-		System.out.println("--------------");
-    	for(int i = 0; i< photoWaypointlat.size(); i++) {
-    		System.out.printf("%.11f\n", photoWaypointlat.get(i));
-    		System.out.printf("%.11f\n", photoWaypointlng.get(i));
-    	}
+//    	for(int i = 0; i < flylat.size(); i++) {
+//    		System.out.printf("%.11f\n", flylat.get(i));
+//    		System.out.printf("%.11f\n", flylng.get(i));
+//    	}
+//		System.out.println("--------------");
+//    	for(int i = 0; i< photoWaypointlat.size(); i++) {
+//    		System.out.printf("%.11f\n", photoWaypointlat.get(i));
+//    		System.out.printf("%.11f\n", photoWaypointlng.get(i));
+//    	}
 
 
     }
@@ -111,7 +108,8 @@ public class TestMain extends Thread {
 
 
 	private static void startTestFlight() {
-    	 StaticIRComponent test = new StaticIRComponent();
+		Ir rolandsGUI = new Ir();
+    	StaticIRComponent test = new StaticIRComponent(rolandsGUI);
     	 
         // Target Location
         double latTest = 48.50000000000;
@@ -136,7 +134,10 @@ public class TestMain extends Thread {
 
 
 	/*
-     * (non-Javadoc) Flug Simulation
+     *   ~43,2km/h minimum == 12m/s
+     *   
+     *   Testdaten: 10m/s -> pro 100ms 1 Meter weiter
+     *   
      */
     @Override
     public void run() {
@@ -149,8 +150,8 @@ public class TestMain extends Thread {
             }
 
             try {
-            	//Sleep bis neuen Waypoint
-                Thread.sleep(100);
+            	//10 ms Sleep bis neuen Waypoint
+                Thread.sleep(10);
                 
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
@@ -160,7 +161,7 @@ public class TestMain extends Thread {
     }
 
     public static synchronized Location getCurrentTESTPosition() {
-        System.out.println("RETURN: " + currentSimulatedPos.toString());
+       // System.out.println("RETURN: " + currentSimulatedPos.toString());
         return currentSimulatedPos;
     }
 
@@ -170,7 +171,6 @@ public class TestMain extends Thread {
         for (int i = 0; i < photoWaypointlat.size(); i++) {
             testWaypoints.add(new Location(photoWaypointlng.get(i), photoWaypointlat.get(i), 80));
         }
-        System.out.println(testWaypoints.toString());
         return testWaypoints;
     }
 
