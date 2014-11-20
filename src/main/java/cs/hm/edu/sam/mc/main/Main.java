@@ -25,6 +25,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import cs.hm.edu.sam.mc.airdrop.Airdrop;
 import cs.hm.edu.sam.mc.emergent.Emergent;
 import cs.hm.edu.sam.mc.gpsTable.GPSViewer;
 import cs.hm.edu.sam.mc.gpsTable.GpsTable;
@@ -36,6 +37,7 @@ import cs.hm.edu.sam.mc.options.Options;
 import cs.hm.edu.sam.mc.report.ReportSheet;
 import cs.hm.edu.sam.mc.rest.RESTClient;
 import cs.hm.edu.sam.mc.routing.Routing;
+import cs.hm.edu.sam.mc.searchArea.SearchArea;
 import cs.hm.edu.sam.mc.sric.SRIC;
 
 /**
@@ -53,14 +55,18 @@ public class Main extends JFrame {
     private JButton btnImageviewer;
     private JButton btnSric;
     private JButton btnIr;
-    private JButton btnEmergency;
+    private JButton btnEmergent;
     private JButton btnGPStable;
+    private JButton btnSearchArea;
+    private JButton btnAirdrop;
     private ReportSheet reportSheet;
     private SRIC sric;
     private Routing routing;
     private Ir ir;
-    private Emergent emergency;
+    private Emergent emergent;
     private GPSViewer gpsviewer;
+    private SearchArea searchArea;
+    private Airdrop airdrop;
     private Options options;
     private ImageViewer imageViewer;
     private JDesktopPane desktopPane;
@@ -191,15 +197,25 @@ public class Main extends JFrame {
         btnIr.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR + "ir_icon.png")));
         toolBar.add(btnIr);
 
-        btnEmergency = new JButton("Emergency");
-        btnEmergency.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR
-                + "emergency_icon.png")));
-        toolBar.add(btnEmergency);
+        btnEmergent = new JButton("Emergent");
+        btnEmergent.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR
+                + "emergent_icon.png")));
+        toolBar.add(btnEmergent);
         
         btnGPStable = new JButton("GPS Table");
         btnGPStable.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR
                 + "gps_icon.png")));
         toolBar.add(btnGPStable);
+        
+        btnSearchArea = new JButton("SearchArea");
+        btnSearchArea.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR
+            + "searcharea_icon.png")));
+        toolBar.add(btnSearchArea);
+        
+        btnAirdrop = new JButton("AirDrop");
+        btnAirdrop.setIcon(new ImageIcon(Main.class.getResource(CONSTANTS.ICON_DIR
+            + "airdrop_icon.png")));
+        toolBar.add(btnAirdrop);
 
         contentPane.setLayout(gl_contentPane);
     }
@@ -280,17 +296,17 @@ public class Main extends JFrame {
             }
         });
 
-        btnEmergency.addActionListener(new ActionListener() {
+        btnEmergent.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                if (emergency == null) {
-                    emergency = new Emergent(); // only one instance of this
-                    desktopPane.add(emergency);
-                    emergency.show();
-                } else if (!emergency.isVisible()) {
-                    emergency.setVisible(true);
+                if (emergent == null) {
+                    emergent = new Emergent(); // only one instance of this
+                    desktopPane.add(emergent);
+                    emergent.show();
+                } else if (!emergent.isVisible()) {
+                    emergent.setVisible(true);
                 } else {
-                    emergency.moveToFront();
+                    emergent.moveToFront();
                 }
             }
         });
@@ -306,6 +322,36 @@ public class Main extends JFrame {
                 	gpsviewer.setVisible(true);
                 } else {
                 	gpsviewer.moveToFront();
+                }
+            }
+        });
+        
+        btnAirdrop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                if (airdrop == null) {
+                  airdrop = new Airdrop(); // only one instance of this
+                    desktopPane.add(airdrop);
+                    airdrop.show();
+                } else if (!airdrop.isVisible()) {
+                  airdrop.setVisible(true);
+                } else {
+                  airdrop.moveToFront();
+                }
+            }
+        });
+          
+          btnSearchArea.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                if (searchArea == null) {
+                  searchArea = new SearchArea(); // only one instance of this
+                    desktopPane.add(searchArea);
+                    searchArea.show();
+                } else if (!gpsviewer.isVisible()) {
+                  searchArea.setVisible(true);
+                } else {
+                  searchArea.moveToFront();
                 }
             }
         });
@@ -349,7 +395,7 @@ public class Main extends JFrame {
                         }
                     }
 
-                    // sleep 2 sec
+                    // sleep x sec
                     sleep(CONSTANTS.GET_CURRENT_POSITION_DELAY);
                 } catch (final InterruptedException e) {
                 }

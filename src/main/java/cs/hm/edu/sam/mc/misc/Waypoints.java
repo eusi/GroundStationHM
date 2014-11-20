@@ -31,7 +31,6 @@ public class Waypoints {
      * 
      * JSON-file has to be like following struct:
      * 
-     * 
      * public class Locationwp { public byte id; // command id public byte
      * options; public float p1; // param 1 public float p2; // param 2 public
      * float p3; // param 3 public float p4; // param 4 public double lat; //

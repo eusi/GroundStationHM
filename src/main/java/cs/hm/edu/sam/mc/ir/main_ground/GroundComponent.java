@@ -72,7 +72,7 @@ public abstract class GroundComponent implements GroundGuiInterface {
             wayPointsArray[i] = toUpload.get(i);
 
         // Sende an MissionPlanner Gruppe...
-        Data.setWaypointList(wayPointsArray, taskName);
+        Data.setIrWaypoints(wayPointsArray, taskName);
 
     }
 

@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import cs.hm.edu.sam.mc.misc.CONSTANTS;
 
 /**
- * SearchArea class.
+ * SearchArea class for its task.
  *
  * @author Christoph Friegel
  * @version 0.1
@@ -24,7 +24,7 @@ public class SearchArea extends JInternalFrame {
      */
     public SearchArea() {
         setFrameIcon(new ImageIcon(SearchArea.class.getResource(CONSTANTS.ICON_DIR
-                + "emergency_icon_mini.png")));
+                + "searcharea_icon_mini.png")));
         setTitle("SearchArea");
         setIconifiable(true);
         setClosable(true);

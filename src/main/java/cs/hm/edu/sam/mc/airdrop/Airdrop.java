@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import cs.hm.edu.sam.mc.misc.CONSTANTS;
 
 /**
- * Airdrop class.
+ * Airdrop class for its task.
  *
  * @author Christoph Friegel
  * @version 0.1
@@ -24,7 +24,7 @@ public class Airdrop extends JInternalFrame {
      */
     public Airdrop() {
         setFrameIcon(new ImageIcon(Airdrop.class.getResource(CONSTANTS.ICON_DIR
-                + "emergency_icon_mini.png")));
+                + "airdrop_icon_mini.png")));
         setTitle("Airdrop");
         setIconifiable(true);
         setClosable(true);

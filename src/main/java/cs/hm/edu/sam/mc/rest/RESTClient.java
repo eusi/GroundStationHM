@@ -12,6 +12,7 @@ import com.sun.jersey.api.json.JSONConfiguration;
 import cs.hm.edu.sam.mc.misc.CONSTANTS;
 import cs.hm.edu.sam.mc.misc.Data;
 import cs.hm.edu.sam.mc.misc.Location;
+import cs.hm.edu.sam.mc.misc.Waypoints;
 
 /**
  * Send waypoints and get current location RESTful / JSON.
@@ -63,10 +64,11 @@ public class RESTClient {
         }
     }
 
-    public static void sendWaypoints() {
+    //@param like Data.getIrWaypoints()
+    public static void sendWaypoints(Waypoints waypoints) {
         try {
-            String waypointsJSON = "{\"waypoints\":[" + Data.getWaypoints().toString()
-                    + "], \"append\":1, \"name\":" + Data.getWaypoints().getWaypointListName()
+            String waypointsJSON = "{\"waypoints\":[" + waypoints.toString()
+                    + "], \"append\":1, \"name\":" + waypoints.getWaypointListName()
                     + "}";
 
             ClientConfig clientConfig = new DefaultClientConfig();

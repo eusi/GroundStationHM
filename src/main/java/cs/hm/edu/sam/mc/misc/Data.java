@@ -7,14 +7,14 @@ package cs.hm.edu.sam.mc.misc;
  * @version 0.1
  *
  *
- *          Location-TEST (e.g. currentPosition)
+ *          Location-EXAMPLE (e.g. currentPosition)
  *
  *          Location test = new Location( 1.2, 1.3, 50 );
  *          Data.setCurrentPosition( test ); System.out.println(
  *          Data.getCurrentPosition().getLng() );
  *
  *
- *          Waypoint-TEST (e.g. waypoint-list)
+ *          Waypoints-EXAMPLE (e.g. waypoint-list)
  *
  *          Location test1 = new Location( 1.2, 1.3, 50 ); //HOME! Location
  *          test2 = new Location( 2.2, 2.3, 50 ); Location test3 = new Location(
@@ -26,43 +26,95 @@ package cs.hm.edu.sam.mc.misc;
  */
 
 public class Data {
-    private static Location currentPosition; // this is acutally the current
-                                             // position
-                                             // of the aircraft (by MP)
-    private static Waypoints thisWaypoints; // this should be the waypoints
-                                            // which
-                                            // are created by routing-module and
-                                            // will be send to MP
+    
+	// this is actually the current position of the aircraft (by MP)
+	private static volatile Location currentPosition; 
 
-    private static boolean currentLocationIsActive; // if we want to poll a
-                                                    // current loc
+    // waypoints which are created by routing-modules for routing (to MP)
+	// use this to storage your module-waypoints
+    private static volatile Waypoints sricWaypoints;
+    private static volatile Waypoints routingWaypoints;
+    private static volatile Waypoints irWaypoints;
+    private static volatile Waypoints emergentWaypoints;
+    private static volatile Waypoints searchareaWaypoints;
+    private static volatile Waypoints airdropWaypoints;
 
-    // Get current position - for e.g. IR-task
+
+    // if we want to poll a current location, we have to turn it on
+    // check GUI-option: FILE -> GET LOCATION
+    private static boolean currentLocationIsActive; 
+
+    
+    // get current position - for e.g. routing tasks
     public static Location getCurrentPosition() {
         return currentPosition;
     }
 
-    // Set current position - for rest only, don't call this manually!
+    // set current position - for rest only, don't call this manually!
     public static void setCurrentPosition(Location newPosition) {
         currentPosition = newPosition;
     }
+    
 
-    // Get waypoint list - for e.g. rest
-    public static Waypoints getWaypoints() {
-        return thisWaypoints;
-    }
-
-    // Set waypoint list - for e.g. routing
-    public static void setWaypointList(Location[] waypointList, String waypointListName) {
-        thisWaypoints = new Waypoints(waypointList, waypointListName);
-    }
-
+    // get polling (current aircraft position)
     public static boolean isCurrentLocationActive() {
         return currentLocationIsActive;
     }
 
+    // set polling (current aircraft position) - via GUI only, don't call this manually!
     public static void setCurrentLocationIsActive(boolean currentLocationIsActive) {
         Data.currentLocationIsActive = currentLocationIsActive;
     }
 
+    
+    
+    // getter and setter: waypoint lists - for e.g. rest or routing
+    // use this to storage your module-waypoints
+	public static Waypoints getSricWaypoints() {
+		return sricWaypoints;
+	}
+
+	public static void setSricWaypoints(Location[] sricWaypoints, String waypointListName) {
+		Data.sricWaypoints = new Waypoints(sricWaypoints, waypointListName);
+	}
+
+	public static Waypoints getRoutingWaypoints() {
+		return routingWaypoints;
+	}
+
+	public static void setRoutingWaypoints(Location[] routingWaypoints, String waypointListName) {
+		Data.routingWaypoints = new Waypoints(routingWaypoints, waypointListName);
+	}
+
+	public static Waypoints getIrWaypoints() {
+		return irWaypoints;
+	}
+
+	public static void setIrWaypoints(Location[] irWaypoints, String waypointListName) {
+		Data.irWaypoints = new Waypoints(irWaypoints, waypointListName);
+	}
+
+	public static Waypoints getEmergentWaypoints() {
+		return emergentWaypoints;
+	}
+
+	public static void setEmergentWaypoints(Location[] emergentWaypoints, String waypointListName) {
+		Data.emergentWaypoints = new Waypoints(emergentWaypoints, waypointListName);
+	}
+
+	public static Waypoints getSearchareaWaypoints() {
+		return searchareaWaypoints;
+	}
+
+	public static void setSearchareaWaypoints(Location[] searchareaWaypoints, String waypointListName) {
+		Data.searchareaWaypoints = new Waypoints(searchareaWaypoints, waypointListName);
+	}
+
+	public static Waypoints getAirdropWaypoints() {
+		return airdropWaypoints;
+	}
+
+	public static void setAirdropWaypoints(Location[] airdropWaypoints, String waypointListName) {
+		Data.airdropWaypoints = new Waypoints(airdropWaypoints, waypointListName);
+	}
 }

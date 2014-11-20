@@ -12,7 +12,7 @@ public class Location {
     private double lng; // longitude
     private double lat; // latitude
     private double alt; // altitude, in real it's a float
-    private String ts; // timestamp, only needed for import UAS Position from MP
+    private String ts;  // timestamp, only needed for import UAS Position from MP
 
     public Location(double newLng, double newLat, double newAlt) {
         this.lng = newLng;

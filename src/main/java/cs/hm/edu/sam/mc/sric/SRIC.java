@@ -29,6 +29,8 @@ public class SRIC extends JInternalFrame {
     private final JTextField textFieldNAME;
     private final JTextField textFieldPW2;
     private final JTextField textFieldPP;
+    private JTextField textField_1;
+    private JTextField textField;
 
     /**
      * Create the frame.
@@ -41,21 +43,24 @@ public class SRIC extends JInternalFrame {
         setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
         setIconifiable(true);
         setResizable(true);
-        setBounds(0, 0, 500, 400);
+        setBounds(0, 0, 605, 538);
 
         final JPanel panel = new JPanel();
         final GroupLayout groupLayout = new GroupLayout(getContentPane());
-        groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
-                groupLayout
-                        .createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panel, GroupLayout.PREFERRED_SIZE, 465,
-                                GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-        groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(
-                groupLayout.createSequentialGroup().addContainerGap()
-                        .addComponent(panel, GroupLayout.PREFERRED_SIZE, 349, Short.MAX_VALUE)
-                        .addContainerGap()));
+        groupLayout.setHorizontalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(panel, GroupLayout.PREFERRED_SIZE, 583, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(12, Short.MAX_VALUE))
+        );
+        groupLayout.setVerticalGroup(
+        	groupLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(panel, GroupLayout.PREFERRED_SIZE, 349, Short.MAX_VALUE)
+        			.addContainerGap())
+        );
 
         final JLabel lblWlan = new JLabel("WLAN");
 
@@ -72,8 +77,6 @@ public class SRIC extends JInternalFrame {
         final JLabel lblName = new JLabel("Name");
 
         final JLabel lblPasswort = new JLabel("Password");
-
-        final JLabel lblFtp = new JLabel("FTP");
 
         final JButton btnSend = new JButton("Send");
 
@@ -99,196 +102,147 @@ public class SRIC extends JInternalFrame {
         textFieldPP.setColumns(10);
 
         final JLabel lblFTP = new JLabel("FTP");
+        
+        JLabel lblSricrouting = new JLabel("SRIC-Routing");
+        
+        JLabel lblLongitude = new JLabel("Longitude");
+        
+        JLabel lblLatitude = new JLabel("Latitude");
+        
+        textField_1 = new JTextField();
+        textField_1.setColumns(10);
+        
+        JButton btnCreateWaypoints = new JButton("Create Waypoints");
+        
+        JButton button = new JButton("Send");
+        
+        textField = new JTextField();
+        textField.setColumns(10);
         final GroupLayout gl_panel = new GroupLayout(panel);
-        gl_panel.setHorizontalGroup(gl_panel
-                .createParallelGroup(Alignment.TRAILING)
-                .addGroup(
-                        gl_panel.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(
-                                        gl_panel.createParallelGroup(Alignment.LEADING)
-                                                .addGroup(
-                                                        gl_panel.createSequentialGroup()
-                                                                .addComponent(lblName,
-                                                                        GroupLayout.PREFERRED_SIZE,
-                                                                        70,
-                                                                        GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(
-                                                                        ComponentPlacement.UNRELATED)
-                                                                .addComponent(textFieldNAME,
-                                                                        GroupLayout.PREFERRED_SIZE,
-                                                                        176,
-                                                                        GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(
-                                                        gl_panel.createSequentialGroup()
-                                                                .addComponent(lblPasswort,
-                                                                                GroupLayout.PREFERRED_SIZE,
-                                                                        70,
-                                                                                GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(
-                                                                        ComponentPlacement.UNRELATED)
-                                                                .addComponent(textFieldPW2,
-                                                                        GroupLayout.PREFERRED_SIZE,
-                                                                        176,
-                                                                        GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(
-                                                        gl_panel.createSequentialGroup()
-                                                                .addComponent(lblPicture,
-                                                                        GroupLayout.PREFERRED_SIZE,
-                                                                        70,
-                                                                        GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(
-                                                                        ComponentPlacement.UNRELATED)
-                                                                .addComponent(textFieldPP,
-                                                                        GroupLayout.PREFERRED_SIZE,
-                                                                        343,
-                                                                        GroupLayout.PREFERRED_SIZE)))
-                                .addGap(147))
-                .addGroup(
-                        gl_panel.createSequentialGroup()
-                                .addComponent(lblFTP, GroupLayout.PREFERRED_SIZE, 29,
-                                        GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.RELATED, 502, Short.MAX_VALUE)
-                                .addComponent(lblFtp, GroupLayout.PREFERRED_SIZE, 29,
-                                        GroupLayout.PREFERRED_SIZE).addContainerGap())
-                .addGroup(
-                        gl_panel.createSequentialGroup()
-                                .addGroup(
-                                        gl_panel.createParallelGroup(Alignment.LEADING)
-                                                .addGroup(
-                                                        gl_panel.createSequentialGroup()
-                                                                .addContainerGap()
-                                                                .addComponent(lblPort,
-                                                                        GroupLayout.PREFERRED_SIZE,
-                                                                        70,
-                                                                        GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(
-                                                                        ComponentPlacement.UNRELATED)
-                                                                .addComponent(textFieldPORT,
-                                                                        GroupLayout.DEFAULT_SIZE,
-                                                                        176, Short.MAX_VALUE))
-                                                .addGroup(
-                                                        gl_panel.createSequentialGroup()
-                                                                .addContainerGap()
-                                                                .addComponent(lblHost,
-                                                                        GroupLayout.PREFERRED_SIZE,
-                                                                        70,
-                                                                        GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(
-                                                                        ComponentPlacement.UNRELATED)
-                                                                .addComponent(textFieldHOST,
-                                                                        GroupLayout.DEFAULT_SIZE,
-                                                                        176, Short.MAX_VALUE))
-                                                .addGroup(
-                                                        gl_panel.createSequentialGroup()
-                                                                .addContainerGap()
-                                                                .addComponent(btnSend))
-                                                .addComponent(lblWlan)
-                                                .addGroup(
-                                                        gl_panel.createSequentialGroup()
-                                                                .addContainerGap()
-                                                                .addGroup(
-                                                                        gl_panel.createParallelGroup(
-                                                                                Alignment.LEADING,
-                                                                                false)
-                                                                                .addComponent(
-                                                                                        lblSsid,
-                                                                                        GroupLayout.PREFERRED_SIZE,
-                                                                                        70,
-                                                                                        GroupLayout.PREFERRED_SIZE)
-                                                                                .addComponent(
-                                                                                        labelPw,
-                                                                                        GroupLayout.PREFERRED_SIZE,
-                                                                                        70,
-                                                                                        GroupLayout.PREFERRED_SIZE))
-                                                                .addPreferredGap(
-                                                                        ComponentPlacement.UNRELATED)
-                                                                .addGroup(
-                                                                        gl_panel.createParallelGroup(
-                                                                                Alignment.LEADING)
-                                                                                .addComponent(
-                                                                                        textFieldSSID,
-                                                                                        GroupLayout.PREFERRED_SIZE,
-                                                                                        176,
-                                                                                        GroupLayout.PREFERRED_SIZE)
-                                                                                .addComponent(
-                                                                                        textFieldPW,
-                                                                                        GroupLayout.DEFAULT_SIZE,
-                                                                                        176,
-                                                                                        Short.MAX_VALUE))))
-                                .addGap(314)));
-        gl_panel.setVerticalGroup(gl_panel
-                .createParallelGroup(Alignment.LEADING)
-                .addGroup(
-                        gl_panel.createSequentialGroup()
-                                .addComponent(lblWlan)
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addGroup(
-                                        gl_panel.createParallelGroup(Alignment.LEADING)
-                                                .addGroup(
-                                                        gl_panel.createSequentialGroup()
-                                                                .addComponent(lblSsid)
-                                                                .addPreferredGap(
-                                                                        ComponentPlacement.UNRELATED)
-                                                                .addComponent(labelPw))
-                                                .addGroup(
-                                                        gl_panel.createSequentialGroup()
-                                                                .addComponent(textFieldSSID,
-                                                                        GroupLayout.PREFERRED_SIZE,
-                                                                        GroupLayout.DEFAULT_SIZE,
-                                                                        GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(
-                                                                        ComponentPlacement.RELATED)
-                                                                .addComponent(textFieldPW,
-                                                                        GroupLayout.PREFERRED_SIZE,
-                                                                        GroupLayout.DEFAULT_SIZE,
-                                                                        GroupLayout.PREFERRED_SIZE)))
-                                .addGap(46)
-                                .addGroup(
-                                        gl_panel.createParallelGroup(Alignment.BASELINE)
-                                                .addComponent(lblFtp).addComponent(lblFTP))
-                                .addGap(1)
-                                .addGroup(
-                                        gl_panel.createParallelGroup(Alignment.BASELINE)
-                                                .addComponent(lblHost)
-                                                .addComponent(textFieldHOST,
-                                                        GroupLayout.PREFERRED_SIZE,
-                                                        GroupLayout.DEFAULT_SIZE,
-                                                        GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(ComponentPlacement.RELATED,
-                                        GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(
-                                        gl_panel.createParallelGroup(Alignment.BASELINE)
-                                                .addComponent(lblPort)
-                                                .addComponent(textFieldPORT,
-                                                        GroupLayout.PREFERRED_SIZE,
-                                                        GroupLayout.DEFAULT_SIZE,
-                                                        GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addGroup(
-                                        gl_panel.createParallelGroup(Alignment.BASELINE)
-                                                .addComponent(lblName)
-                                                .addComponent(textFieldNAME,
-                                                        GroupLayout.PREFERRED_SIZE,
-                                                        GroupLayout.DEFAULT_SIZE,
-                                                        GroupLayout.PREFERRED_SIZE))
-                                .addGap(9)
-                                .addGroup(
-                                        gl_panel.createParallelGroup(Alignment.BASELINE)
-                                                .addComponent(lblPasswort)
-                                                .addComponent(textFieldPW2,
-                                                        GroupLayout.PREFERRED_SIZE,
-                                                        GroupLayout.DEFAULT_SIZE,
-                                                        GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addGroup(
-                                        gl_panel.createParallelGroup(Alignment.BASELINE)
-                                                .addComponent(lblPicture)
-                                                .addComponent(textFieldPP,
-                                                        GroupLayout.PREFERRED_SIZE,
-                                                        GroupLayout.DEFAULT_SIZE,
-                                                        GroupLayout.PREFERRED_SIZE)).addGap(29)
-                                .addComponent(btnSend).addGap(54)));
+        gl_panel.setHorizontalGroup(
+        	gl_panel.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panel.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addComponent(lblName, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(textFieldNAME, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addComponent(lblPasswort, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(textFieldPW2, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addComponent(lblPicture, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(textFieldPP, GroupLayout.PREFERRED_SIZE, 343, GroupLayout.PREFERRED_SIZE)))
+        			.addGap(147))
+        		.addGroup(gl_panel.createSequentialGroup()
+        			.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        				.addComponent(lblWlan)
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        						.addGroup(gl_panel.createSequentialGroup()
+        							.addContainerGap()
+        							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+        								.addComponent(lblSsid, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+        								.addComponent(labelPw, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)))
+        						.addComponent(button, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE))
+        					.addGap(18)
+        					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        						.addComponent(textFieldSSID, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(textFieldPW, GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))))
+        			.addGap(314))
+        		.addGroup(gl_panel.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(lblPort, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(textFieldPORT, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+        			.addGap(314))
+        		.addGroup(gl_panel.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(lblHost, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(textFieldHOST, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+        			.addGap(314))
+        		.addGroup(gl_panel.createSequentialGroup()
+        			.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addGap(10)
+        					.addComponent(lblLongitude, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addGap(10)
+        					.addComponent(lblLatitude, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(textField, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(lblSricrouting, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
+        			.addGap(317))
+        		.addGroup(gl_panel.createSequentialGroup()
+        			.addComponent(btnCreateWaypoints)
+        			.addContainerGap())
+        		.addGroup(gl_panel.createSequentialGroup()
+        			.addComponent(lblFTP, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap())
+        		.addGroup(gl_panel.createSequentialGroup()
+        			.addComponent(btnSend, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap(516, Short.MAX_VALUE))
+        );
+        gl_panel.setVerticalGroup(
+        	gl_panel.createParallelGroup(Alignment.LEADING)
+        		.addGroup(gl_panel.createSequentialGroup()
+        			.addComponent(lblSricrouting)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(lblLongitude)
+        				.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(11)
+        			.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(lblLatitude)
+        				.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(btnCreateWaypoints)
+        			.addGap(36)
+        			.addComponent(lblWlan)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addComponent(lblSsid)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(labelPw)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(button))
+        				.addGroup(gl_panel.createSequentialGroup()
+        					.addComponent(textFieldSSID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(textFieldPW, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+        			.addGap(30)
+        			.addComponent(lblFTP)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+        				.addComponent(textFieldHOST, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblHost))
+        			.addGap(8)
+        			.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(lblPort)
+        				.addComponent(textFieldPORT, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(lblName)
+        				.addComponent(textFieldNAME, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(lblPasswort)
+        				.addComponent(textFieldPW2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(lblPicture)
+        				.addComponent(textFieldPP, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(btnSend)
+        			.addGap(53))
+        );
         panel.setLayout(gl_panel);
         getContentPane().setLayout(groupLayout);
 

@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -29,7 +30,9 @@ import cs.hm.edu.sam.mc.ir.enum_interfaces.EmergentGuiInterface;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.GUIInterface;
 import cs.hm.edu.sam.mc.ir.enum_interfaces.TasksEnum;
 import cs.hm.edu.sam.mc.ir.main_ground.EmergentComponent;
+import cs.hm.edu.sam.mc.misc.CONSTANTS;
 import cs.hm.edu.sam.mc.misc.Location;
+import cs.hm.edu.sam.mc.report.ReportSheet;
 
 /**
  * @author Roland Widmann
@@ -117,7 +120,9 @@ public class Emergent extends JInternalFrame implements GUIInterface {
         setClosable(true);
         setResizable(true);
        
-		setBounds(100, 100, 830, 649);
+		setBounds(10, 10, 830, 649);
+        setFrameIcon(new ImageIcon(ReportSheet.class.getResource(CONSTANTS.ICON_DIR
+                + "emergent_icon_mini.png")));
 		
 		JPanel pnlSouth = new JPanel();
 		getContentPane().add(pnlSouth, BorderLayout.SOUTH);

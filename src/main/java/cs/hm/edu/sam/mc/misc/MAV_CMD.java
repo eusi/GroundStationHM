@@ -1,7 +1,7 @@
 package cs.hm.edu.sam.mc.misc;
 
 /**
- * Enum class for mav commands (see waypoints-id).
+ * Enum class for mav commands (see id in Waypoints).
  *
  * @author Christoph Friegel
  * @version 0.1

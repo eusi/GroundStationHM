@@ -228,10 +228,8 @@ public class ImageViewer extends JInternalFrame implements ActionListener {
     /**
      * Creates an ImageIcon if the path is valid.
      *
-     * @param String
-     *            - resource path
-     * @param String
-     *            - description of the file
+     * @param path - resource path
+     * @param description - description of the file
      */
     protected ImageIcon createImageIcon(final String path, final String description) {
         final java.net.URL imgURL = getClass().getResource(path);
@@ -246,13 +244,10 @@ public class ImageViewer extends JInternalFrame implements ActionListener {
     /**
      * Resizes an image using a Graphics2D object backed by a BufferedImage.
      *
-     * @param srcImg
-     *            - source image to scale
-     * @param w
-     *            - desired width
-     * @param h
-     *            - desired height
-     * @return - the new resized image
+     * @param srcImg - source image to scale
+     * @param w - desired width
+     * @param h - desired height
+     * @return the new resized image
      */
     private Image getScaledImage(final Image srcImg, final int w, final int h) {
         final BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
@@ -274,12 +269,9 @@ public class ImageViewer extends JInternalFrame implements ActionListener {
 
         /**
          * @param filePath
-         * @param Icon
-         *            - The bigger photo to show in the button.
-         * @param Icon
-         *            - The thumbnail to show in the button.
-         * @param String
-         *            - The descriptioon of the icon.
+         * @param Icon - The bigger photo to show in the button.
+         * @param Icon - The thumbnail to show in the button.
+         * @param String - The descriptioon of the icon.
          */
         public ThumbnailAction(final Icon photo, final Icon thumb, final String desc,
                 String filePath) {

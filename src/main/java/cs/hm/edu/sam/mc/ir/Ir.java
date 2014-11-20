@@ -104,7 +104,7 @@ public class Ir extends JInternalFrame implements GUIInterface {
         setClosable(true);
         setResizable(true);
        
-		setBounds(100, 100, 830, 649);
+		setBounds(10, 10, 830, 649);
 		
 		JPanel pnlSouth = new JPanel();
 		getContentPane().add(pnlSouth, BorderLayout.SOUTH);

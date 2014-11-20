@@ -6,6 +6,7 @@ import org.jeromq.ZMQ.Socket;
 
 /**
  * JeroMQ communication interface to the android devices.
+ * Its a test class in first case.
  *
  * @author Christoph Friegel
  * @version 0.1
@@ -16,7 +17,7 @@ public class JeroMQ {
     static final String TOPIC = "test";
 	
     //response-test
-	public boolean recTest()
+	public boolean resTest()
 	{
 		boolean success = false;
 		
@@ -37,7 +38,7 @@ public class JeroMQ {
 	}
 	
 	//request-test
-	public boolean resTest()
+	public boolean reqTest()
 	{
 		boolean success = false;
 		
