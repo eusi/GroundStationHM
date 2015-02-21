@@ -6,32 +6,10 @@ NEED TO BUILD:
 
 - Eclipse ( https://www.eclipse.org/home/index.php )
 
-- Java 1.8 ( http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html )
+- Java 1.7 ( e.g. http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html )
 
-- Maven Plugin for Eclipse ( http://www.eclipse.org/m2e/ )
+- Maven Plugin for Eclipse ( Eclipse: Install New Software: http://download.eclipse.org/technology/m2e/releases )
 
-- WindowBuilder / SWT or SWING Designer ( http://stackoverflow.com/questions/10867920/installing-windowbuilder-on-eclipse-4-2 )
+- WindowBuilder / SWT- or SWING-Designer ( Eclipse: Install New Software: http://download.eclipse.org/releases/luna )
 
-- Optional: Modify build path -> Project Properties -> Java Build Path -> renew 'JRE System Library' (1.8)
-
-
-
-
-TODO (Team 7):
-----------------
-
-- SRIC: Send data to android-phone (and waiting for response) or prepare data for polling
-
-- Zoning: Create new zone (multi-color). Multi-Parameter: lat, long.
-
-- Main: Better look & feel, more menu items?
-
-- Rest: Replace hardcoded paths with gui options (like MP IP address)
-
-- ReportSheet: Put algorithm behind the code to create a report sheet (hardcoded path like c:\mp\ or 'browse folder' or 'browse files').
-
-- optional: add a config-file for modules if they use things like 'browser folder' (save path) or ftp data 
-
-- Logger?
-
-- Javadoc: Set to every public function an comment in javadoc.
+- Optional: Sometimes you get in trouble while there is a parent-object and a relative path (../pom.xml) in the pom.xml itself. Just delete the parent-object and change ../pom.xml to pom.xml. This should make it work local.
